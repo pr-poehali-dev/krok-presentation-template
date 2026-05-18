@@ -142,15 +142,12 @@ export const Slide4 = ({ dir, animKey, c, upd }: SlideProps) => (
         { icon: "Car",        label: "Собеседование в машине",   sub: "По пути на Валдай" },
         { icon: "Radio",      label: "Оффер на вышке",           sub: "300 м над землёй, глубоко в лесу" },
       ].map((step, i) => (
-        <div key={i} className="flex items-start gap-3 fade-up" style={{ animationDelay: `${0.1 * i}s` }}>
-          <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
+        <div key={i} className="flex items-center gap-3 fade-up" style={{ animationDelay: `${0.1 * i}s` }}>
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
             style={{ background: "rgba(29,227,162,0.15)", border: "1px solid rgba(29,227,162,0.3)" }}>
             <Icon name={step.icon} size={14} style={{ color: "#1DE3A2" }} />
           </div>
-          <div>
-            <div className="text-sm font-bold text-white">{step.label}</div>
-            <div className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>{step.sub}</div>
-          </div>
+          <div className="text-sm font-bold text-white">{step.label}</div>
         </div>
       ))}
     </div>
@@ -245,16 +242,10 @@ export const Slide5 = ({ dir, animKey, c, upd }: SlideProps) => (
           <div className="w-full h-px" style={{ background: "rgba(29,227,162,0.12)" }} />
           {/* stats row */}
           <div className="grid grid-cols-2 gap-2">
-            {[
-              { val: "9",      sub: "месяцев" },
-              { val: "BI",     sub: "аналитик" },
-              { val: "S2T",    sub: "1-я задача" },
-              { val: "BigData",sub: "направление" },
-            ].map((s, i) => (
-              <div key={i} className="rounded-xl px-3 py-2 text-center"
+            {["9 месяцев", "BI", "S2T", "Группа отчётности"].map((val, i) => (
+              <div key={i} className="rounded-xl px-3 py-2.5 flex items-center justify-center"
                 style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}>
-                <div className="text-sm font-black" style={{ color: "#1DE3A2" }}>{s.val}</div>
-                <div className="text-[10px]" style={{ color: "rgba(255,255,255,0.4)" }}>{s.sub}</div>
+                <div className="text-sm font-black text-center" style={{ color: "#1DE3A2" }}>{val}</div>
               </div>
             ))}
           </div>
@@ -361,33 +352,34 @@ export const Slide8 = ({ dir, animKey, c, upd }: SlideProps) => (
       <div className="mt-1.5 w-12 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
     </div>
     <div className="absolute left-10 right-10 top-[108px] bottom-8 grid grid-cols-2 gap-4">
-      {/* Left: большой визуальный чеклист */}
-      <div className="rounded-2xl p-4 border fade-up flex flex-col gap-2"
+      {/* Left: иконка чек-листа */}
+      <div className="rounded-2xl border fade-up flex items-center justify-center"
         style={{ background: "rgba(255,255,255,0.03)", borderColor: "rgba(29,227,162,0.18)" }}>
-        <div className="flex items-center gap-2 mb-1">
-          <Icon name="ClipboardCheck" size={14} style={{ color: "#1DE3A2" }} />
-          <span className="text-[10px] font-semibold tracking-widest uppercase" style={{ color: "#1DE3A2" }}>Стажёрская программа</span>
-        </div>
-        {[
-          { done: true,  text: "Насыщенная и разнообразная программа" },
-          { done: true,  text: "Хороший баланс сложности — где-то легко, где-то нет" },
-          { done: true,  text: "Программа развивается, не стоит на месте" },
-          { done: true,  text: "Стажёр уходит с базой знаний для роста" },
-          { done: false, text: "Нет итерации по коммуникации с заказчиком" },
-        ].map((item, i) => (
-          <div key={i} className="flex items-center gap-3 rounded-xl px-3 py-2.5"
-            style={{
-              background: item.done ? "rgba(29,227,162,0.06)" : "rgba(255,100,100,0.06)",
-              border: `1px solid ${item.done ? "rgba(29,227,162,0.15)" : "rgba(255,100,100,0.15)"}`,
-              animationDelay: `${0.08 * i}s`
-            }}>
-            <div className="w-5 h-5 rounded-md flex items-center justify-center shrink-0"
-              style={{ background: item.done ? "rgba(29,227,162,0.18)" : "rgba(255,100,100,0.18)" }}>
-              <Icon name={item.done ? "Check" : "X"} size={11} style={{ color: item.done ? "#1DE3A2" : "#FF6464" }} />
-            </div>
-            <span className="text-xs" style={{ color: item.done ? "rgba(255,255,255,0.75)" : "rgba(255,150,150,0.75)" }}>{item.text}</span>
-          </div>
-        ))}
+        <svg viewBox="0 0 160 200" width="160" height="200" style={{ opacity: 0.9 }}>
+          {/* clipboard body */}
+          <rect x="20" y="30" width="120" height="155" rx="10" fill="none" stroke="#1DE3A2" strokeWidth="3" opacity="0.5" />
+          {/* clipboard clip */}
+          <rect x="55" y="18" width="50" height="24" rx="8" fill="#0D1F1A" stroke="#1DE3A2" strokeWidth="2.5" opacity="0.9" />
+          <rect x="62" y="22" width="36" height="12" rx="4" fill="#1DE3A2" opacity="0.2" />
+          {/* check rows */}
+          {[50, 75, 100, 125, 150].map((y, i) => (
+            <g key={i}>
+              {/* checkbox */}
+              <rect x="36" y={y - 8} width="18" height="18" rx="4"
+                fill={i < 4 ? "rgba(29,227,162,0.15)" : "rgba(255,100,100,0.1)"}
+                stroke={i < 4 ? "#1DE3A2" : "#FF6464"} strokeWidth="1.5" />
+              {i < 4 ? (
+                <polyline points={`40,${y + 1} 44,${y + 5} 50,${y - 2}`}
+                  fill="none" stroke="#1DE3A2" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              ) : (
+                <line x1="40" y1={y - 3} x2="50" y2={y + 7} stroke="#FF6464" strokeWidth="2" strokeLinecap="round" />
+              )}
+              {/* line */}
+              <rect x="62" y={y - 2} width={i < 4 ? 70 - i * 8 : 55} height="5" rx="2.5"
+                fill={i < 4 ? "#1DE3A2" : "#FF6464"} opacity={i < 4 ? 0.25 : 0.2} />
+            </g>
+          ))}
+        </svg>
       </div>
       {/* Right: инициатива */}
       <div className="rounded-2xl p-4 border fade-up-d2 flex flex-col gap-3"
@@ -502,9 +494,8 @@ export const Slide11 = ({ dir, animKey, c, upd }: SlideProps) => (
       <EditableText value={c.s11.label} onChange={(v) => upd({ ...c, s11: { ...c.s11, label: v } })}
         className="text-[10px] font-semibold tracking-[0.5em] uppercase mb-3 fade-up block"
         style={{ color: "#1DE3A2" }} />
-      <h2 className="font-black leading-[1.0] mb-4 fade-up-d1" style={{ fontSize: "clamp(38px, 5.5vw, 64px)", color: "#fff" }}>
+      <h2 className="font-black leading-[1.0] mb-4 fade-up-d1 flex items-baseline gap-3" style={{ fontSize: "clamp(38px, 5.5vw, 64px)" }}>
         <EditableText value={c.s11.heading1} onChange={(v) => upd({ ...c, s11: { ...c.s11, heading1: v } })} style={{ color: "#fff" }} />
-        <br />
         <EditableText value={c.s11.heading2} onChange={(v) => upd({ ...c, s11: { ...c.s11, heading2: v } })} style={{ color: "#1DE3A2" }} />
       </h2>
       <div className="h-px w-40 mb-5 fade-up-d2" style={{ background: "rgba(255,255,255,0.08)" }} />
