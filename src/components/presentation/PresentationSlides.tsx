@@ -84,20 +84,20 @@ export const Slide2 = ({ dir, animKey, c, upd }: SlideProps) => (
 
 // ─── Slide 3: Path to KROK + Getting the offer (объединение 3 и 4) ────────────
 export const Slide3 = ({ dir, animKey, c, upd }: SlideProps) => {
-  const leftItems = [
+  const items = [
     { icon: "GraduationCap", text: "Математическая школа — хотела быть востоковедом?" },
+    { icon: "School",        text: "Летняя школа КРОК — узнала через сообщество вуза" },
     { icon: "BookOpen",      text: "11 класс — смена области → Московский Политех" },
+    { icon: "FileCheck",     text: "3 этапа — тестирование, кейс, ассессмент" },
     { icon: "Database",      text: "«Большие и открытые данные» — BigData" },
+    { icon: "Car",           text: "Собеседование с ресурс-менеджером прямо в машине" },
     { icon: "Zap",           text: "Стажировка — казалась труднодостижимой мечтой" },
+    { icon: "CheckCircle",   text: "Прошла все этапы — получила оффер" },
     { icon: "Radio",         text: "Оффер в лесу — 300 м над землёй на Валдае" },
+    { icon: "Sparkles",      text: "Старт стажировки в группе отчётности" },
   ];
-  const rightItems = [
-    { icon: "School",      text: "Летняя школа КРОК — узнала через сообщество вуза" },
-    { icon: "FileCheck",   text: "3 этапа — тестирование, кейс, ассессмент" },
-    { icon: "Car",         text: "Собеседование с ресурс-менеджером прямо в машине" },
-    { icon: "CheckCircle", text: "Прошла все этапы — получила оффер" },
-    { icon: "Sparkles",    text: "Старт стажировки в группе отчётности" },
-  ];
+  const left  = items.filter((_, i) => i % 2 === 0);
+  const right = items.filter((_, i) => i % 2 === 1);
   return (
     <Slide dir={dir} animKey={animKey}>
       <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 80% at 85% 50%, #0F2D22 0%, #0A1A14 55%, #060F0B 100%)" }} />
@@ -116,32 +116,27 @@ export const Slide3 = ({ dir, animKey, c, upd }: SlideProps) => {
         <div className="mt-1.5 w-10 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
       </div>
 
-      {/* Единый grid — строки выровнены */}
-      <div className="absolute left-10 right-10 top-[90px] bottom-6 grid grid-cols-2 gap-x-4 content-start">
-        {/* Заголовки колонок */}
-        <div className="text-[9px] font-semibold tracking-widest uppercase fade-up" style={{ color: "rgba(29,227,162,0.6)" }}>Путь в КРОК</div>
-        <div className="text-[9px] font-semibold tracking-widest uppercase fade-up" style={{ color: "rgba(29,227,162,0.6)" }}>Оффер в лесу</div>
-
-        {/* Строки попарно — одинаковая высота */}
-        {leftItems.map((item, i) => (
-          <>
-            <div key={`l${i}`} className="flex items-center gap-3 rounded-xl px-4 py-3 border fade-up mt-2"
-              style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.07 * i}s` }}>
-              <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-                style={{ background: "rgba(29,227,162,0.12)" }}>
-                <Icon name={item.icon} size={13} style={{ color: "#1DE3A2" }} />
-              </div>
-              <span className="text-sm leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
+      {/* Два столбца — строки выровнены попарно */}
+      <div className="absolute left-10 right-10 top-[88px] bottom-6 grid grid-cols-2 gap-x-4 gap-y-2 content-between">
+        {left.map((item, i) => (
+          <div key={`l${i}`} className="flex items-center gap-3 rounded-xl px-4 py-3 border fade-up"
+            style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.06 * i}s` }}>
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+              style={{ background: "rgba(29,227,162,0.12)" }}>
+              <Icon name={item.icon} size={13} style={{ color: "#1DE3A2" }} />
             </div>
-            <div key={`r${i}`} className="flex items-center gap-3 rounded-xl px-4 py-3 border fade-up mt-2"
-              style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.09 + 0.07 * i}s` }}>
-              <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-                style={{ background: "rgba(29,227,162,0.12)" }}>
-                <Icon name={rightItems[i].icon} size={13} style={{ color: "#1DE3A2" }} />
-              </div>
-              <span className="text-sm leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{rightItems[i].text}</span>
+            <span className="text-sm leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
+          </div>
+        ))}
+        {right.map((item, i) => (
+          <div key={`r${i}`} className="flex items-center gap-3 rounded-xl px-4 py-3 border fade-up"
+            style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", gridRow: i + 1, gridColumn: 2, animationDelay: `${0.06 * i + 0.03}s` }}>
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+              style={{ background: "rgba(29,227,162,0.12)" }}>
+              <Icon name={item.icon} size={13} style={{ color: "#1DE3A2" }} />
             </div>
-          </>
+            <span className="text-sm leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
+          </div>
         ))}
       </div>
       {ACCENT_LINE}
