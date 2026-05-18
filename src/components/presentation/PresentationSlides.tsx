@@ -6,7 +6,7 @@ import type { SlideProps } from "./slideTypes";
 import {
   DNADecor, CircuitDecor, GlowOrb,
   LogoBadge, Slide, EditableText,
-  StickFigureNewbie, StickFigureExpert,
+  StickFigureExpert,
 } from "./slideComponents";
 
 const ACCENT_LINE = (
@@ -83,88 +83,71 @@ export const Slide2 = ({ dir, animKey, c, upd }: SlideProps) => (
 );
 
 // ─── Slide 3: Path to KROK + Getting the offer (объединение 3 и 4) ────────────
-export const Slide3 = ({ dir, animKey, c, upd }: SlideProps) => (
-  <Slide dir={dir} animKey={animKey}>
-    <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 80% at 85% 50%, #0F2D22 0%, #0A1A14 55%, #060F0B 100%)" }} />
-    <GlowOrb size={350} x="85%" y="50%" color="#1DE3A2" blur={120} />
-    <CircuitDecor />
-    <LogoBadge />
-    <div className="absolute right-10 top-1/2 -translate-y-1/2 opacity-50">
-      <StickFigureNewbie />
-    </div>
+export const Slide3 = ({ dir, animKey, c, upd }: SlideProps) => {
+  const leftItems = [
+    { icon: "GraduationCap", text: "Математическая школа — хотела быть востоковедом?" },
+    { icon: "BookOpen",      text: "11 класс — смена области → Московский Политех" },
+    { icon: "Database",      text: "«Большие и открытые данные» — BigData" },
+    { icon: "Zap",           text: "Стажировка — казалась труднодостижимой мечтой" },
+    { icon: "Radio",         text: "Оффер в лесу — 300 м над землёй на Валдае" },
+  ];
+  const rightItems = [
+    { icon: "School",      text: "Летняя школа КРОК — узнала через сообщество вуза" },
+    { icon: "FileCheck",   text: "3 этапа — тестирование, кейс, ассессмент" },
+    { icon: "Car",         text: "Собеседование с ресурс-менеджером прямо в машине" },
+    { icon: "CheckCircle", text: "Прошла все этапы — получила оффер" },
+    { icon: "Sparkles",    text: "Старт стажировки в группе отчётности" },
+  ];
+  return (
+    <Slide dir={dir} animKey={animKey}>
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 80% at 85% 50%, #0F2D22 0%, #0A1A14 55%, #060F0B 100%)" }} />
+      <GlowOrb size={350} x="85%" y="50%" color="#1DE3A2" blur={120} />
+      <CircuitDecor />
+      <LogoBadge />
 
-    {/* Header */}
-    <div className="absolute top-6 left-10 right-10">
-      <EditableText value={c.s3.label} onChange={(v) => upd({ ...c, s3: { ...c.s3, label: v } })}
-        className="text-[9px] font-semibold tracking-[0.4em] uppercase mb-1 fade-up block"
-        style={{ color: "#1DE3A2" }} />
-      <EditableText value={c.s3.heading} onChange={(v) => upd({ ...c, s3: { ...c.s3, heading: v } })}
-        as="h2" className="text-white font-black fade-up-d1 block"
-        style={{ fontSize: "clamp(22px, 3vw, 36px)", color: "#fff" }} />
-      <div className="mt-1.5 w-10 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
-    </div>
-
-    {/* Two columns — растягиваем до самого низа */}
-    <div className="absolute left-10 right-[28%] top-[90px] bottom-8 grid grid-cols-2 gap-4">
-      {/* Левая — школа/вуз */}
-      <div className="flex flex-col justify-around">
-        <div className="text-[9px] font-semibold tracking-widest uppercase mb-2 fade-up" style={{ color: "rgba(29,227,162,0.6)" }}>Путь в КРОК</div>
-        {[
-          { icon: "GraduationCap", text: "Математическая школа — хотела быть востоковедом?" },
-          { icon: "BookOpen",      text: "11 класс — смена области → Московский Политех" },
-          { icon: "Database",      text: "«Большие и открытые данные» — BigData" },
-          { icon: "Zap",           text: "Стажировка — казалась труднодостижимой мечтой" },
-        ].map((item, i) => (
-          <div key={i} className="flex items-center gap-3 rounded-xl px-4 py-3 border fade-up"
-            style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.07 * i}s` }}>
-            <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-              style={{ background: "rgba(29,227,162,0.12)" }}>
-              <Icon name={item.icon} size={13} style={{ color: "#1DE3A2" }} />
-            </div>
-            <span className="text-sm leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
-          </div>
-        ))}
-        <div className="flex gap-1.5 flex-wrap mt-2">
-          {[c.s3.tag1, c.s3.tag2, c.s3.tag3].map((tag, i) => (
-            <span key={i} className="px-3 py-1 rounded-full text-[11px] font-semibold"
-              style={{ background: "rgba(29,227,162,0.12)", border: "1px solid rgba(29,227,162,0.25)", color: "#1DE3A2" }}>
-              {tag}
-            </span>
-          ))}
-        </div>
+      {/* Header */}
+      <div className="absolute top-6 left-10 right-10">
+        <EditableText value={c.s3.label} onChange={(v) => upd({ ...c, s3: { ...c.s3, label: v } })}
+          className="text-[9px] font-semibold tracking-[0.4em] uppercase mb-1 fade-up block"
+          style={{ color: "#1DE3A2" }} />
+        <EditableText value={c.s3.heading} onChange={(v) => upd({ ...c, s3: { ...c.s3, heading: v } })}
+          as="h2" className="text-white font-black fade-up-d1 block"
+          style={{ fontSize: "clamp(22px, 3vw, 36px)", color: "#fff" }} />
+        <div className="mt-1.5 w-10 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
       </div>
 
-      {/* Правая — оффер */}
-      <div className="flex flex-col justify-around">
-        <div className="text-[9px] font-semibold tracking-widest uppercase mb-2 fade-up" style={{ color: "rgba(29,227,162,0.6)" }}>Оффер в лесу</div>
-        {[
-          { icon: "School",      text: "Летняя школа КРОК — пост в сообществе вуза" },
-          { icon: "FileCheck",   text: "3 этапа — тестирование, кейс, ассессмент" },
-          { icon: "Car",         text: "Собеседование с ресурс-менеджером прямо в машине" },
-          { icon: "Radio",       text: "Оффер на вышке — 300 м над землёй на Валдае" },
-        ].map((item, i) => (
-          <div key={i} className="flex items-center gap-3 rounded-xl px-4 py-3 border fade-up"
-            style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.09 + 0.07 * i}s` }}>
-            <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-              style={{ background: "rgba(29,227,162,0.12)" }}>
-              <Icon name={item.icon} size={13} style={{ color: "#1DE3A2" }} />
+      {/* Единый grid — строки выровнены */}
+      <div className="absolute left-10 right-10 top-[90px] bottom-6 grid grid-cols-2 gap-x-4 content-start">
+        {/* Заголовки колонок */}
+        <div className="text-[9px] font-semibold tracking-widest uppercase fade-up" style={{ color: "rgba(29,227,162,0.6)" }}>Путь в КРОК</div>
+        <div className="text-[9px] font-semibold tracking-widest uppercase fade-up" style={{ color: "rgba(29,227,162,0.6)" }}>Оффер в лесу</div>
+
+        {/* Строки попарно — одинаковая высота */}
+        {leftItems.map((item, i) => (
+          <>
+            <div key={`l${i}`} className="flex items-center gap-3 rounded-xl px-4 py-3 border fade-up mt-2"
+              style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.07 * i}s` }}>
+              <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+                style={{ background: "rgba(29,227,162,0.12)" }}>
+                <Icon name={item.icon} size={13} style={{ color: "#1DE3A2" }} />
+              </div>
+              <span className="text-sm leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
             </div>
-            <span className="text-sm leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
-          </div>
+            <div key={`r${i}`} className="flex items-center gap-3 rounded-xl px-4 py-3 border fade-up mt-2"
+              style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.09 + 0.07 * i}s` }}>
+              <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+                style={{ background: "rgba(29,227,162,0.12)" }}>
+                <Icon name={rightItems[i].icon} size={13} style={{ color: "#1DE3A2" }} />
+              </div>
+              <span className="text-sm leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{rightItems[i].text}</span>
+            </div>
+          </>
         ))}
-        <div className="flex gap-1.5 flex-wrap mt-2">
-          {[c.s4.tag1, c.s4.tag2, c.s4.tag3].map((tag, i) => (
-            <span key={i} className="px-3 py-1 rounded-full text-[11px] font-semibold"
-              style={{ background: "rgba(29,227,162,0.12)", border: "1px solid rgba(29,227,162,0.25)", color: "#1DE3A2" }}>
-              {tag}
-            </span>
-          ))}
-        </div>
       </div>
-    </div>
-    {ACCENT_LINE}
-  </Slide>
-);
+      {ACCENT_LINE}
+    </Slide>
+  );
+};
 
 // ─── Slide 4: Мосэнерго + задачи + диаграмма (объединение 5, 6, 7) ────────────
 export const Slide4 = ({ dir, animKey, c, upd }: SlideProps) => {
@@ -188,12 +171,12 @@ export const Slide4 = ({ dir, animKey, c, upd }: SlideProps) => {
         <div className="mt-1 w-10 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
       </div>
 
-      {/* Верхняя зона: задачи слева + карточка справа */}
-      <div className="absolute left-10 right-10 top-[82px] bottom-[46%] grid grid-cols-2 gap-3">
+      {/* Верхняя зона: задачи слева + карточка справа — фиксированная высота 240px */}
+      <div className="absolute left-10 right-10 grid grid-cols-2 gap-3" style={{ top: 82, height: 240 }}>
         {/* Задачи — все 6 */}
-        <div className="flex flex-col justify-around">
+        <div className="flex flex-col gap-1">
           {c.s6.tasks.map((task, i) => (
-            <div key={i} className="flex items-center gap-2.5 rounded-xl px-3 py-1.5 border fade-up"
+            <div key={i} className="flex items-center gap-2.5 rounded-xl px-3 py-[7px] border fade-up flex-1"
               style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.06 * i}s` }}>
               <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "#1DE3A2" }} />
               <div className="min-w-0">
@@ -229,39 +212,38 @@ export const Slide4 = ({ dir, animKey, c, upd }: SlideProps) => {
         </div>
       </div>
 
-      {/* ── BOTTOM: столбчатая диаграмма ── */}
-      <div className="absolute left-10 right-10 bottom-5" style={{ top: "calc(100% - 46% - 4px)" }}>
-        <div className="text-[9px] font-semibold tracking-widest uppercase mb-1" style={{ color: "rgba(255,255,255,0.3)" }}>
+      {/* ── BOTTOM: столбчатая диаграмма — от 82+240+12=334px до низа ── */}
+      <div className="absolute left-10 right-10 bottom-4" style={{ top: 334 }}>
+        <div className="text-[9px] font-semibold tracking-widest uppercase mb-2" style={{ color: "rgba(255,255,255,0.3)" }}>
           {c.s7.heading}
         </div>
-        <div className="relative flex items-end gap-2" style={{ height: "calc(100% - 20px)", paddingBottom: "22px" }}>
+        {/* Область баров: вся оставшаяся высота минус заголовок (18px) и подписи (20px) */}
+        <div className="relative flex gap-2" style={{ height: "calc(100% - 38px)" }}>
           {c.s7.bars.map(([label, value, color], i) => {
             const pct = Math.round(((value as number) / max) * 100);
             const isHovered = tooltip?.idx === i;
             return (
               <div
                 key={i}
-                className="flex-1 flex flex-col items-end cursor-pointer relative"
+                className="flex-1 flex flex-col justify-end cursor-pointer relative"
                 onMouseEnter={() => setTooltip({ idx: i, x: 0, y: 0 })}
                 onMouseLeave={() => setTooltip(null)}
               >
-                {/* value */}
-                <div className="text-[11px] font-black mb-1 self-center" style={{ color: color as string, opacity: isHovered ? 1 : 0.75 }}>{value}</div>
-                {/* bar — высота в % от контейнера */}
-                <div className="w-full rounded-t-lg relative overflow-hidden"
+                {/* value над баром */}
+                <div className="text-[11px] font-black text-center mb-1" style={{ color: color as string, opacity: isHovered ? 1 : 0.8 }}>{value}</div>
+                {/* bar */}
+                <div className="w-full rounded-t-xl relative overflow-hidden"
                   style={{
                     height: `${pct}%`,
-                    background: `${color}22`,
-                    border: `1px solid ${color}${isHovered ? "88" : "44"}`,
-                    transform: isHovered ? "scaleY(1.04)" : "scaleY(1)",
-                    transformOrigin: "bottom",
-                    transition: "transform 0.15s",
+                    background: `${color}28`,
+                    border: `1px solid ${color}${isHovered ? "99" : "55"}`,
+                    transition: "height 0.3s ease, border-color 0.15s",
                   }}>
-                  <div className="absolute inset-0 rounded-t-lg"
-                    style={{ background: `linear-gradient(to top, ${color}cc, ${color}33)` }} />
+                  <div className="absolute inset-0 rounded-t-xl"
+                    style={{ background: `linear-gradient(to top, ${color}dd, ${color}44)` }} />
                 </div>
-                {/* axis label */}
-                <div className="text-[9px] text-center font-medium leading-tight absolute bottom-0 left-0 right-0 px-0.5"
+                {/* axis label под баром */}
+                <div className="text-[9px] text-center font-medium leading-tight mt-1"
                   style={{ color: "rgba(255,255,255,0.45)" }}>
                   {(label as string).length > 9 ? (label as string).slice(0, 9) + "…" : label as string}
                 </div>
