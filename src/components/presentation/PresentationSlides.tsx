@@ -1,5 +1,6 @@
-// ─── Slide1–Slide11 components ────────────────────────────────────────────────
+// ─── Slide1–Slide9 components ────────────────────────────────────────────────
 
+import { useState } from "react";
 import Icon from "@/components/ui/icon";
 import type { SlideProps } from "./slideTypes";
 import {
@@ -81,263 +82,245 @@ export const Slide2 = ({ dir, animKey, c, upd }: SlideProps) => (
   </Slide>
 );
 
-// ─── Slide 3: Path to KROK — school & university ──────────────────────────────
+// ─── Slide 3: Path to KROK + Getting the offer (объединение 3 и 4) ────────────
 export const Slide3 = ({ dir, animKey, c, upd }: SlideProps) => (
   <Slide dir={dir} animKey={animKey}>
     <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 80% at 85% 50%, #0F2D22 0%, #0A1A14 55%, #060F0B 100%)" }} />
     <GlowOrb size={350} x="85%" y="50%" color="#1DE3A2" blur={120} />
+    <CircuitDecor />
     <LogoBadge />
-    <div className="absolute right-12 top-1/2 -translate-y-1/2 opacity-60">
+    <div className="absolute right-10 top-1/2 -translate-y-1/2 opacity-50">
       <StickFigureNewbie />
     </div>
-    <div className="absolute top-7 left-10 right-10">
+
+    {/* Header */}
+    <div className="absolute top-5 left-10 right-10">
       <EditableText value={c.s3.label} onChange={(v) => upd({ ...c, s3: { ...c.s3, label: v } })}
         className="text-[9px] font-semibold tracking-[0.4em] uppercase mb-1 fade-up block"
         style={{ color: "#1DE3A2" }} />
       <EditableText value={c.s3.heading} onChange={(v) => upd({ ...c, s3: { ...c.s3, heading: v } })}
         as="h2" className="text-white font-black fade-up-d1 block"
-        style={{ fontSize: "clamp(20px, 2.8vw, 32px)", color: "#fff" }} />
-      <div className="mt-1.5 w-12 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
+        style={{ fontSize: "clamp(18px, 2.4vw, 28px)", color: "#fff" }} />
+      <div className="mt-1 w-10 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
     </div>
-    <div className="absolute left-10 top-[110px] bottom-8 max-w-[60%] flex flex-col gap-2.5">
-      {[
-        { icon: "GraduationCap", text: "Математическая школа — хотела быть востоковедом?" },
-        { icon: "BookOpen",      text: "11 класс — смена области → поступление в Московский Политех" },
-        { icon: "Database",      text: "Направление «Большие и открытые данные» — прямое попадание в BigData" },
-        { icon: "Zap",           text: "Стажировка — сложная и труднореализуемая мечта" },
-      ].map((item, i) => (
-        <div key={i} className="flex items-center gap-3 rounded-xl px-4 py-2.5 border fade-up"
-          style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.08 * i}s` }}>
-          <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-            style={{ background: "rgba(29,227,162,0.12)" }}>
-            <Icon name={item.icon} size={13} style={{ color: "#1DE3A2" }} />
-          </div>
-          <span className="text-sm" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
-        </div>
-      ))}
-      <div className="flex gap-2 flex-wrap mt-1">
-        {[c.s3.tag1, c.s3.tag2, c.s3.tag3].map((tag, i) => (
-          <span key={i} className="px-3 py-1 rounded-full text-[11px] font-semibold"
-            style={{ background: "rgba(29,227,162,0.12)", border: "1px solid rgba(29,227,162,0.25)", color: "#1DE3A2" }}>
-            {tag}
-          </span>
-        ))}
-      </div>
-    </div>
-    {ACCENT_LINE}
-  </Slide>
-);
 
-// ─── Slide 4: Getting the offer ───────────────────────────────────────────────
-export const Slide4 = ({ dir, animKey, c, upd }: SlideProps) => (
-  <Slide dir={dir} animKey={animKey}>
-    <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 60% 90% at 20% 60%, #0A1F16 0%, #07120E 55%, #040A08 100%)" }} />
-    <GlowOrb size={400} x="20%" y="60%" color="#1DE3A2" blur={130} />
-    <CircuitDecor />
-    <LogoBadge />
-    <div className="absolute right-10 top-16 bottom-10 w-[36%] flex flex-col justify-around">
-      {[
-        { icon: "School",     label: "Летняя школа",            sub: "Узнала через вуз, не надеялась" },
-        { icon: "FileCheck",  label: "Тест → Кейс → Ассессмент", sub: "Прошла все три этапа" },
-        { icon: "Car",        label: "Собеседование в машине",   sub: "По пути на Валдай" },
-        { icon: "Radio",      label: "Оффер на вышке",           sub: "300 м над землёй, глубоко в лесу" },
-      ].map((step, i) => (
-        <div key={i} className="flex items-center gap-3 fade-up" style={{ animationDelay: `${0.1 * i}s` }}>
-          <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
-            style={{ background: "rgba(29,227,162,0.15)", border: "1px solid rgba(29,227,162,0.3)" }}>
-            <Icon name={step.icon} size={14} style={{ color: "#1DE3A2" }} />
-          </div>
-          <div className="text-sm font-bold text-white">{step.label}</div>
-        </div>
-      ))}
-    </div>
-    <div className="absolute top-7 left-10 right-[42%]">
-      <EditableText value={c.s4.label} onChange={(v) => upd({ ...c, s4: { ...c.s4, label: v } })}
-        className="text-[9px] font-semibold tracking-[0.4em] uppercase mb-1 fade-up block"
-        style={{ color: "#1DE3A2" }} />
-      <EditableText value={c.s4.heading} onChange={(v) => upd({ ...c, s4: { ...c.s4, heading: v } })}
-        as="h2" className="text-white font-black fade-up-d1 block"
-        style={{ fontSize: "clamp(20px, 2.8vw, 32px)", color: "#fff" }} />
-      <div className="mt-1.5 w-12 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
-    </div>
-    <div className="absolute left-10 top-[108px] bottom-8 max-w-[54%] flex flex-col gap-2.5">
-      {[
-        { icon: "School",      text: "Летняя школа КРОК — пост в сообществе вуза?" },
-        { icon: "CheckCircle", text: "3 этапа — тестирование, кейс, ассессмент" },
-        { icon: "Car",         text: "Собеседование с ресурс-менеджером Леной прямо в машине" },
-        { icon: "Radio",       text: "Оффер на вышке — 300 м над землёй, глубоко в лесу на Валдае" },
-      ].map((item, i) => (
-        <div key={i} className="flex items-center gap-3 rounded-xl px-4 py-2.5 border fade-up"
-          style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.09 * i}s` }}>
-          <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-            style={{ background: "rgba(29,227,162,0.12)" }}>
-            <Icon name={item.icon} size={13} style={{ color: "#1DE3A2" }} />
-          </div>
-          <span className="text-sm" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
-        </div>
-      ))}
-      <div className="flex gap-2 flex-wrap mt-1">
-        {[c.s4.tag1, c.s4.tag2, c.s4.tag3].map((tag, i) => (
-          <span key={i} className="px-3 py-1 rounded-full text-[11px] font-semibold"
-            style={{ background: "rgba(29,227,162,0.12)", border: "1px solid rgba(29,227,162,0.25)", color: "#1DE3A2" }}>
-            {tag}
-          </span>
-        ))}
-      </div>
-    </div>
-    {ACCENT_LINE}
-  </Slide>
-);
-
-// ─── Slide 5: Project experience — intro ──────────────────────────────────────
-export const Slide5 = ({ dir, animKey, c, upd }: SlideProps) => (
-  <Slide dir={dir} animKey={animKey}>
-    <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 70% at 50% 20%, #0F2D22 0%, #0A1A14 55%, #060F0B 100%)" }} />
-    <GlowOrb size={400} x="50%" y="10%" color="#1DE3A2" blur={120} />
-    <LogoBadge />
-    <div className="absolute top-7 left-10 right-10">
-      <EditableText value={c.s5.label} onChange={(v) => upd({ ...c, s5: { ...c.s5, label: v } })}
-        className="text-[9px] font-semibold tracking-[0.4em] uppercase mb-1 fade-up block"
-        style={{ color: "#1DE3A2" }} />
-      <EditableText value={c.s5.heading} onChange={(v) => upd({ ...c, s5: { ...c.s5, heading: v } })}
-        as="h2" className="text-white font-black fade-up-d1 block"
-        style={{ fontSize: "clamp(20px, 2.8vw, 32px)", color: "#fff" }} />
-      <div className="mt-1.5 w-12 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
-    </div>
-    <div className="absolute left-10 right-10 top-[108px] bottom-8 grid grid-cols-2 gap-3">
-      {/* Left col — timeline */}
-      <div className="flex flex-col gap-2.5">
+    {/* Two columns */}
+    <div className="absolute left-10 right-[30%] top-[88px] bottom-6 grid grid-cols-2 gap-3">
+      {/* Левая — школа/вуз */}
+      <div className="flex flex-col gap-1.5">
+        <div className="text-[9px] font-semibold tracking-widest uppercase mb-1 fade-up" style={{ color: "rgba(29,227,162,0.6)" }}>Путь в КРОК</div>
         {[
-          { icon: "UserCheck", text: "Роль стажёра в группе отчётности на проекте Мосэнерго" },
-          { icon: "Clock",     text: "Первые три дня — самые сложные" },
-          { icon: "FileSearch",text: "1-я задача — работа с S2T, первичный анализ показателей в отчётах" },
-          { icon: "Anchor",    text: "Погружение в Мосэнерго казалось «чёрной дырой»" },
-          { icon: "TrendingUp",text: "Быстро втянулась — задач становилось всё больше" },
+          { icon: "GraduationCap", text: "Математическая школа — хотела быть востоковедом?" },
+          { icon: "BookOpen",      text: "11 класс — смена области → Московский Политех" },
+          { icon: "Database",      text: "«Большие и открытые данные» — BigData" },
+          { icon: "Zap",           text: "Стажировка — казалась труднодостижимой мечтой" },
         ].map((item, i) => (
-          <div key={i} className="flex items-center gap-3 rounded-xl px-3 py-2 border fade-up"
+          <div key={i} className="flex items-center gap-2.5 rounded-xl px-3 py-2 border fade-up"
             style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.07 * i}s` }}>
             <div className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0"
               style={{ background: "rgba(29,227,162,0.12)" }}>
-              <Icon name={item.icon} size={12} style={{ color: "#1DE3A2" }} />
+              <Icon name={item.icon} size={11} style={{ color: "#1DE3A2" }} />
             </div>
-            <span className="text-xs" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
+            <span className="text-xs leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
           </div>
         ))}
+        <div className="flex gap-1.5 flex-wrap mt-1">
+          {[c.s3.tag1, c.s3.tag2, c.s3.tag3].map((tag, i) => (
+            <span key={i} className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold"
+              style={{ background: "rgba(29,227,162,0.12)", border: "1px solid rgba(29,227,162,0.25)", color: "#1DE3A2" }}>
+              {tag}
+            </span>
+          ))}
+        </div>
       </div>
-      {/* Right col — visual data card */}
-      <div className="flex flex-col gap-3 justify-center">
-        <div className="rounded-2xl p-5 border flex flex-col gap-4 fade-up-d2 h-full justify-center"
+
+      {/* Правая — оффер */}
+      <div className="flex flex-col gap-1.5">
+        <div className="text-[9px] font-semibold tracking-widest uppercase mb-1 fade-up" style={{ color: "rgba(29,227,162,0.6)" }}>Оффер в лесу</div>
+        {[
+          { icon: "School",      text: "Летняя школа КРОК — пост в сообществе вуза" },
+          { icon: "FileCheck",   text: "3 этапа — тестирование, кейс, ассессмент" },
+          { icon: "Car",         text: "Собеседование с ресурс-менеджером прямо в машине" },
+          { icon: "Radio",       text: "Оффер на вышке — 300 м над землёй на Валдае" },
+        ].map((item, i) => (
+          <div key={i} className="flex items-center gap-2.5 rounded-xl px-3 py-2 border fade-up"
+            style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.09 + 0.07 * i}s` }}>
+            <div className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0"
+              style={{ background: "rgba(29,227,162,0.12)" }}>
+              <Icon name={item.icon} size={11} style={{ color: "#1DE3A2" }} />
+            </div>
+            <span className="text-xs leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
+          </div>
+        ))}
+        <div className="flex gap-1.5 flex-wrap mt-1">
+          {[c.s4.tag1, c.s4.tag2, c.s4.tag3].map((tag, i) => (
+            <span key={i} className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold"
+              style={{ background: "rgba(29,227,162,0.12)", border: "1px solid rgba(29,227,162,0.25)", color: "#1DE3A2" }}>
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+    {ACCENT_LINE}
+  </Slide>
+);
+
+// ─── Slide 4: Мосэнерго + задачи + диаграмма (объединение 5, 6, 7) ────────────
+export const Slide4 = ({ dir, animKey, c, upd }: SlideProps) => {
+  const [tooltip, setTooltip] = useState<{ idx: number; x: number; y: number } | null>(null);
+  const max = Math.max(...c.s7.bars.map(([, n]) => n as number));
+
+  return (
+    <Slide dir={dir} animKey={animKey}>
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 70% at 50% 20%, #0F2D22 0%, #0A1A14 55%, #060F0B 100%)" }} />
+      <GlowOrb size={400} x="50%" y="10%" color="#1DE3A2" blur={120} />
+      <LogoBadge />
+
+      {/* ── TOP: проект Мосэнерго ── */}
+      <div className="absolute top-5 left-10 right-10">
+        <EditableText value={c.s5.label} onChange={(v) => upd({ ...c, s5: { ...c.s5, label: v } })}
+          className="text-[9px] font-semibold tracking-[0.4em] uppercase mb-0.5 fade-up block"
+          style={{ color: "#1DE3A2" }} />
+        <EditableText value={c.s5.heading} onChange={(v) => upd({ ...c, s5: { ...c.s5, heading: v } })}
+          as="h2" className="text-white font-black fade-up-d1 block"
+          style={{ fontSize: "clamp(17px, 2.2vw, 26px)", color: "#fff" }} />
+        <div className="mt-1 w-10 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
+      </div>
+
+      {/* Верхняя зона: карточка проекта + задачи */}
+      <div className="absolute left-10 right-10 top-[82px] h-[44%] grid grid-cols-2 gap-3">
+        {/* Задачи */}
+        <div className="flex flex-col gap-1.5 overflow-hidden">
+          {c.s6.tasks.map((task, i) => (
+            <div key={i} className="flex items-start gap-2.5 rounded-xl px-3 py-1.5 border fade-up"
+              style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.06 * i}s` }}>
+              <div className="mt-0.5 w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "#1DE3A2" }} />
+              <div className="min-w-0">
+                <div className="text-xs font-bold text-white leading-tight">{task.title}</div>
+                {task.desc ? <div className="text-[10px] mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>{task.desc}</div> : null}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Карточка проекта */}
+        <div className="rounded-2xl p-4 border flex flex-col gap-3 fade-up-d2"
           style={{ background: "rgba(29,227,162,0.04)", borderColor: "rgba(29,227,162,0.18)" }}>
-          {/* project badge */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+            <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
               style={{ background: "rgba(29,227,162,0.15)", border: "1px solid rgba(29,227,162,0.3)" }}>
-              <Icon name="Building2" size={18} style={{ color: "#1DE3A2" }} />
+              <Icon name="Building2" size={16} style={{ color: "#1DE3A2" }} />
             </div>
             <div>
-              <div className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: "#1DE3A2" }}>Проект</div>
+              <div className="text-[9px] font-semibold uppercase tracking-widest" style={{ color: "#1DE3A2" }}>Проект</div>
               <div className="text-base font-black text-white">Мосэнерго</div>
             </div>
           </div>
           <div className="w-full h-px" style={{ background: "rgba(29,227,162,0.12)" }} />
-          {/* stats row */}
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-1.5">
             {["9 месяцев", "BI", "S2T", "Группа отчётности"].map((val, i) => (
-              <div key={i} className="rounded-xl px-3 py-2.5 flex items-center justify-center"
+              <div key={i} className="rounded-xl px-2 py-2 flex items-center justify-center"
                 style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}>
-                <div className="text-sm font-black text-center" style={{ color: "#1DE3A2" }}>{val}</div>
+                <div className="text-xs font-black text-center" style={{ color: "#1DE3A2" }}>{val}</div>
               </div>
             ))}
           </div>
-        </div>
-      </div>
-    </div>
-    {ACCENT_LINE}
-  </Slide>
-);
-
-// ─── Slide 6: Task list ───────────────────────────────────────────────────────
-export const Slide6 = ({ dir, animKey, c, upd }: SlideProps) => (
-  <Slide dir={dir} animKey={animKey}>
-    <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 70% at 90% 20%, #0F2D22 0%, #0A1A14 60%, #060F0B 100%)" }} />
-    <GlowOrb size={350} x="90%" y="15%" color="#1DE3A2" blur={120} />
-    <CircuitDecor />
-    <LogoBadge />
-    <div className="absolute top-7 left-10 right-10">
-      <EditableText value={c.s6.label} onChange={(v) => upd({ ...c, s6: { ...c.s6, label: v } })}
-        className="text-[9px] font-semibold tracking-[0.4em] uppercase mb-1.5 fade-up block"
-        style={{ color: "#1DE3A2" }} />
-      <EditableText value={c.s6.heading} onChange={(v) => upd({ ...c, s6: { ...c.s6, heading: v } })}
-        as="h2" className="text-white font-black fade-up-d1 block"
-        style={{ fontSize: "clamp(22px, 3vw, 36px)", color: "#fff" }} />
-      <div className="mt-1.5 w-12 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
-    </div>
-    <div className="absolute left-10 right-10 top-[108px] bottom-8 grid grid-cols-2 gap-2.5">
-      {c.s6.tasks.map((task, i) => (
-        <div key={i} className="rounded-2xl px-5 py-4 border fade-up flex items-start gap-3"
-          style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.07 * i}s` }}>
-          <div className="text-xl font-black shrink-0 w-7 pt-0.5" style={{ color: "#1DE3A2" }}>
-            {String(i + 1).padStart(2, "0")}
-          </div>
-          <div className="flex-1">
-            <EditableText value={task.title}
-              onChange={(v) => { const tasks = [...c.s6.tasks]; tasks[i] = { ...tasks[i], title: v }; upd({ ...c, s6: { ...c.s6, tasks } }); }}
-              className="text-white font-bold text-sm block" style={{ color: "#fff" }} />
-            <EditableText value={task.desc}
-              onChange={(v) => { const tasks = [...c.s6.tasks]; tasks[i] = { ...tasks[i], desc: v }; upd({ ...c, s6: { ...c.s6, tasks } }); }}
-              className="text-xs mt-0.5 block" style={{ color: "rgba(255,255,255,0.4)" }} />
-          </div>
-        </div>
-      ))}
-    </div>
-    {ACCENT_LINE}
-  </Slide>
-);
-
-// ─── Slide 7: Bar chart ───────────────────────────────────────────────────────
-export const Slide7 = ({ dir, animKey, c, upd }: SlideProps) => {
-  const max = Math.max(...c.s7.bars.map(([, n]) => n as number));
-  return (
-    <Slide dir={dir} animKey={animKey}>
-      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 80% at 20% 60%, #0F2D22 0%, #0A1A14 55%, #060F0B 100%)" }} />
-      <GlowOrb size={400} x="25%" y="60%" color="#1DE3A2" blur={130} />
-      <LogoBadge />
-      <div className="absolute top-7 left-10 right-10">
-        <EditableText value={c.s7.label} onChange={(v) => upd({ ...c, s7: { ...c.s7, label: v } })}
-          className="text-[9px] font-semibold tracking-[0.4em] uppercase mb-1 fade-up block"
-          style={{ color: "#1DE3A2" }} />
-        <EditableText value={c.s7.heading} onChange={(v) => upd({ ...c, s7: { ...c.s7, heading: v } })}
-          as="h2" className="text-white font-black fade-up-d1 block"
-          style={{ fontSize: "clamp(20px, 2.8vw, 32px)", color: "#fff" }} />
-        <div className="mt-1.5 w-12 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
-      </div>
-      <div className="absolute left-10 right-10 top-[108px] bottom-8 flex items-end gap-6 pb-6">
-        {c.s7.bars.map(([label, value, color], i) => {
-          const pct = Math.round(((value as number) / max) * 100);
-          return (
-            <div key={i} className="flex-1 flex flex-col items-center gap-2 fade-up"
-              style={{ animationDelay: `${0.08 * i}s` }}>
-              <div className="text-sm font-black" style={{ color: color as string }}>{value}</div>
-              <div className="w-full rounded-t-xl relative overflow-hidden"
-                style={{ height: `${pct * 1.6}px`, background: `${color}22`, border: `1px solid ${color}44` }}>
-                <div className="absolute bottom-0 left-0 right-0 rounded-t-xl"
-                  style={{ height: "100%", background: `linear-gradient(to top, ${color}99, ${color}33)` }} />
-              </div>
-              <EditableText value={label as string}
-                onChange={(v) => { const bars = [...c.s7.bars] as [string, number, string][]; bars[i] = [v, value as number, color as string]; upd({ ...c, s7: { ...c.s7, bars } }); }}
-                className="text-[10px] text-center font-semibold block w-full"
-                style={{ color: "rgba(255,255,255,0.5)" }} />
+          {[
+            { icon: "UserCheck",  text: "Стажёр в группе отчётности" },
+            { icon: "TrendingUp", text: "Быстро втянулась, задач становилось больше" },
+          ].map((item, i) => (
+            <div key={i} className="flex items-center gap-2">
+              <Icon name={item.icon} size={11} style={{ color: "#1DE3A2", opacity: 0.8 }} />
+              <span className="text-[11px]" style={{ color: "rgba(255,255,255,0.55)" }}>{item.text}</span>
             </div>
-          );
-        })}
+          ))}
+        </div>
       </div>
+
+      {/* ── BOTTOM: столбчатая диаграмма ── */}
+      <div className="absolute left-10 right-10 bottom-5" style={{ top: "calc(82px + 44% + 8px)" }}>
+        <div className="text-[9px] font-semibold tracking-widest uppercase mb-2" style={{ color: "rgba(255,255,255,0.3)" }}>
+          {c.s7.heading}
+        </div>
+        <div className="relative flex items-end gap-2" style={{ height: "90px", paddingBottom: "22px" }}>
+          {c.s7.bars.map(([label, value, color], i) => {
+            const pct = Math.round(((value as number) / max) * 100);
+            const barH = Math.round((pct / 100) * 68);
+            const isHovered = tooltip?.idx === i;
+            return (
+              <div
+                key={i}
+                className="flex-1 flex flex-col items-center gap-1 cursor-pointer relative"
+                onMouseEnter={() => setTooltip({ idx: i, x: 0, y: 0 })}
+                onMouseLeave={() => setTooltip(null)}
+              >
+                {/* value */}
+                <div className="text-[10px] font-black" style={{ color: color as string, opacity: isHovered ? 1 : 0.7 }}>{value}</div>
+                {/* bar */}
+                <div className="w-full rounded-t-lg relative overflow-hidden"
+                  style={{
+                    height: barH,
+                    background: `${color}22`,
+                    border: `1px solid ${color}${isHovered ? "88" : "44"}`,
+                    transform: isHovered ? "scaleY(1.05)" : "scaleY(1)",
+                    transformOrigin: "bottom",
+                    transition: "transform 0.15s",
+                  }}>
+                  <div className="absolute inset-0 rounded-t-lg"
+                    style={{ background: `linear-gradient(to top, ${color}99, ${color}33)` }} />
+                </div>
+                {/* axis label */}
+                <div className="text-[9px] text-center font-medium leading-tight absolute bottom-0 left-0 right-0 px-0.5"
+                  style={{ color: "rgba(255,255,255,0.45)" }}>
+                  {(label as string).length > 9 ? (label as string).slice(0, 9) + "…" : label as string}
+                </div>
+
+                {/* per-bar tooltip */}
+                {isHovered && (() => {
+                  const task = c.s6.tasks[i];
+                  const col = color as string;
+                  return (
+                    <div
+                      className="absolute z-50 rounded-xl px-3 py-2.5 pointer-events-none"
+                      style={{
+                        background: "rgba(6,15,11,0.97)",
+                        border: `1px solid ${col}55`,
+                        boxShadow: "0 8px 32px rgba(0,0,0,0.8)",
+                        bottom: "calc(100% + 6px)",
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                        width: "180px",
+                        whiteSpace: "normal",
+                      }}
+                    >
+                      <div className="text-xs font-black mb-1" style={{ color: col }}>{label as string}</div>
+                      {task && (
+                        <>
+                          <div className="text-[11px] font-semibold text-white leading-tight">{task.title}</div>
+                          {task.desc && <div className="text-[10px] mt-1" style={{ color: "rgba(255,255,255,0.5)" }}>{task.desc}</div>}
+                        </>
+                      )}
+                      <div className="mt-1.5 flex items-center gap-1">
+                        <div className="w-2 h-2 rounded-sm" style={{ background: col }} />
+                        <span className="text-[10px] font-bold" style={{ color: col }}>Кол-во: {value as number}</span>
+                      </div>
+                    </div>
+                  );
+                })()}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
       {ACCENT_LINE}
     </Slide>
   );
 };
 
-// ─── Slide 8: Internship program + initiative ─────────────────────────────────
-export const Slide8 = ({ dir, animKey, c, upd }: SlideProps) => (
+// ─── Slide 5 (бывший 8): Стажёрская программа + инициатива ───────────────────
+export const Slide5 = ({ dir, animKey, c, upd }: SlideProps) => (
   <Slide dir={dir} animKey={animKey}>
     <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 70% at 50% 0%, #0F2D22 0%, #0A1A14 55%, #060F0B 100%)" }} />
     <GlowOrb size={400} x="50%" y="0%" color="#1DE3A2" blur={120} />
@@ -352,16 +335,12 @@ export const Slide8 = ({ dir, animKey, c, upd }: SlideProps) => (
       <div className="mt-1.5 w-12 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
     </div>
     <div className="absolute left-10 right-10 top-[108px] bottom-8 grid grid-cols-2 gap-4">
-      {/* Left: иконка чек-листа */}
       <div className="rounded-2xl border fade-up flex items-center justify-center"
         style={{ background: "rgba(255,255,255,0.03)", borderColor: "rgba(29,227,162,0.18)" }}>
         <svg viewBox="0 0 160 200" width="160" height="200" style={{ opacity: 0.9 }}>
-          {/* clipboard body */}
           <rect x="20" y="30" width="120" height="155" rx="10" fill="none" stroke="#1DE3A2" strokeWidth="3" opacity="0.5" />
-          {/* clipboard clip */}
           <rect x="55" y="18" width="50" height="24" rx="8" fill="#0D1F1A" stroke="#1DE3A2" strokeWidth="2.5" opacity="0.9" />
           <rect x="62" y="22" width="36" height="12" rx="4" fill="#1DE3A2" opacity="0.2" />
-          {/* check rows — all green */}
           {[50, 75, 100, 125, 150].map((y, i) => (
             <g key={i}>
               <rect x="36" y={y - 8} width="18" height="18" rx="4"
@@ -374,7 +353,6 @@ export const Slide8 = ({ dir, animKey, c, upd }: SlideProps) => (
           ))}
         </svg>
       </div>
-      {/* Right: инициатива */}
       <div className="rounded-2xl p-4 border fade-up-d2 flex flex-col gap-3"
         style={{ background: "rgba(29,227,162,0.07)", borderColor: "rgba(29,227,162,0.25)", borderTopWidth: "3px", borderTopColor: "#1DE3A2" }}>
         <div className="flex items-center gap-2">
@@ -384,9 +362,9 @@ export const Slide8 = ({ dir, animKey, c, upd }: SlideProps) => (
         <div className="text-sm font-bold text-white">Расширить раздел «Коммуникация с заказчиком»</div>
         {[
           { icon: "MessageSquare", text: "Встреча 1: стажёр собирает/уточняет требования" },
-          { icon: "Layout",        text: "Дорабатывает дашборд? самостоятельно" },
+          { icon: "Layout",        text: "Дорабатывает дашборд самостоятельно" },
           { icon: "RotateCcw",     text: "Встреча 2: показывает результат, получает обратную связь" },
-          { icon: "Star",          text: "Делает выводы — определяет, хватило ли выявленных требований и каков результат" },
+          { icon: "Star",          text: "Делает выводы — определяет, хватило ли выявленных требований" },
         ].map((step, i) => (
           <div key={i} className="flex items-center gap-2">
             <Icon name={step.icon} size={12} style={{ color: "#1DE3A2", opacity: 0.8 }} />
@@ -399,8 +377,8 @@ export const Slide8 = ({ dir, animKey, c, upd }: SlideProps) => (
   </Slide>
 );
 
-// ─── Slide 9: Development directions ─────────────────────────────────────────
-export const Slide9 = ({ dir, animKey, c, upd }: SlideProps) => (
+// ─── Slide 6 (бывший 9): Development directions ───────────────────────────────
+export const Slide6 = ({ dir, animKey, c, upd }: SlideProps) => (
   <Slide dir={dir} animKey={animKey}>
     <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 60% 90% at 10% 50%, #0F2D22 0%, #0A1A14 55%, #060F0B 100%)" }} />
     <GlowOrb size={300} x="8%" y="50%" color="#1DE3A2" blur={100} />
@@ -432,8 +410,8 @@ export const Slide9 = ({ dir, animKey, c, upd }: SlideProps) => (
   </Slide>
 );
 
-// ─── Slide 10: Who I became ────────────────────────────────────────────────────
-export const Slide10 = ({ dir, animKey, c, upd }: SlideProps) => (
+// ─── Slide 7 (бывший 10): Who I became ────────────────────────────────────────
+export const Slide7 = ({ dir, animKey, c, upd }: SlideProps) => (
   <Slide dir={dir} animKey={animKey}>
     <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 80% at 70% 50%, #0F2D22 0%, #0A1A14 60%, #060F0B 100%)" }} />
     <GlowOrb size={500} x="72%" y="50%" color="#1DE3A2" blur={120} />
@@ -452,12 +430,12 @@ export const Slide10 = ({ dir, animKey, c, upd }: SlideProps) => (
     </div>
     <div className="absolute left-10 top-[108px] bottom-8 max-w-[58%] grid grid-cols-2 gap-2.5 content-start">
       {[
-        { icon: "Shield",      label: "Уверенность",    text: "Намного увереннее на проекте, чем в первый день" },
-        { icon: "BarChart2",   label: "Задачи",         text: "Спектр самостоятельных задач значительно вырос" },
-        { icon: "Database",    label: "Знания",         text: "Большой объём предметных и технических знаний" },
-        { icon: "Zap",         label: "Скорость",       text: "Быстрее нахожу решения, меньше трачу времени" },
+        { icon: "Shield",        label: "Уверенность",  text: "Намного увереннее на проекте, чем в первый день" },
+        { icon: "BarChart2",     label: "Задачи",       text: "Спектр самостоятельных задач значительно вырос" },
+        { icon: "Database",      label: "Знания",       text: "Большой объём предметных и технических знаний" },
+        { icon: "Zap",           label: "Скорость",     text: "Быстрее нахожу решения, меньше трачу времени" },
         { icon: "MessageCircle", label: "Коммуникация", text: "Прихожу не с «что делать», а с гипотезой и вопросом" },
-        { icon: "Star",        label: "Опыт",           text: "Реальный проектный опыт с первого дня стажировки" },
+        { icon: "Star",          label: "Опыт",         text: "Реальный проектный опыт с первого дня стажировки" },
       ].map((item, i) => (
         <div key={i} className="rounded-xl px-3 py-2.5 border flex items-start gap-2.5 fade-up"
           style={{ background: "rgba(29,227,162,0.06)", borderColor: "rgba(29,227,162,0.18)", animationDelay: `${0.07 * i}s` }}>
@@ -473,8 +451,8 @@ export const Slide10 = ({ dir, animKey, c, upd }: SlideProps) => (
   </Slide>
 );
 
-// ─── Slide 11: Thank you ──────────────────────────────────────────────────────
-export const Slide11 = ({ dir, animKey, c, upd }: SlideProps) => (
+// ─── Slide 8 (бывший 11): Thank you ──────────────────────────────────────────
+export const Slide8 = ({ dir, animKey, c, upd }: SlideProps) => (
   <Slide dir={dir} animKey={animKey}>
     <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 90% 90% at 60% 40%, #0F2D22 0%, #0A1A14 55%, #060F0B 100%)" }} />
     <GlowOrb size={500} x="60%" y="40%" color="#1DE3A2" blur={150} />
@@ -501,11 +479,9 @@ export const Slide11 = ({ dir, animKey, c, upd }: SlideProps) => (
 
 // ─── Slide registry ───────────────────────────────────────────────────────────
 export const SLIDE_COMPONENTS = [
-  Slide1, Slide2, Slide3, Slide4, Slide5, Slide6,
-  Slide7, Slide8, Slide9, Slide10, Slide11,
+  Slide1, Slide2, Slide3, Slide4, Slide5, Slide6, Slide7, Slide8,
 ];
 export const SLIDE_LABELS = [
-  "Титул", "Оглавление", "Путь → КРОК", "Оффер в лесу",
-  "Мосэнерго", "Задачи", "Статистика",
-  "Программа", "Развитие", "9 месяцев", "Q&A",
+  "Титул", "Оглавление", "Путь → КРОК",
+  "Мосэнерго", "Программа", "Развитие", "9 месяцев", "Q&A",
 ];
