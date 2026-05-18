@@ -86,13 +86,11 @@ export const Slide2 = ({ dir, animKey, c, upd }: SlideProps) => (
 export const Slide3 = ({ dir, animKey, c, upd }: SlideProps) => {
   const items = [
     { icon: "GraduationCap", text: "Математическая школа — хотела быть востоковедом?" },
-    { icon: "School",        text: "Летняя школа КРОК — узнала через сообщество вуза" },
     { icon: "BookOpen",      text: "11 класс — смена области → Московский Политех" },
-    { icon: "FileCheck",     text: "3 этапа — тестирование, кейс, ассессмент" },
     { icon: "Database",      text: "«Большие и открытые данные» — BigData" },
+    { icon: "School",        text: "Летняя школа КРОК — узнала через сообщество вуза" },
+    { icon: "FileCheck",     text: "3 этапа — тестирование, кейс, ассессмент" },
     { icon: "Car",           text: "Собеседование с ресурс-менеджером прямо в машине" },
-    { icon: "Zap",           text: "Стажировка — казалась труднодостижимой мечтой" },
-    { icon: "CheckCircle",   text: "Прошла все этапы — получила оффер" },
     { icon: "Radio",         text: "Оффер в лесу — 300 м над землёй на Валдае" },
     { icon: "Sparkles",      text: "Старт стажировки в группе отчётности" },
   ];
@@ -166,49 +164,22 @@ export const Slide4 = ({ dir, animKey, c, upd }: SlideProps) => {
         <div className="mt-1 w-10 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
       </div>
 
-      {/* Верхняя зона: задачи слева + карточка справа — фиксированная высота 240px */}
-      <div className="absolute left-10 right-10 grid grid-cols-2 gap-3" style={{ top: 82, height: 240 }}>
-        {/* Задачи — все 6 */}
-        <div className="flex flex-col gap-1">
-          {c.s6.tasks.map((task, i) => (
-            <div key={i} className="flex items-center gap-2.5 rounded-xl px-3 py-[7px] border fade-up flex-1"
-              style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.06 * i}s` }}>
-              <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "#1DE3A2" }} />
-              <div className="min-w-0">
-                <div className="text-xs font-bold text-white leading-tight">{task.title}</div>
-                {task.desc ? <div className="text-[10px]" style={{ color: "rgba(255,255,255,0.4)" }}>{task.desc}</div> : null}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Карточка проекта */}
-        <div className="rounded-2xl p-4 border flex flex-col justify-center gap-3 fade-up-d2"
-          style={{ background: "rgba(29,227,162,0.04)", borderColor: "rgba(29,227,162,0.18)" }}>
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
-              style={{ background: "rgba(29,227,162,0.15)", border: "1px solid rgba(29,227,162,0.3)" }}>
-              <Icon name="Building2" size={16} style={{ color: "#1DE3A2" }} />
-            </div>
-            <div>
-              <div className="text-[9px] font-semibold uppercase tracking-widest" style={{ color: "#1DE3A2" }}>Проект</div>
-              <div className="text-base font-black text-white">Мосэнерго</div>
+      {/* Верхняя зона: все 6 задач в 2 колонки по 3 — фиксированная высота */}
+      <div className="absolute left-10 right-10 grid grid-cols-2 gap-x-3 gap-y-1.5" style={{ top: 82, height: 220 }}>
+        {c.s6.tasks.map((task, i) => (
+          <div key={i} className="flex items-center gap-2.5 rounded-xl px-3 border fade-up"
+            style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.06 * i}s`, height: "calc((100% - 10px) / 3)" }}>
+            <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "#1DE3A2" }} />
+            <div className="min-w-0">
+              <div className="text-xs font-bold text-white leading-tight">{task.title}</div>
+              {task.desc ? <div className="text-[10px]" style={{ color: "rgba(255,255,255,0.4)" }}>{task.desc}</div> : null}
             </div>
           </div>
-          <div className="w-full h-px" style={{ background: "rgba(29,227,162,0.12)" }} />
-          <div className="grid grid-cols-2 gap-1.5">
-            {["9 месяцев", "BI-направление", "Стажёр", "Группа отчётности"].map((val, i) => (
-              <div key={i} className="rounded-xl px-2 py-2 flex items-center justify-center"
-                style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}>
-                <div className="text-xs font-black text-center" style={{ color: "#1DE3A2" }}>{val}</div>
-              </div>
-            ))}
-          </div>
-        </div>
+        ))}
       </div>
 
-      {/* ── BOTTOM: столбчатая диаграмма — от 82+240+12=334px до низа ── */}
-      <div className="absolute left-10 right-10 bottom-4" style={{ top: 334 }}>
+      {/* ── BOTTOM: столбчатая диаграмма — от 82+220+12=314px до низа ── */}
+      <div className="absolute left-10 right-10 bottom-4" style={{ top: 314 }}>
         <div className="text-[9px] font-semibold tracking-widest uppercase mb-2" style={{ color: "rgba(255,255,255,0.3)" }}>
           {c.s7.heading}
         </div>
