@@ -109,20 +109,3 @@
 .fade-up-d4 {
   animation: fadeUp 0.5s 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-
-/* Diagonal accent line */
-.diagonal-line {
-  position: absolute;
-  width: 3px;
-  background: var(--krok-accent);
-  transform: rotate(-15deg);
-  transform-origin: top left;
-}
-
-/* Grid pattern overlay */
-.grid-pattern {
-  background-image:
-    linear-gradient(rgba(0, 184, 122, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 184, 122, 0.06) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
