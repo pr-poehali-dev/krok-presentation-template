@@ -73,7 +73,7 @@ export const GlowOrb = ({
 );
 
 // ─── Logo ─────────────────────────────────────────────────────────────────────
-export const KrokLogo = () => (
+export const KrokLogo = ({ subtitle = "ALINA KOZLOVA" }: { subtitle?: string }) => (
   <div className="flex items-center gap-2.5">
     <div className="flex flex-col items-end">
       <span
@@ -90,16 +90,58 @@ export const KrokLogo = () => (
       </span>
     </div>
     <div className="w-[1.5px] self-stretch rounded-full bg-[#1DE3A2] opacity-50" />
-    <div className="text-[7px] font-semibold tracking-[0.15em] uppercase leading-tight max-w-[50px] text-white opacity-40">
-      IT Solutions & Analytics
+    <div className="text-[7px] font-semibold tracking-[0.15em] uppercase leading-tight max-w-[60px] text-white opacity-40">
+      {subtitle}
     </div>
   </div>
 );
 
-export const LogoBadge = () => (
+export const LogoBadge = ({ subtitle }: { subtitle?: string }) => (
   <div className="absolute top-5 right-7 z-20">
-    <KrokLogo />
+    <KrokLogo subtitle={subtitle} />
   </div>
+);
+
+// ─── Stick figures ────────────────────────────────────────────────────────────
+export const StickFigureNewbie = () => (
+  <svg viewBox="0 0 120 200" width="120" height="200" style={{ opacity: 0.85 }}>
+    {/* body */}
+    <circle cx="60" cy="30" r="18" fill="none" stroke="#1DE3A2" strokeWidth="3" />
+    <line x1="60" y1="48" x2="60" y2="120" stroke="#1DE3A2" strokeWidth="3" strokeLinecap="round" />
+    {/* arms — raised in confusion */}
+    <line x1="60" y1="70" x2="25" y2="50" stroke="#1DE3A2" strokeWidth="3" strokeLinecap="round" />
+    <line x1="60" y1="70" x2="95" y2="50" stroke="#1DE3A2" strokeWidth="3" strokeLinecap="round" />
+    {/* legs */}
+    <line x1="60" y1="120" x2="35" y2="170" stroke="#1DE3A2" strokeWidth="3" strokeLinecap="round" />
+    <line x1="60" y1="120" x2="85" y2="170" stroke="#1DE3A2" strokeWidth="3" strokeLinecap="round" />
+    {/* face: confused */}
+    <circle cx="52" cy="26" r="2.5" fill="#1DE3A2" />
+    <circle cx="68" cy="26" r="2.5" fill="#1DE3A2" />
+    <path d="M50 38 Q60 33 70 38" fill="none" stroke="#1DE3A2" strokeWidth="2" strokeLinecap="round" />
+    {/* question marks */}
+    <text x="90" y="20" fontSize="18" fill="#1DE3A2" opacity="0.7" fontWeight="bold">?</text>
+    <text x="10" y="30" fontSize="14" fill="#1DE3A2" opacity="0.5" fontWeight="bold">?</text>
+  </svg>
+);
+
+export const StickFigureExpert = () => (
+  <svg viewBox="0 0 120 200" width="120" height="200" style={{ opacity: 0.9 }}>
+    {/* body */}
+    <circle cx="60" cy="30" r="18" fill="none" stroke="#1DE3A2" strokeWidth="3" />
+    <line x1="60" y1="48" x2="60" y2="120" stroke="#1DE3A2" strokeWidth="3" strokeLinecap="round" />
+    {/* arms — confident, one up */}
+    <line x1="60" y1="70" x2="20" y2="80" stroke="#1DE3A2" strokeWidth="3" strokeLinecap="round" />
+    <line x1="60" y1="65" x2="95" y2="42" stroke="#1DE3A2" strokeWidth="3" strokeLinecap="round" />
+    {/* legs — standing straight */}
+    <line x1="60" y1="120" x2="42" y2="172" stroke="#1DE3A2" strokeWidth="3" strokeLinecap="round" />
+    <line x1="60" y1="120" x2="78" y2="172" stroke="#1DE3A2" strokeWidth="3" strokeLinecap="round" />
+    {/* face: smile */}
+    <circle cx="52" cy="26" r="2.5" fill="#1DE3A2" />
+    <circle cx="68" cy="26" r="2.5" fill="#1DE3A2" />
+    <path d="M50 35 Q60 42 70 35" fill="none" stroke="#1DE3A2" strokeWidth="2" strokeLinecap="round" />
+    {/* star */}
+    <text x="88" y="18" fontSize="20" fill="#1DE3A2" opacity="0.8">★</text>
+  </svg>
 );
 
 // ─── Slide wrapper ────────────────────────────────────────────────────────────
