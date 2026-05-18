@@ -361,22 +361,15 @@ export const Slide8 = ({ dir, animKey, c, upd }: SlideProps) => (
           {/* clipboard clip */}
           <rect x="55" y="18" width="50" height="24" rx="8" fill="#0D1F1A" stroke="#1DE3A2" strokeWidth="2.5" opacity="0.9" />
           <rect x="62" y="22" width="36" height="12" rx="4" fill="#1DE3A2" opacity="0.2" />
-          {/* check rows */}
+          {/* check rows — all green */}
           {[50, 75, 100, 125, 150].map((y, i) => (
             <g key={i}>
-              {/* checkbox */}
               <rect x="36" y={y - 8} width="18" height="18" rx="4"
-                fill={i < 4 ? "rgba(29,227,162,0.15)" : "rgba(255,100,100,0.1)"}
-                stroke={i < 4 ? "#1DE3A2" : "#FF6464"} strokeWidth="1.5" />
-              {i < 4 ? (
-                <polyline points={`40,${y + 1} 44,${y + 5} 50,${y - 2}`}
-                  fill="none" stroke="#1DE3A2" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-              ) : (
-                <line x1="40" y1={y - 3} x2="50" y2={y + 7} stroke="#FF6464" strokeWidth="2" strokeLinecap="round" />
-              )}
-              {/* line */}
-              <rect x="62" y={y - 2} width={i < 4 ? 70 - i * 8 : 55} height="5" rx="2.5"
-                fill={i < 4 ? "#1DE3A2" : "#FF6464"} opacity={i < 4 ? 0.25 : 0.2} />
+                fill="rgba(29,227,162,0.15)" stroke="#1DE3A2" strokeWidth="1.5" />
+              <polyline points={`40,${y + 1} 44,${y + 5} 50,${y - 2}`}
+                fill="none" stroke="#1DE3A2" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              <rect x="62" y={y - 2} width={70 - i * 8} height="5" rx="2.5"
+                fill="#1DE3A2" opacity="0.25" />
             </g>
           ))}
         </svg>
@@ -390,10 +383,10 @@ export const Slide8 = ({ dir, animKey, c, upd }: SlideProps) => (
         </div>
         <div className="text-sm font-bold text-white">Расширить раздел «Коммуникация с заказчиком»</div>
         {[
-          { icon: "MessageSquare", text: "Встреча 1: стажёр собирает требования" },
-          { icon: "Layout",        text: "Дорабатывает дашборд самостоятельно" },
+          { icon: "MessageSquare", text: "Встреча 1: стажёр собирает/уточняет требования" },
+          { icon: "Layout",        text: "Дорабатывает дашборд? самостоятельно" },
           { icon: "RotateCcw",     text: "Встреча 2: показывает результат, получает обратную связь" },
-          { icon: "Star",          text: "Делает выводы — что получилось, что нет" },
+          { icon: "Star",          text: "Делает выводы — определяет, хватило ли выявленных требований и каков результат" },
         ].map((step, i) => (
           <div key={i} className="flex items-center gap-2">
             <Icon name={step.icon} size={12} style={{ color: "#1DE3A2", opacity: 0.8 }} />
