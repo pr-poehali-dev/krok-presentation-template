@@ -165,10 +165,10 @@ export const Slide = ({
   </div>
 );
 
-// ─── Editable Text ────────────────────────────────────────────────────────────
+// ─── Static Text (read-only display) ─────────────────────────────────────────
 interface EditableTextProps {
   value: string;
-  onChange: (v: string) => void;
+  onChange?: (v: string) => void;
   className?: string;
   style?: React.CSSProperties;
   multiline?: boolean;
@@ -177,85 +177,12 @@ interface EditableTextProps {
 
 export const EditableText = ({
   value,
-  onChange,
   className = "",
   style,
-  multiline = false,
   as: Tag = "div",
-}: EditableTextProps) => {
-  const [editing, setEditing] = useState(false);
-  const [draft, setDraft]     = useState(value);
-  const ref = useRef<HTMLTextAreaElement & HTMLInputElement>(null);
-
-  const commit = () => { onChange(draft.trim() || value); setEditing(false); };
-
-  useEffect(() => { if (editing) ref.current?.focus(); }, [editing]);
-  useEffect(() => { setDraft(value); }, [value]);
-
-  if (editing) {
-    const shared: React.CSSProperties = {
-      ...style,
-      background: "rgba(0,0,0,0.55)",
-      border: "1.5px solid #1DE3A2",
-      borderRadius: 6,
-      outline: "none",
-      color: style?.color ?? "#fff",
-      fontFamily: "'Golos Text', sans-serif",
-      resize: "none",
-      width: "100%",
-      boxSizing: "border-box",
-      padding: "2px 6px",
-    };
-    if (multiline) {
-      return (
-        <textarea
-          ref={ref as React.RefObject<HTMLTextAreaElement>}
-          value={draft}
-          rows={3}
-          onChange={(e) => setDraft(e.target.value)}
-          onBlur={commit}
-          onKeyDown={(e) => { if (e.key === "Escape") { setDraft(value); setEditing(false); } }}
-          className={className}
-          style={shared}
-        />
-      );
-    }
-    return (
-      <input
-        ref={ref as React.RefObject<HTMLInputElement>}
-        value={draft}
-        onChange={(e) => setDraft(e.target.value)}
-        onBlur={commit}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") commit();
-          if (e.key === "Escape") { setDraft(value); setEditing(false); }
-        }}
-        className={className}
-        style={shared}
-      />
-    );
-  }
-
-  return (
-    <Tag
-      className={`${className} cursor-text group relative`}
-      style={style}
-      onClick={(e) => { e.stopPropagation(); setEditing(true); }}
-      title="Нажмите для редактирования"
-    >
-      {value}
-      <span
-        className="absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity"
-        style={{ pointerEvents: "none" }}
-      >
-        <svg width="10" height="10" viewBox="0 0 10 10">
-          <circle cx="5" cy="5" r="4" fill="#1DE3A2" opacity="0.9" />
-          <path d="M3.5 6.5 L6.5 3.5 M5.5 3 L7 4.5" stroke="#000" strokeWidth="1" strokeLinecap="round" />
-        </svg>
-      </span>
-    </Tag>
-  );
-};
+}: EditableTextProps) => (
+  <Tag className={className} style={style}>{value}</Tag>
+);
 
 // ─── Data Packet Overlay ──────────────────────────────────────────────────────
 type TrailPoint = { id: number; x: number; y: number; delay: number; size: number };

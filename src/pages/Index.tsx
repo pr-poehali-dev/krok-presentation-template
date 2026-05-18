@@ -60,15 +60,9 @@ export default function Index() {
         <span className="text-[10px] tracking-widest uppercase" style={{ color: "rgba(255,255,255,0.2)" }}>
           Шаблон презентации КРОК
         </span>
-        <div className="flex items-center gap-2">
-          <span className="text-[10px] px-2 py-0.5 rounded-full"
-            style={{ background: "rgba(29,227,162,0.1)", color: "#1DE3A2", border: "1px solid rgba(29,227,162,0.2)" }}>
-            ✎ Нажмите на любой текст для редактирования
-          </span>
-          <span className="text-[10px]" style={{ color: "rgba(255,255,255,0.2)" }}>
-            {current + 1} / {SLIDE_COMPONENTS.length}
-          </span>
-        </div>
+        <span className="text-[10px]" style={{ color: "rgba(255,255,255,0.2)" }}>
+          {current + 1} / {SLIDE_COMPONENTS.length}
+        </span>
       </div>
 
       {/* Slide frame */}
