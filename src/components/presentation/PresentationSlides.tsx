@@ -114,28 +114,30 @@ export const Slide3 = ({ dir, animKey, c, upd }: SlideProps) => {
         <div className="mt-1.5 w-10 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
       </div>
 
-      {/* Два столбца — строки выровнены попарно */}
-      <div className="absolute left-10 right-10 top-[88px] bottom-6 grid grid-cols-2 gap-x-4 gap-y-2 content-between">
-        {left.map((item, i) => (
-          <div key={`l${i}`} className="flex items-center gap-3 rounded-xl px-4 py-3 border fade-up"
-            style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.06 * i}s` }}>
-            <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-              style={{ background: "rgba(29,227,162,0.12)" }}>
-              <Icon name={item.icon} size={13} style={{ color: "#1DE3A2" }} />
+      {/* Два столбца — центрированы по вертикали, компактный gap */}
+      <div className="absolute left-8 right-8 flex items-center" style={{ top: 88, bottom: 20 }}>
+        <div className="w-full grid grid-cols-2 gap-x-3 gap-y-1.5">
+          {left.map((item, i) => (
+            <div key={`l${i}`} className="flex items-center gap-3 rounded-xl px-4 py-2.5 border fade-up"
+              style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.06 * i}s` }}>
+              <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+                style={{ background: "rgba(29,227,162,0.12)" }}>
+                <Icon name={item.icon} size={13} style={{ color: "#1DE3A2" }} />
+              </div>
+              <span className="text-sm leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
             </div>
-            <span className="text-sm leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
-          </div>
-        ))}
-        {right.map((item, i) => (
-          <div key={`r${i}`} className="flex items-center gap-3 rounded-xl px-4 py-3 border fade-up"
-            style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", gridRow: i + 1, gridColumn: 2, animationDelay: `${0.06 * i + 0.03}s` }}>
-            <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-              style={{ background: "rgba(29,227,162,0.12)" }}>
-              <Icon name={item.icon} size={13} style={{ color: "#1DE3A2" }} />
+          ))}
+          {right.map((item, i) => (
+            <div key={`r${i}`} className="flex items-center gap-3 rounded-xl px-4 py-2.5 border fade-up"
+              style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", gridRow: i + 1, gridColumn: 2, animationDelay: `${0.06 * i + 0.03}s` }}>
+              <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+                style={{ background: "rgba(29,227,162,0.12)" }}>
+                <Icon name={item.icon} size={13} style={{ color: "#1DE3A2" }} />
+              </div>
+              <span className="text-sm leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
             </div>
-            <span className="text-sm leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
       {ACCENT_LINE}
     </Slide>
@@ -164,11 +166,11 @@ export const Slide4 = ({ dir, animKey, c, upd }: SlideProps) => {
         <div className="mt-1 w-10 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
       </div>
 
-      {/* Верхняя зона: все 6 задач в 2 колонки по 3 — фиксированная высота */}
-      <div className="absolute left-10 right-10 grid grid-cols-2 gap-x-3 gap-y-1.5" style={{ top: 82, height: 220 }}>
+      {/* Верхняя зона: все 6 задач в 2 колонки по 3 */}
+      <div className="absolute left-8 right-8 grid grid-cols-2 gap-x-3 gap-y-1.5" style={{ top: 82, height: 210 }}>
         {c.s6.tasks.map((task, i) => (
-          <div key={i} className="flex items-center gap-2.5 rounded-xl px-3 border fade-up"
-            style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.06 * i}s`, height: "calc((100% - 10px) / 3)" }}>
+          <div key={i} className="flex items-center gap-2.5 rounded-xl px-4 border fade-up"
+            style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.06 * i}s`, height: "calc((100% - 8px) / 3)" }}>
             <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "#1DE3A2" }} />
             <div className="min-w-0">
               <div className="text-xs font-bold text-white leading-tight">{task.title}</div>
@@ -178,8 +180,8 @@ export const Slide4 = ({ dir, animKey, c, upd }: SlideProps) => {
         ))}
       </div>
 
-      {/* ── BOTTOM: столбчатая диаграмма — от 82+220+12=314px до низа ── */}
-      <div className="absolute left-10 right-10 bottom-4" style={{ top: 314 }}>
+      {/* ── BOTTOM: столбчатая диаграмма ── */}
+      <div className="absolute left-8 right-8 bottom-4" style={{ top: 302 }}>
         <div className="text-[9px] font-semibold tracking-widest uppercase mb-2" style={{ color: "rgba(255,255,255,0.3)" }}>
           {c.s7.heading}
         </div>
