@@ -27,11 +27,10 @@ export const Slide1 = ({ dir, animKey, c, upd }: SlideProps) => (
       <EditableText value={c.s1.label} onChange={(v) => upd({ ...c, s1: { ...c.s1, label: v } })}
         className="text-[10px] font-semibold tracking-[0.45em] uppercase mb-3 fade-up block"
         style={{ color: "#1DE3A2" }} />
-      <h1 className="font-black leading-[1.02] mb-3 fade-up-d1" style={{ fontSize: "clamp(28px, 4vw, 52px)", color: "#fff" }}>
-        <EditableText value={c.s1.title1} onChange={(v) => upd({ ...c, s1: { ...c.s1, title1: v } })} style={{ color: "#fff" }} />
-        <br />
-        <EditableText value={c.s1.title2} onChange={(v) => upd({ ...c, s1: { ...c.s1, title2: v } })} style={{ color: "#1DE3A2" }} />
-      </h1>
+      <div className="font-black mb-3 fade-up-d1" style={{ fontSize: "clamp(28px, 4vw, 52px)", color: "#fff", lineHeight: 1.0 }}>
+        <EditableText value={c.s1.title1} onChange={(v) => upd({ ...c, s1: { ...c.s1, title1: v } })} style={{ color: "#fff", display: "block" }} />
+        <EditableText value={c.s1.title2} onChange={(v) => upd({ ...c, s1: { ...c.s1, title2: v } })} style={{ color: "#1DE3A2", display: "block" }} />
+      </div>
       <EditableText value={c.s1.subtitle} onChange={(v) => upd({ ...c, s1: { ...c.s1, subtitle: v } })}
         as="p" className="text-lg font-semibold fade-up-d2 block"
         style={{ color: "rgba(255,255,255,0.7)" }} />
@@ -57,10 +56,9 @@ export const Slide2 = ({ dir, animKey, c, upd }: SlideProps) => (
         <EditableText value={c.s2.label} onChange={(v) => upd({ ...c, s2: { ...c.s2, label: v } })}
           className="text-[9px] font-semibold tracking-[0.4em] uppercase mb-2 fade-up block"
           style={{ color: "#1DE3A2" }} />
-        <div className="text-3xl font-black leading-tight text-white fade-up-d1">
-          <EditableText value={c.s2.heading1} onChange={(v) => upd({ ...c, s2: { ...c.s2, heading1: v } })} style={{ color: "#fff" }} />
-          <br />
-          <EditableText value={c.s2.heading2} onChange={(v) => upd({ ...c, s2: { ...c.s2, heading2: v } })} style={{ color: "#fff" }} />
+        <div className="font-black leading-none text-white fade-up-d1" style={{ fontSize: "clamp(22px, 3vw, 34px)" }}>
+          <EditableText value={c.s2.heading1} onChange={(v) => upd({ ...c, s2: { ...c.s2, heading1: v } })} style={{ color: "#fff", display: "block", lineHeight: 1.05 }} />
+          <EditableText value={c.s2.heading2} onChange={(v) => upd({ ...c, s2: { ...c.s2, heading2: v } })} style={{ color: "#fff", display: "block", lineHeight: 1.05 }} />
         </div>
         <div className="mt-4 w-8 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
       </div>
@@ -103,10 +101,10 @@ export const Slide3 = ({ dir, animKey, c, upd }: SlideProps) => (
     </div>
     <div className="absolute left-10 top-[110px] bottom-8 max-w-[60%] flex flex-col gap-2.5">
       {[
-        { icon: "GraduationCap", text: "Мат. школа — отрицала «технарский» путь, мечтала о востоковедении" },
-        { icon: "BookOpen",      text: "11 класс — сменила предметы ЕГЭ, поступила в Московский Политех" },
+        { icon: "GraduationCap", text: "Математическая школа — хотела быть востоковедом?" },
+        { icon: "BookOpen",      text: "11 класс — смена области → поступление в Московский Политех" },
         { icon: "Database",      text: "Направление «Большие и открытые данные» — прямое попадание в BigData" },
-        { icon: "Zap",           text: "Со 2-го курса захотела устроиться на стажировку" },
+        { icon: "Zap",           text: "Стажировка — сложная и труднореализуемая мечта" },
       ].map((item, i) => (
         <div key={i} className="flex items-center gap-3 rounded-xl px-4 py-2.5 border fade-up"
           style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.08 * i}s` }}>
@@ -167,10 +165,10 @@ export const Slide4 = ({ dir, animKey, c, upd }: SlideProps) => (
     </div>
     <div className="absolute left-10 top-[108px] bottom-8 max-w-[54%] flex flex-col gap-2.5">
       {[
-        { icon: "School",    text: "Узнала о летней школе через вуз — совершенно случайно" },
-        { icon: "CheckCircle", text: "Прошла тестирование, кейс и ассессмент" },
-        { icon: "Car",       text: "Собеседование с ресурс-менеджером Леной прямо в машине" },
-        { icon: "Radio",     text: "Оффер получила на вышке — 300 м над землёй, глубоко в лесу на Валдае" },
+        { icon: "School",      text: "Летняя школа КРОК — пост в сообществе вуза?" },
+        { icon: "CheckCircle", text: "3 этапа — тестирование, кейс, ассессмент" },
+        { icon: "Car",         text: "Собеседование с ресурс-менеджером Леной прямо в машине" },
+        { icon: "Radio",       text: "Оффер на вышке — 300 м над землёй, глубоко в лесу на Валдае" },
       ].map((item, i) => (
         <div key={i} className="flex items-center gap-3 rounded-xl px-4 py-2.5 border fade-up"
           style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.09 * i}s` }}>
@@ -213,9 +211,9 @@ export const Slide5 = ({ dir, animKey, c, upd }: SlideProps) => (
       {/* Left col — timeline */}
       <div className="flex flex-col gap-2.5">
         {[
-          { icon: "UserCheck", text: "Роль BI-аналитика на проекте Мосэнерго" },
-          { icon: "Clock",     text: "Первые 3 дня — без задач, погружение в программу" },
-          { icon: "Users",     text: "Первая задача: поделили с Егором анализ отчётов S2T" },
+          { icon: "UserCheck", text: "Роль стажёра в группе отчётности на проекте Мосэнерго" },
+          { icon: "Clock",     text: "Первые три дня — самые сложные" },
+          { icon: "FileSearch",text: "1-я задача — работа с S2T, первичный анализ показателей в отчётах" },
           { icon: "Anchor",    text: "Погружение в Мосэнерго казалось «чёрной дырой»" },
           { icon: "TrendingUp",text: "Быстро втянулась — задач становилось всё больше" },
         ].map((item, i) => (
@@ -229,25 +227,37 @@ export const Slide5 = ({ dir, animKey, c, upd }: SlideProps) => (
           </div>
         ))}
       </div>
-      {/* Right col — key facts */}
-      <div className="flex flex-col gap-2.5">
-        <div className="rounded-xl px-4 py-3 border fade-up-d2"
-          style={{ background: "rgba(29,227,162,0.07)", borderColor: "rgba(29,227,162,0.2)", borderLeftWidth: "3px", borderLeftColor: "#1DE3A2" }}>
-          <div className="text-[10px] font-semibold uppercase tracking-widest mb-1" style={{ color: "#1DE3A2" }}>Проект</div>
-          <div className="text-sm font-bold text-white">Мосэнерго</div>
-          <div className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>Энергетика / BigData</div>
-        </div>
-        <div className="rounded-xl px-4 py-3 border fade-up-d2"
-          style={{ background: "rgba(29,227,162,0.07)", borderColor: "rgba(29,227,162,0.2)", borderLeftWidth: "3px", borderLeftColor: "#1DE3A2" }}>
-          <div className="text-[10px] font-semibold uppercase tracking-widest mb-1" style={{ color: "#1DE3A2" }}>Тимлид</div>
-          <div className="text-sm font-bold text-white">Соня Лебедева</div>
-          <div className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>Группа отчётности</div>
-        </div>
-        <div className="rounded-xl px-4 py-3 border fade-up-d2"
-          style={{ background: "rgba(29,227,162,0.07)", borderColor: "rgba(29,227,162,0.2)", borderLeftWidth: "3px", borderLeftColor: "#1DE3A2" }}>
-          <div className="text-[10px] font-semibold uppercase tracking-widest mb-1" style={{ color: "#1DE3A2" }}>Первый коллега</div>
-          <div className="text-sm font-bold text-white">Егор</div>
-          <div className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>Разделили первую задачу</div>
+      {/* Right col — visual data card */}
+      <div className="flex flex-col gap-3 justify-center">
+        <div className="rounded-2xl p-5 border flex flex-col gap-4 fade-up-d2 h-full justify-center"
+          style={{ background: "rgba(29,227,162,0.04)", borderColor: "rgba(29,227,162,0.18)" }}>
+          {/* project badge */}
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+              style={{ background: "rgba(29,227,162,0.15)", border: "1px solid rgba(29,227,162,0.3)" }}>
+              <Icon name="Building2" size={18} style={{ color: "#1DE3A2" }} />
+            </div>
+            <div>
+              <div className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: "#1DE3A2" }}>Проект</div>
+              <div className="text-base font-black text-white">Мосэнерго</div>
+            </div>
+          </div>
+          <div className="w-full h-px" style={{ background: "rgba(29,227,162,0.12)" }} />
+          {/* stats row */}
+          <div className="grid grid-cols-2 gap-2">
+            {[
+              { val: "9",      sub: "месяцев" },
+              { val: "BI",     sub: "аналитик" },
+              { val: "S2T",    sub: "1-я задача" },
+              { val: "BigData",sub: "направление" },
+            ].map((s, i) => (
+              <div key={i} className="rounded-xl px-3 py-2 text-center"
+                style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}>
+                <div className="text-sm font-black" style={{ color: "#1DE3A2" }}>{s.val}</div>
+                <div className="text-[10px]" style={{ color: "rgba(255,255,255,0.4)" }}>{s.sub}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -351,19 +361,31 @@ export const Slide8 = ({ dir, animKey, c, upd }: SlideProps) => (
       <div className="mt-1.5 w-12 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
     </div>
     <div className="absolute left-10 right-10 top-[108px] bottom-8 grid grid-cols-2 gap-4">
-      {/* Left: программа — чеклист */}
-      <div className="flex flex-col gap-2.5">
-        <div className="text-[9px] font-semibold tracking-widest uppercase mb-0.5" style={{ color: "#1DE3A2" }}>Что понравилось</div>
+      {/* Left: большой визуальный чеклист */}
+      <div className="rounded-2xl p-4 border fade-up flex flex-col gap-2"
+        style={{ background: "rgba(255,255,255,0.03)", borderColor: "rgba(29,227,162,0.18)" }}>
+        <div className="flex items-center gap-2 mb-1">
+          <Icon name="ClipboardCheck" size={14} style={{ color: "#1DE3A2" }} />
+          <span className="text-[10px] font-semibold tracking-widest uppercase" style={{ color: "#1DE3A2" }}>Стажёрская программа</span>
+        </div>
         {[
-          "Насыщенная и разнообразная программа",
-          "Где-то легко, где-то сложно — хороший баланс",
-          "Программа развивается и не стоит на месте",
-          "Стажёр получает базу знаний для дальнейшего роста",
-        ].map((text, i) => (
-          <div key={i} className="flex items-start gap-2.5 rounded-xl px-3 py-2 border fade-up"
-            style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.07 * i}s` }}>
-            <Icon name="CheckCircle" size={13} className="mt-0.5 shrink-0" style={{ color: "#1DE3A2" }} />
-            <span className="text-xs" style={{ color: "rgba(255,255,255,0.7)" }}>{text}</span>
+          { done: true,  text: "Насыщенная и разнообразная программа" },
+          { done: true,  text: "Хороший баланс сложности — где-то легко, где-то нет" },
+          { done: true,  text: "Программа развивается, не стоит на месте" },
+          { done: true,  text: "Стажёр уходит с базой знаний для роста" },
+          { done: false, text: "Нет итерации по коммуникации с заказчиком" },
+        ].map((item, i) => (
+          <div key={i} className="flex items-center gap-3 rounded-xl px-3 py-2.5"
+            style={{
+              background: item.done ? "rgba(29,227,162,0.06)" : "rgba(255,100,100,0.06)",
+              border: `1px solid ${item.done ? "rgba(29,227,162,0.15)" : "rgba(255,100,100,0.15)"}`,
+              animationDelay: `${0.08 * i}s`
+            }}>
+            <div className="w-5 h-5 rounded-md flex items-center justify-center shrink-0"
+              style={{ background: item.done ? "rgba(29,227,162,0.18)" : "rgba(255,100,100,0.18)" }}>
+              <Icon name={item.done ? "Check" : "X"} size={11} style={{ color: item.done ? "#1DE3A2" : "#FF6464" }} />
+            </div>
+            <span className="text-xs" style={{ color: item.done ? "rgba(255,255,255,0.75)" : "rgba(255,150,150,0.75)" }}>{item.text}</span>
           </div>
         ))}
       </div>
@@ -501,5 +523,5 @@ export const SLIDE_COMPONENTS = [
 export const SLIDE_LABELS = [
   "Титул", "Оглавление", "Путь → КРОК", "Оффер в лесу",
   "Мосэнерго", "Задачи", "Статистика",
-  "Программа", "Развитие", "Год спустя", "Финал",
+  "Программа", "Развитие", "9 месяцев", "Q&A",
 ];

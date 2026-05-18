@@ -179,7 +179,7 @@ export default function Index() {
             </button>
           </div>
 
-          <div className="mt-2 flex items-center gap-3 text-[10px]" style={{ color: "rgba(255,255,255,0.15)" }}>
+          <div className="mt-2 flex items-center gap-3 text-[10px]" style={{ color: "rgba(255,255,255,0.15)", display: "none" }}>
             <span className="flex items-center gap-1"><Icon name="MousePointer" size={11} />кнопки</span>
             <span style={{ color: "rgba(255,255,255,0.08)" }}>·</span>
             <span className="flex items-center gap-1"><Icon name="ArrowLeft" size={11} /><Icon name="ArrowRight" size={11} />стрелки</span>
