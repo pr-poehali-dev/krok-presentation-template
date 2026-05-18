@@ -109,3 +109,113 @@
 .fade-up-d4 {
   animation: fadeUp 0.5s 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
+/* ── Data Packet transition animation ────────────────────────────────────── */
+
+/* Packet flies left→right along a bezier arc */
+@keyframes packetFlyRight {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+    transform: rotate(0deg) scale(0.6);
+  }
+  8% {
+    opacity: 1;
+    transform: rotate(15deg) scale(1);
+  }
+  85% {
+    opacity: 1;
+    transform: rotate(-10deg) scale(1);
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+    transform: rotate(20deg) scale(0.5);
+  }
+}
+
+/* Packet flies right→left */
+@keyframes packetFlyLeft {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+    transform: rotate(180deg) scale(0.6);
+  }
+  8% {
+    opacity: 1;
+    transform: rotate(165deg) scale(1);
+  }
+  85% {
+    opacity: 1;
+    transform: rotate(190deg) scale(1);
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+    transform: rotate(160deg) scale(0.5);
+  }
+}
+
+/* Trail dot pulse */
+@keyframes trailDot {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  30% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+}
+
+/* Ripple on arrival */
+@keyframes arrivalRipple {
+  0% {
+    transform: scale(0.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+.data-packet-right {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  offset-path: path("M -20,270 C 180,20 560,320 1120,170");
+  animation: packetFlyRight 0.75s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.data-packet-left {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  offset-path: path("M 1140,170 C 900,320 380,20 -20,270");
+  animation: packetFlyLeft 0.75s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.trail-dot {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 49;
+  animation: trailDot 0.6s ease-out forwards;
+}
+
+.arrival-ripple {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 49;
+  animation: arrivalRipple 0.5s ease-out forwards;
+}

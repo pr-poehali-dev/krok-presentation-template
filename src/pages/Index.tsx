@@ -1,9 +1,162 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import Icon from "@/components/ui/icon";
 
 // ── Brand colors from KROK brandbook ──────────────────────────────────────────
 // BG: #0D1F1A (very dark green), Accent: #1DE3A2 / #00C896 (bright mint)
 // Cards: rgba(255,255,255,0.05) with border rgba(255,255,255,0.1)
+
+// ─── Data Packet Overlay ──────────────────────────────────────────────────────
+// Летящий data-пакет с пунктирным треком при переключении слайдов
+
+type TrailPoint = { id: number; x: number; y: number; delay: number; size: number };
+
+const TRAIL_COUNT = 14;
+
+// Точки вдоль той же кривой Безье что и CSS offset-path
+function sampleBezier(
+  t: number,
+  dir: "right" | "left"
+): { x: number; y: number } {
+  // right: M -20,270 C 180,20 560,320 1120,170
+  // left:  M 1140,170 C 900,320 380,20 -20,270
+  const [p0, p1, p2, p3] =
+    dir === "right"
+      ? [{ x: -20, y: 270 }, { x: 180, y: 20 }, { x: 560, y: 320 }, { x: 1120, y: 170 }]
+      : [{ x: 1140, y: 170 }, { x: 900, y: 320 }, { x: 380, y: 20 }, { x: -20, y: 270 }];
+  const mt = 1 - t;
+  return {
+    x: mt ** 3 * p0.x + 3 * mt ** 2 * t * p1.x + 3 * mt * t ** 2 * p2.x + t ** 3 * p3.x,
+    y: mt ** 3 * p0.y + 3 * mt ** 2 * t * p1.y + 3 * mt * t ** 2 * p2.y + t ** 3 * p3.y,
+  };
+}
+
+function buildTrail(dir: "right" | "left"): TrailPoint[] {
+  return Array.from({ length: TRAIL_COUNT }).map((_, i) => {
+    const t = (i + 1) / (TRAIL_COUNT + 1);
+    const { x, y } = sampleBezier(t, dir);
+    return {
+      id: i,
+      x,
+      y,
+      delay: t * 0.55,           // dot appears as packet passes
+      size: 3 + Math.random() * 4,
+    };
+  });
+}
+
+interface DataPacketOverlayProps {
+  triggerKey: number;
+  dir: "right" | "left";
+}
+
+const DataPacketOverlay = ({ triggerKey, dir }: DataPacketOverlayProps) => {
+  const [active, setActive] = useState(false);
+  const [trail, setTrail]   = useState<TrailPoint[]>([]);
+  const [ripple, setRipple] = useState<{ x: number; y: number } | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    if (triggerKey === 0) return;
+
+    // Reset previous
+    if (timerRef.current) clearTimeout(timerRef.current);
+    setActive(false);
+    setTrail([]);
+    setRipple(null);
+
+    // Start
+    requestAnimationFrame(() => {
+      setActive(true);
+      setTrail(buildTrail(dir));
+
+      // Ripple at arrival point
+      const arrival = sampleBezier(0.98, dir);
+      timerRef.current = setTimeout(() => {
+        setRipple({ x: arrival.x, y: arrival.y });
+      }, 680);
+
+      // Cleanup after full cycle
+      timerRef.current = setTimeout(() => {
+        setActive(false);
+        setTrail([]);
+        setRipple(null);
+      }, 1100);
+    });
+
+    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [triggerKey]);
+
+  if (!active && trail.length === 0 && !ripple) return null;
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 60 }}>
+      {/* Trail dots */}
+      {trail.map((dot) => (
+        <div
+          key={dot.id}
+          className="trail-dot"
+          style={{
+            left: dot.x - dot.size / 2,
+            top:  dot.y - dot.size / 2,
+            width:  dot.size,
+            height: dot.size,
+            background: "#1DE3A2",
+            boxShadow: `0 0 ${dot.size * 3}px #1DE3A2`,
+            animationDelay: `${dot.delay}s`,
+            animationDuration: "0.55s",
+          }}
+        />
+      ))}
+
+      {/* The data packet itself */}
+      {active && (
+        <div className={dir === "right" ? "data-packet-right" : "data-packet-left"}>
+          {/* Ромб — символ сетевого пакета */}
+          <svg viewBox="0 0 20 20" width="20" height="20">
+            <polygon
+              points="10,1 19,10 10,19 1,10"
+              fill="#0D1F1A"
+              stroke="#1DE3A2"
+              strokeWidth="1.5"
+            />
+            <polygon
+              points="10,5 15,10 10,15 5,10"
+              fill="#1DE3A2"
+              opacity="0.9"
+            />
+            {/* Inner glow dot */}
+            <circle cx="10" cy="10" r="2" fill="#fff" opacity="0.8" />
+          </svg>
+        </div>
+      )}
+
+      {/* Ripple on arrival */}
+      {ripple && (
+        <>
+          <div
+            className="arrival-ripple"
+            style={{
+              left: ripple.x - 10, top: ripple.y - 10,
+              width: 20, height: 20,
+              border: "1.5px solid #1DE3A2",
+            }}
+          />
+          <div
+            className="arrival-ripple"
+            style={{
+              left: ripple.x - 10, top: ripple.y - 10,
+              width: 20, height: 20,
+              border: "1px solid #1DE3A2",
+              animationDelay: "0.12s",
+              opacity: 0.5,
+            }}
+          />
+        </>
+      )}
+    </div>
+  );
+};
 
 // ─── DNA / Fiber SVG decorations ─────────────────────────────────────────────
 const DNADecor = ({ opacity = 0.18 }: { opacity?: number }) => (
@@ -506,6 +659,7 @@ export default function Index() {
         style={{ aspectRatio: "16/9", boxShadow: "0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(29,227,162,0.08)" }}
       >
         <Component dir={dir} animKey={animKey} />
+        <DataPacketOverlay triggerKey={animKey} dir={dir} />
       </div>
 
       <div className="w-full max-w-[1100px] mt-4 flex items-center gap-3">
