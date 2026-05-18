@@ -58,7 +58,7 @@ export default function Index() {
       {/* Header */}
       <div className="w-full max-w-[1100px] mb-3 flex items-center justify-between">
         <span className="text-[10px] tracking-widest uppercase" style={{ color: "rgba(255,255,255,0.2)" }}>
-          Шаблон презентации КРОК
+          Стажёрская программа КРОК
         </span>
         <span className="text-[10px]" style={{ color: "rgba(255,255,255,0.2)" }}>
           {current + 1} / {SLIDE_COMPONENTS.length}
