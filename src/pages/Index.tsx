@@ -38,7 +38,7 @@ function buildTrail(dir: "right" | "left"): TrailPoint[] {
       id: i,
       x,
       y,
-      delay: t * 0.55,           // dot appears as packet passes
+      delay: t * 1.3,            // dot appears as packet passes
       size: 3 + Math.random() * 4,
     };
   });
@@ -73,14 +73,14 @@ const DataPacketOverlay = ({ triggerKey, dir }: DataPacketOverlayProps) => {
       const arrival = sampleBezier(0.98, dir);
       timerRef.current = setTimeout(() => {
         setRipple({ x: arrival.x, y: arrival.y });
-      }, 680);
+      }, 1650);
 
       // Cleanup after full cycle
       timerRef.current = setTimeout(() => {
         setActive(false);
         setTrail([]);
         setRipple(null);
-      }, 1100);
+      }, 2300);
     });
 
     return () => { if (timerRef.current) clearTimeout(timerRef.current); };
@@ -638,6 +638,33 @@ export default function Index() {
   const prev = () => current > 0                  && goTo(current - 1);
   const next = () => current < SLIDES.length - 1  && goTo(current + 1);
 
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        setCurrent((c) => {
+          if (c < SLIDES.length - 1) {
+            setDir("right");
+            setAnimKey((k) => k + 1);
+            return c + 1;
+          }
+          return c;
+        });
+      }
+      if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        setCurrent((c) => {
+          if (c > 0) {
+            setDir("left");
+            setAnimKey((k) => k + 1);
+            return c - 1;
+          }
+          return c;
+        });
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
   const { Component } = SLIDES[current];
 
   return (
@@ -701,9 +728,17 @@ export default function Index() {
         </button>
       </div>
 
-      <div className="mt-2 flex items-center gap-1.5 text-[10px]" style={{ color: "rgba(255,255,255,0.15)" }}>
-        <Icon name="MousePointer" size={11} />
-        Нажимайте на кнопки для навигации между слайдами
+      <div className="mt-2 flex items-center gap-3 text-[10px]" style={{ color: "rgba(255,255,255,0.15)" }}>
+        <span className="flex items-center gap-1">
+          <Icon name="MousePointer" size={11} />
+          кнопки
+        </span>
+        <span style={{ color: "rgba(255,255,255,0.08)" }}>·</span>
+        <span className="flex items-center gap-1">
+          <Icon name="ArrowLeft" size={11} />
+          <Icon name="ArrowRight" size={11} />
+          стрелки на клавиатуре
+        </span>
       </div>
     </div>
   );

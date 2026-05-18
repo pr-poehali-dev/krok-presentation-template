@@ -189,7 +189,7 @@
   width: 20px;
   height: 20px;
   offset-path: path("M -20,270 C 180,20 560,320 1120,170");
-  animation: packetFlyRight 0.75s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: packetFlyRight 1.8s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
   z-index: 50;
   pointer-events: none;
 }
@@ -199,7 +199,7 @@
   width: 20px;
   height: 20px;
   offset-path: path("M 1140,170 C 900,320 380,20 -20,270");
-  animation: packetFlyLeft 0.75s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: packetFlyLeft 1.8s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
   z-index: 50;
   pointer-events: none;
 }
