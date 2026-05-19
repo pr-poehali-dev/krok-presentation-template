@@ -144,7 +144,7 @@ export const Slide3 = ({ dir, animKey, c, upd }: SlideProps) => {
       </div>
 
       {/* Фотографии снизу */}
-      <div className="absolute left-4 right-4 flex items-end gap-1 fade-up" style={{ bottom: 24, height: 222 }}>
+      <div className="absolute left-4 right-4 flex items-end gap-1 fade-up" style={{ bottom: 35, height: 305 }}>
         <div className="flex-1 rounded-xl overflow-hidden fade-up" style={{ animationDelay: "0.1s", height: "80%" }}>
           <img src={photos[0]} alt="" className="w-full h-full object-contain" />
         </div>
