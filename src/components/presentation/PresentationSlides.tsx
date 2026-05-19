@@ -119,36 +119,36 @@ export const Slide3 = ({ dir, animKey, c, upd }: SlideProps) => {
         <div className="mt-1 w-10 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
       </div>
 
-      {/* Два столбца с строками — не перекрывают заголовок */}
-      <div className="absolute left-6 right-6 grid grid-cols-2 gap-x-3 gap-y-1.5" style={{ top: 82, bottom: 158 }}>
+      {/* Два столбца с строками — ниже зелёной черты */}
+      <div className="absolute left-6 right-6 grid grid-cols-2 gap-x-3 gap-y-1.5" style={{ top: 95, bottom: 162 }}>
         {leftItems.map((item, i) => (
-          <div key={`l${i}`} className="flex items-center gap-3 rounded-xl px-4 py-2.5 border fade-up"
+          <div key={`l${i}`} className="flex items-center gap-2.5 rounded-xl px-3 py-2 border fade-up"
             style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.06 * i}s` }}>
-            <div className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0"
+            <div className="w-5 h-5 rounded-md flex items-center justify-center shrink-0"
               style={{ background: "rgba(29,227,162,0.12)" }}>
-              <Icon name={item.icon} size={12} style={{ color: "#1DE3A2" }} />
+              <Icon name={item.icon} size={11} style={{ color: "#1DE3A2" }} />
             </div>
-            <span className="text-xs leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
+            <span className="text-[11px] leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
           </div>
         ))}
         {rightItems.map((item, i) => (
-          <div key={`r${i}`} className="flex items-center gap-3 rounded-xl px-4 py-2.5 border fade-up"
+          <div key={`r${i}`} className="flex items-center gap-2.5 rounded-xl px-3 py-2 border fade-up"
             style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", gridRow: i + 1, gridColumn: 2, animationDelay: `${0.06 * i + 0.03}s` }}>
-            <div className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0"
+            <div className="w-5 h-5 rounded-md flex items-center justify-center shrink-0"
               style={{ background: "rgba(29,227,162,0.12)" }}>
-              <Icon name={item.icon} size={12} style={{ color: "#1DE3A2" }} />
+              <Icon name={item.icon} size={11} style={{ color: "#1DE3A2" }} />
             </div>
-            <span className="text-xs leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
+            <span className="text-[11px] leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
           </div>
         ))}
       </div>
 
-      {/* Фотографии снизу */}
-      <div className="absolute left-6 right-6 flex gap-3 fade-up" style={{ bottom: 12, height: 138 }}>
+      {/* Фотографии снизу — без обрезания */}
+      <div className="absolute left-6 right-6 flex gap-3 fade-up" style={{ bottom: 12, height: 150 }}>
         {photos.map((src, i) => (
-          <div key={i} className="flex-1 rounded-2xl overflow-hidden border"
-            style={{ borderColor: "rgba(29,227,162,0.25)", animationDelay: `${0.1 + 0.08 * i}s` }}>
-            <img src={src} alt="" className="w-full h-full object-cover" style={{ objectPosition: "center top" }} />
+          <div key={i} className="flex-1 rounded-2xl overflow-hidden border flex items-center justify-center"
+            style={{ borderColor: "rgba(29,227,162,0.25)", background: "rgba(0,0,0,0.3)", animationDelay: `${0.1 + 0.08 * i}s` }}>
+            <img src={src} alt="" className="w-full h-full object-contain" />
           </div>
         ))}
       </div>
@@ -181,7 +181,7 @@ export const Slide4 = ({ dir, animKey, c, upd }: SlideProps) => {
       </div>
 
       {/* Верхняя зона: все 6 задач в 2 колонки по 3 */}
-      <div className="absolute left-6 right-6 grid grid-cols-2 gap-x-3 gap-y-2" style={{ top: 82 }}>
+      <div className="absolute left-6 right-6 grid grid-cols-2 gap-x-3 gap-y-2" style={{ top: 95 }}>
         {c.s6.tasks.map((task, i) => (
           <div key={i} className="flex items-center gap-3 rounded-xl px-5 py-3 border fade-up"
             style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.06 * i}s` }}>
@@ -238,8 +238,8 @@ export const Slide4 = ({ dir, animKey, c, upd }: SlideProps) => {
                     { desc: "Формализация требований к BI-отчёту, включающая макет, определение показателей, разрезов и фильтров, проектирование витрины (атрибутивный состав, правила формирования) и постановку на Visiology (перечень виджетов, их настройки и форматирование) для дальнейшей разработки" },
                     { desc: "Разработка дашбордов, использование кастомных виджетов, работа с js, написание SQL-запросов" },
                     { desc: "Проверка корректности разработки и работы отчётов, использование чек-листа по тестированию" },
-                    { desc: "определение типа заявки, устранение ошибок, коммуникация с заказчиком и консультация" },
-                    { desc: "тестирование каждого атрибута витрины на корректное наполнение, формирование excel-таблицы для фиксирования результатов проверки" },
+                    { desc: "Определение типа заявки, устранение ошибок, коммуникация с заказчиком и консультация" },
+                    { desc: "Тестирование каждого атрибута витрины на корректное наполнение, формирование excel-таблицы для фиксирования результатов проверки" },
                   ];
                   const td = tooltipData[i] ?? { desc: "" };
                   return (
