@@ -549,8 +549,14 @@ export const Slide7 = ({ dir, animKey }: SlideProps) => {
   const soft = [
     { before: "Не было опыта с заказчиком",  after: "Коммуницирую с заказчиком, знаю правила переписки" },
     { before: "Приходила с «что делать?»",   after: "Прихожу с гипотезой и конкретным вопросом" },
-    { before: "Не понимала проектный ритм",  after: "Самостоятельно веду задачи и трекаю прогресс" },
     { before: "Не умела защищать решения",   after: "Аргументирую выбор и отстаиваю свою точку зрения" },
+    { before: "Боялась ошибиться",           after: "Делаю, получаю обратную связь, расту" },
+  ];
+
+  const stats = [
+    { value: "~9", label: "месяцев на проекте" },
+    { value: "130+", label: "задач выполнено" },
+    { value: "×2", label: "рост самостоятельности" },
   ];
 
   return (
@@ -571,8 +577,8 @@ export const Slide7 = ({ dir, animKey }: SlideProps) => {
         <div className="mt-1 w-12 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
       </div>
 
-      {/* Две колонки */}
-      <div className="absolute left-6 right-6 grid grid-cols-2 gap-4" style={{ top: 108, bottom: 16 }}>
+      {/* Две колонки скиллов */}
+      <div className="absolute left-6 right-6 grid grid-cols-2 gap-4" style={{ top: 108, bottom: 96 }}>
 
         {/* Hard Skills */}
         <div className="flex flex-col gap-2">
@@ -614,15 +620,22 @@ export const Slide7 = ({ dir, animKey }: SlideProps) => {
               </div>
             </div>
           ))}
+        </div>
+      </div>
 
-          {/* Итоговый бейдж */}
-          <div className="mt-auto rounded-2xl px-4 py-3 fade-up"
-            style={{ background: "rgba(29,227,162,0.08)", border: "1px solid rgba(29,227,162,0.25)", animationDelay: "0.5s" }}>
-            <div className="text-[10px] font-black" style={{ color: "#1DE3A2" }}>9 месяцев = реальный проектный опыт</div>
-            <div className="text-[9px] mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>
-              от стажёра без опыта → к самостоятельному специалисту
-            </div>
+      {/* Нижний баннер — статистика на всю ширину */}
+      <div className="absolute left-6 right-6 flex gap-3 fade-up" style={{ bottom: 14, height: 70, animationDelay: "0.4s" }}>
+        {stats.map((s, i) => (
+          <div key={i} className="flex-1 rounded-2xl flex flex-col items-center justify-center"
+            style={{ background: i === 1 ? "rgba(29,227,162,0.1)" : "rgba(255,255,255,0.04)", border: `1px solid ${i === 1 ? "rgba(29,227,162,0.3)" : "rgba(255,255,255,0.07)"}` }}>
+            <div className="font-black leading-none" style={{ fontSize: "clamp(18px, 2.2vw, 26px)", color: i === 1 ? "#1DE3A2" : "#fff" }}>{s.value}</div>
+            <div className="text-[9px] mt-0.5 font-medium" style={{ color: "rgba(255,255,255,0.4)" }}>{s.label}</div>
           </div>
+        ))}
+        <div className="flex-[2] rounded-2xl flex flex-col justify-center px-5"
+          style={{ background: "rgba(29,227,162,0.06)", border: "1px solid rgba(29,227,162,0.2)" }}>
+          <div className="text-[11px] font-black" style={{ color: "#1DE3A2" }}>от стажёра → к специалисту</div>
+          <div className="text-[9px] mt-0.5" style={{ color: "rgba(255,255,255,0.35)" }}>9 месяцев реального проектного опыта в КРОК</div>
         </div>
       </div>
 
