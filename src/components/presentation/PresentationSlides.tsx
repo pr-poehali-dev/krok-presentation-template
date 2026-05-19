@@ -396,63 +396,114 @@ export const Slide4 = ({ dir, animKey, c, upd }: SlideProps) => {
   );
 };
 
-// ─── Slide 5 (бывший 8): Стажёрская программа + инициатива ───────────────────
-export const Slide5 = ({ dir, animKey, c, upd }: SlideProps) => (
-  <Slide dir={dir} animKey={animKey}>
-    <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 70% at 50% 0%, #0F2D22 0%, #0A1A14 55%, #060F0B 100%)" }} />
-    <GlowOrb size={400} x="50%" y="0%" color="#1DE3A2" blur={120} />
-    <LogoBadge />
-    <div className="absolute top-7 left-10 right-10">
-      <EditableText value={c.s8.label} onChange={(v) => upd({ ...c, s8: { ...c.s8, label: v } })}
-        className="text-[9px] font-semibold tracking-[0.4em] uppercase mb-1 fade-up block"
-        style={{ color: "#1DE3A2" }} />
-      <EditableText value={c.s8.heading} onChange={(v) => upd({ ...c, s8: { ...c.s8, heading: v } })}
-        as="h2" className="text-white font-black fade-up-d1 block"
-        style={{ fontSize: "clamp(20px, 2.8vw, 32px)", color: "#fff" }} />
-      <div className="mt-1.5 w-12 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
-    </div>
-    <div className="absolute left-10 right-10 top-[108px] bottom-8 grid grid-cols-2 gap-4">
-      <div className="rounded-2xl border fade-up flex items-center justify-center"
-        style={{ background: "rgba(255,255,255,0.03)", borderColor: "rgba(29,227,162,0.18)" }}>
-        <svg viewBox="0 0 160 200" width="160" height="200" style={{ opacity: 0.9 }}>
-          <rect x="20" y="30" width="120" height="155" rx="10" fill="none" stroke="#1DE3A2" strokeWidth="3" opacity="0.5" />
-          <rect x="55" y="18" width="50" height="24" rx="8" fill="#0D1F1A" stroke="#1DE3A2" strokeWidth="2.5" opacity="0.9" />
-          <rect x="62" y="22" width="36" height="12" rx="4" fill="#1DE3A2" opacity="0.2" />
-          {[50, 75, 100, 125, 150].map((y, i) => (
-            <g key={i}>
-              <rect x="36" y={y - 8} width="18" height="18" rx="4"
-                fill="rgba(29,227,162,0.15)" stroke="#1DE3A2" strokeWidth="1.5" />
-              <polyline points={`40,${y + 1} 44,${y + 5} 50,${y - 2}`}
-                fill="none" stroke="#1DE3A2" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-              <rect x="62" y={y - 2} width={70 - i * 8} height="5" rx="2.5"
-                fill="#1DE3A2" opacity="0.25" />
-            </g>
-          ))}
-        </svg>
-      </div>
-      <div className="rounded-2xl p-4 border fade-up-d2 flex flex-col gap-3"
-        style={{ background: "rgba(29,227,162,0.07)", borderColor: "rgba(29,227,162,0.25)", borderTopWidth: "3px", borderTopColor: "#1DE3A2" }}>
-        <div className="flex items-center gap-2">
-          <Icon name="Lightbulb" size={14} style={{ color: "#1DE3A2" }} />
-          <span className="text-[10px] font-semibold tracking-widest uppercase" style={{ color: "#1DE3A2" }}>Моя инициатива</span>
+// ─── Slide 5: Стажёрская программа ───────────────────────────────────────────
+export const Slide5 = ({ dir, animKey }: SlideProps) => {
+  const screenshots = [
+    { url: "https://cdn.poehali.dev/projects/ced705b4-8c8e-4826-8b52-7f4d72e16071/bucket/87c95f31-2e9b-4ae1-bac0-0307ad09236b.png", label: "План стажировки" },
+    { url: "https://cdn.poehali.dev/projects/ced705b4-8c8e-4826-8b52-7f4d72e16071/bucket/0a50cc5a-5502-4906-b96e-eb24faebefbd.png", label: "Курсы LMS" },
+    { url: "https://cdn.poehali.dev/projects/ced705b4-8c8e-4826-8b52-7f4d72e16071/bucket/cacb16db-0abc-4001-a46d-27ea2ee6bf89.png", label: "Протокол встречи" },
+    { url: "https://cdn.poehali.dev/projects/ced705b4-8c8e-4826-8b52-7f4d72e16071/bucket/e315c6cb-c609-410c-862f-80a8331de16c.png", label: "Обучение" },
+  ];
+
+  return (
+    <Slide dir={dir} animKey={animKey}>
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 70% at 50% 0%, #0F2D22 0%, #0A1A14 55%, #060F0B 100%)" }} />
+      <GlowOrb size={400} x="50%" y="0%" color="#1DE3A2" blur={120} />
+      <GlowOrb size={200} x="10%" y="80%" color="#00C896" blur={90} />
+      <LogoBadge />
+
+      {/* Header */}
+      <div className="absolute top-5 left-10 right-10">
+        <div className="text-[9px] font-semibold tracking-[0.4em] uppercase mb-1 fade-up" style={{ color: "#1DE3A2" }}>
+          Слайд 06 — Стажёрская программа
         </div>
-        <div className="text-sm font-bold text-white">Расширить раздел «Коммуникация с заказчиком»</div>
-        {[
-          { icon: "MessageSquare", text: "Встреча 1: стажёр собирает/уточняет требования" },
-          { icon: "Layout",        text: "Дорабатывает дашборд самостоятельно" },
-          { icon: "RotateCcw",     text: "Встреча 2: показывает результат, получает обратную связь" },
-          { icon: "Star",          text: "Делает выводы — определяет, хватило ли выявленных требований" },
-        ].map((step, i) => (
-          <div key={i} className="flex items-center gap-2">
-            <Icon name={step.icon} size={12} style={{ color: "#1DE3A2", opacity: 0.8 }} />
-            <span className="text-xs" style={{ color: "rgba(255,255,255,0.65)" }}>{step.text}</span>
-          </div>
-        ))}
+        <h2 className="font-black fade-up-d1" style={{ fontSize: "clamp(20px, 2.8vw, 32px)", color: "#fff" }}>
+          Стажёрская программа
+        </h2>
+        <div className="mt-1 w-12 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
       </div>
-    </div>
-    {ACCENT_LINE}
-  </Slide>
-);
+
+      {/* Центральная подпись со стрелками */}
+      <div className="absolute fade-up-d1" style={{ top: 108, left: 24, right: 24, bottom: 16 }}>
+
+        {/* Лейбл */}
+        <div className="absolute flex items-center gap-2 z-10"
+          style={{ top: "38%", left: "50%", transform: "translate(-50%, -50%)" }}>
+          <div className="rounded-2xl px-4 py-2 text-center"
+            style={{ background: "rgba(29,227,162,0.12)", border: "1px solid rgba(29,227,162,0.35)", backdropFilter: "blur(8px)" }}>
+            <div className="text-[11px] font-bold leading-snug" style={{ color: "#1DE3A2" }}>
+              Процесс прохождения<br />стажёрской программы
+            </div>
+          </div>
+        </div>
+
+        {/* Скрины: 2 сверху, 2 снизу от центра */}
+        {/* Верхний левый */}
+        <div className="absolute fade-up" style={{ top: 0, left: 0, width: "44%", height: "44%", animationDelay: "0.1s" }}>
+          <div className="w-full h-full rounded-xl overflow-hidden border" style={{ borderColor: "rgba(29,227,162,0.2)" }}>
+            <img src={screenshots[0].url} alt={screenshots[0].label} className="w-full h-full object-cover object-top" />
+          </div>
+          <div className="absolute bottom-2 left-2 text-[9px] font-semibold px-2 py-0.5 rounded-md"
+            style={{ background: "rgba(6,15,11,0.85)", color: "#1DE3A2", border: "1px solid rgba(29,227,162,0.25)" }}>
+            {screenshots[0].label}
+          </div>
+          {/* стрелка вправо-вниз к центру */}
+          <svg className="absolute" style={{ right: -28, bottom: -18, width: 36, height: 28, pointerEvents: "none" }}>
+            <path d="M2 2 Q20 2 32 20" fill="none" stroke="#1DE3A2" strokeWidth="1.5" strokeOpacity="0.5" strokeDasharray="3 3"/>
+            <polygon points="28,18 34,24 22,24" fill="#1DE3A2" fillOpacity="0.5"/>
+          </svg>
+        </div>
+
+        {/* Верхний правый */}
+        <div className="absolute fade-up" style={{ top: 0, right: 0, width: "44%", height: "44%", animationDelay: "0.18s" }}>
+          <div className="w-full h-full rounded-xl overflow-hidden border" style={{ borderColor: "rgba(29,227,162,0.2)" }}>
+            <img src={screenshots[1].url} alt={screenshots[1].label} className="w-full h-full object-cover object-top" />
+          </div>
+          <div className="absolute bottom-2 right-2 text-[9px] font-semibold px-2 py-0.5 rounded-md"
+            style={{ background: "rgba(6,15,11,0.85)", color: "#1DE3A2", border: "1px solid rgba(29,227,162,0.25)" }}>
+            {screenshots[1].label}
+          </div>
+          <svg className="absolute" style={{ left: -28, bottom: -18, width: 36, height: 28, pointerEvents: "none" }}>
+            <path d="M34 2 Q16 2 4 20" fill="none" stroke="#1DE3A2" strokeWidth="1.5" strokeOpacity="0.5" strokeDasharray="3 3"/>
+            <polygon points="8,18 2,24 14,24" fill="#1DE3A2" fillOpacity="0.5"/>
+          </svg>
+        </div>
+
+        {/* Нижний левый */}
+        <div className="absolute fade-up" style={{ bottom: 0, left: 0, width: "44%", height: "44%", animationDelay: "0.26s" }}>
+          <svg className="absolute" style={{ right: -28, top: -18, width: 36, height: 28, pointerEvents: "none" }}>
+            <path d="M2 26 Q20 26 32 8" fill="none" stroke="#1DE3A2" strokeWidth="1.5" strokeOpacity="0.5" strokeDasharray="3 3"/>
+            <polygon points="28,10 34,4 22,4" fill="#1DE3A2" fillOpacity="0.5"/>
+          </svg>
+          <div className="w-full h-full rounded-xl overflow-hidden border" style={{ borderColor: "rgba(29,227,162,0.2)" }}>
+            <img src={screenshots[2].url} alt={screenshots[2].label} className="w-full h-full object-cover object-top" />
+          </div>
+          <div className="absolute top-2 left-2 text-[9px] font-semibold px-2 py-0.5 rounded-md"
+            style={{ background: "rgba(6,15,11,0.85)", color: "#1DE3A2", border: "1px solid rgba(29,227,162,0.25)" }}>
+            {screenshots[2].label}
+          </div>
+        </div>
+
+        {/* Нижний правый */}
+        <div className="absolute fade-up" style={{ bottom: 0, right: 0, width: "44%", height: "44%", animationDelay: "0.34s" }}>
+          <svg className="absolute" style={{ left: -28, top: -18, width: 36, height: 28, pointerEvents: "none" }}>
+            <path d="M34 26 Q16 26 4 8" fill="none" stroke="#1DE3A2" strokeWidth="1.5" strokeOpacity="0.5" strokeDasharray="3 3"/>
+            <polygon points="8,10 2,4 14,4" fill="#1DE3A2" fillOpacity="0.5"/>
+          </svg>
+          <div className="w-full h-full rounded-xl overflow-hidden border" style={{ borderColor: "rgba(29,227,162,0.2)" }}>
+            <img src={screenshots[3].url} alt={screenshots[3].label} className="w-full h-full object-cover object-top" />
+          </div>
+          <div className="absolute top-2 right-2 text-[9px] font-semibold px-2 py-0.5 rounded-md"
+            style={{ background: "rgba(6,15,11,0.85)", color: "#1DE3A2", border: "1px solid rgba(29,227,162,0.25)" }}>
+            {screenshots[3].label}
+          </div>
+        </div>
+      </div>
+
+      {ACCENT_LINE}
+    </Slide>
+  );
+};
 
 // ─── Slide 6 (бывший 9): Development directions ───────────────────────────────
 export const Slide6 = ({ dir, animKey, c, upd }: SlideProps) => (
