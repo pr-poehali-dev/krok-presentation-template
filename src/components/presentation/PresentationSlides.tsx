@@ -120,9 +120,9 @@ export const Slide3 = ({ dir, animKey, c, upd }: SlideProps) => {
       </div>
 
       {/* Два столбца с строками — ниже зелёной черты */}
-      <div className="absolute left-6 right-6 grid grid-cols-2 gap-x-3 gap-y-1.5" style={{ top: 108 }}>
+      <div className="absolute left-6 right-6 grid grid-cols-2 gap-x-3 gap-y-2" style={{ top: 108 }}>
         {leftItems.map((item, i) => (
-          <div key={`l${i}`} className="flex items-center gap-3 rounded-xl px-4 py-1.5 border fade-up"
+          <div key={`l${i}`} className="flex items-center gap-3 rounded-xl px-4 py-2 border fade-up"
             style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.06 * i}s` }}>
             <div className="w-5 h-5 rounded-md flex items-center justify-center shrink-0"
               style={{ background: "rgba(29,227,162,0.12)" }}>
@@ -132,7 +132,7 @@ export const Slide3 = ({ dir, animKey, c, upd }: SlideProps) => {
           </div>
         ))}
         {rightItems.map((item, i) => (
-          <div key={`r${i}`} className="flex items-center gap-3 rounded-xl px-4 py-1.5 border fade-up"
+          <div key={`r${i}`} className="flex items-center gap-3 rounded-xl px-4 py-2 border fade-up"
             style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", gridRow: i + 1, gridColumn: 2, animationDelay: `${0.06 * i + 0.03}s` }}>
             <div className="w-5 h-5 rounded-md flex items-center justify-center shrink-0"
               style={{ background: "rgba(29,227,162,0.12)" }}>
@@ -143,14 +143,17 @@ export const Slide3 = ({ dir, animKey, c, upd }: SlideProps) => {
         ))}
       </div>
 
-      {/* Фотографии снизу — без рамки, без обрезания */}
-      <div className="absolute left-6 right-6 flex gap-2 fade-up" style={{ bottom: 10, height: 210 }}>
-        {photos.map((src, i) => (
-          <div key={i} className="flex-1 rounded-xl overflow-hidden flex items-center justify-center"
-            style={{ animationDelay: `${0.1 + 0.08 * i}s` }}>
-            <img src={src} alt="" className="w-full h-full object-contain" />
-          </div>
-        ))}
+      {/* Фотографии снизу — с закруглениями, смещены по высоте для динамики */}
+      <div className="absolute left-6 right-6 flex gap-2.5 fade-up" style={{ bottom: 10, height: 200 }}>
+        <div className="flex-1 rounded-2xl overflow-hidden fade-up" style={{ animationDelay: "0.1s", marginTop: 16 }}>
+          <img src={photos[0]} alt="" className="w-full h-full object-contain" />
+        </div>
+        <div className="flex-1 rounded-2xl overflow-hidden fade-up" style={{ animationDelay: "0.18s", marginTop: 0 }}>
+          <img src={photos[1]} alt="" className="w-full h-full object-contain" />
+        </div>
+        <div className="flex-1 rounded-2xl overflow-hidden fade-up" style={{ animationDelay: "0.26s", marginTop: 24 }}>
+          <img src={photos[2]} alt="" className="w-full h-full object-contain" />
+        </div>
       </div>
 
       {ACCENT_LINE}
