@@ -251,7 +251,7 @@ export const SlideM = ({ dir, animKey }: SlideProps) => {
           <img
             src="https://cdn.poehali.dev/projects/ced705b4-8c8e-4826-8b52-7f4d72e16071/bucket/2f0ed8db-e230-451f-9364-ac2a19693a59.png"
             alt="Мосэнерго"
-            style={{ maxWidth: "80%", maxHeight: 90, objectFit: "contain", mixBlendMode: "screen", opacity: 0.9 }}
+            style={{ maxWidth: "85%", maxHeight: 100, objectFit: "contain", mixBlendMode: "screen", filter: "brightness(1.1) contrast(1.2)" }}
           />
         </div>
 
