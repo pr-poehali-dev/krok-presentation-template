@@ -578,7 +578,7 @@ export const Slide7 = ({ dir, animKey }: SlideProps) => {
       </div>
 
       {/* Две колонки скиллов */}
-      <div className="absolute left-6 right-6 grid grid-cols-2 gap-4" style={{ top: 108, bottom: 96 }}>
+      <div className="absolute left-6 right-6 grid grid-cols-2 gap-4" style={{ top: 108, bottom: 106 }}>
 
         {/* Hard Skills */}
         <div className="flex flex-col gap-2">
@@ -590,7 +590,7 @@ export const Slide7 = ({ dir, animKey }: SlideProps) => {
             <span className="text-[10px] font-black tracking-[0.3em] uppercase" style={{ color: "#1DE3A2" }}>Hard Skills</span>
           </div>
           {hard.map((item, i) => (
-            <div key={i} className="rounded-xl px-3 py-2.5 border fade-up"
+            <div key={i} className="rounded-xl px-4 py-3 border fade-up"
               style={{ background: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.07)", animationDelay: `${0.06 * i}s` }}>
               <div className="flex items-start gap-2">
                 <span className="text-[10px] leading-tight mt-0.5 shrink-0 line-through" style={{ color: "rgba(255,255,255,0.25)" }}>{item.before}</span>
@@ -611,7 +611,7 @@ export const Slide7 = ({ dir, animKey }: SlideProps) => {
             <span className="text-[10px] font-black tracking-[0.3em] uppercase" style={{ color: "#00C896" }}>Soft Skills</span>
           </div>
           {soft.map((item, i) => (
-            <div key={i} className="rounded-xl px-3 py-2.5 border fade-up"
+            <div key={i} className="rounded-xl px-4 py-3 border fade-up"
               style={{ background: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.07)", animationDelay: `${0.06 * i + 0.1}s` }}>
               <div className="flex items-start gap-2">
                 <span className="text-[10px] leading-tight mt-0.5 shrink-0 line-through" style={{ color: "rgba(255,255,255,0.25)" }}>{item.before}</span>
@@ -624,7 +624,7 @@ export const Slide7 = ({ dir, animKey }: SlideProps) => {
       </div>
 
       {/* Нижний баннер — статистика на всю ширину */}
-      <div className="absolute left-6 right-6 flex gap-3 fade-up" style={{ bottom: 14, height: 70, animationDelay: "0.4s" }}>
+      <div className="absolute left-6 right-6 flex gap-3 fade-up" style={{ bottom: 14, height: 80, animationDelay: "0.4s" }}>
         {stats.map((s, i) => (
           <div key={i} className="flex-1 rounded-2xl flex flex-col items-center justify-center"
             style={{ background: i === 1 ? "rgba(29,227,162,0.1)" : "rgba(255,255,255,0.04)", border: `1px solid ${i === 1 ? "rgba(29,227,162,0.3)" : "rgba(255,255,255,0.07)"}` }}>
@@ -632,9 +632,11 @@ export const Slide7 = ({ dir, animKey }: SlideProps) => {
             <div className="text-[9px] mt-0.5 font-medium" style={{ color: "rgba(255,255,255,0.4)" }}>{s.label}</div>
           </div>
         ))}
-        <div className="flex-[2] rounded-2xl flex flex-col justify-center px-5"
+        <div className="flex-[2] rounded-2xl flex flex-col items-center justify-center px-5"
           style={{ background: "rgba(29,227,162,0.06)", border: "1px solid rgba(29,227,162,0.2)" }}>
-          <div className="text-[9px] mt-0.5" style={{ color: "rgba(255,255,255,0.35)" }}>9 месяцев реального проектного опыта в КРОК</div>
+          <div className="font-black leading-none text-center" style={{ fontSize: "clamp(14px, 1.6vw, 20px)", color: "#fff" }}>
+            9 месяцев реального<br />проектного опыта в КРОК
+          </div>
         </div>
       </div>
 
