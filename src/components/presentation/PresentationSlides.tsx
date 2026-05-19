@@ -537,46 +537,99 @@ export const Slide6 = ({ dir, animKey, c, upd }: SlideProps) => (
   </Slide>
 );
 
-// ─── Slide 7 (бывший 10): Who I became ────────────────────────────────────────
-export const Slide7 = ({ dir, animKey, c, upd }: SlideProps) => (
-  <Slide dir={dir} animKey={animKey}>
-    <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 80% at 70% 50%, #0F2D22 0%, #0A1A14 60%, #060F0B 100%)" }} />
-    <GlowOrb size={500} x="72%" y="50%" color="#1DE3A2" blur={120} />
-    <LogoBadge />
-    <div className="absolute right-12 top-1/2 -translate-y-1/2 opacity-75">
-      <StickFigureExpert />
-    </div>
-    <div className="absolute top-7 left-10 right-10">
-      <EditableText value={c.s10.label} onChange={(v) => upd({ ...c, s10: { ...c.s10, label: v } })}
-        className="text-[9px] font-semibold tracking-[0.4em] uppercase mb-1 fade-up block"
-        style={{ color: "#1DE3A2" }} />
-      <EditableText value={c.s10.heading} onChange={(v) => upd({ ...c, s10: { ...c.s10, heading: v } })}
-        as="h2" className="text-white font-black fade-up-d1 block"
-        style={{ fontSize: "clamp(20px, 2.8vw, 32px)", color: "#fff" }} />
-      <div className="mt-1.5 w-12 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
-    </div>
-    <div className="absolute left-10 top-[108px] bottom-8 max-w-[58%] grid grid-cols-2 gap-2.5 content-start">
-      {[
-        { icon: "Shield",        label: "Уверенность",  text: "Намного увереннее на проекте, чем в первый день" },
-        { icon: "BarChart2",     label: "Задачи",       text: "Спектр самостоятельных задач значительно вырос" },
-        { icon: "Database",      label: "Знания",       text: "Большой объём предметных и технических знаний" },
-        { icon: "Zap",           label: "Скорость",     text: "Быстрее нахожу решения, меньше трачу времени" },
-        { icon: "MessageCircle", label: "Коммуникация", text: "Прихожу не с «что делать», а с гипотезой и вопросом" },
-        { icon: "Star",          label: "Опыт",         text: "Реальный проектный опыт с первого дня стажировки" },
-      ].map((item, i) => (
-        <div key={i} className="rounded-xl px-3 py-2.5 border flex items-start gap-2.5 fade-up"
-          style={{ background: "rgba(29,227,162,0.06)", borderColor: "rgba(29,227,162,0.18)", animationDelay: `${0.07 * i}s` }}>
-          <Icon name={item.icon} size={13} className="mt-0.5 shrink-0" style={{ color: "#1DE3A2" }} />
-          <div>
-            <div className="text-xs font-bold text-white">{item.label}</div>
-            <div className="text-[11px] mt-0.5" style={{ color: "rgba(255,255,255,0.5)" }}>{item.text}</div>
+// ─── Slide 7: 9 месяцев — было/стало ─────────────────────────────────────────
+export const Slide7 = ({ dir, animKey }: SlideProps) => {
+  const hard = [
+    { before: "Знала SQL базово",            after: "Пишу сложные запросы для витрин и дашбордов" },
+    { before: "Не работала с BI",            after: "Разрабатываю дашборды в Visiology + кастомные виджеты" },
+    { before: "Не писала постановки",        after: "Проектирую витрины, пишу постановки на разработку" },
+    { before: "Не читала тех.документацию",  after: "Понимаю проектную документацию: какая для чего" },
+    { before: "BigData — теория",            after: "Реальный проект: 10 систем, 13 ТЭЦ, 7500 показателей" },
+  ];
+  const soft = [
+    { before: "Не было опыта с заказчиком",  after: "Коммуницирую с заказчиком, знаю правила переписки" },
+    { before: "Приходила с «что делать?»",   after: "Прихожу с гипотезой и конкретным вопросом" },
+    { before: "Не понимала проектный ритм",  after: "Самостоятельно веду задачи и трекаю прогресс" },
+    { before: "Не умела защищать решения",   after: "Аргументирую выбор и отстаиваю свою точку зрения" },
+  ];
+
+  return (
+    <Slide dir={dir} animKey={animKey}>
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 80% at 70% 20%, #0F2D22 0%, #0A1A14 60%, #060F0B 100%)" }} />
+      <GlowOrb size={400} x="70%" y="15%" color="#1DE3A2" blur={130} />
+      <GlowOrb size={250} x="10%" y="80%" color="#00C896" blur={100} />
+      <LogoBadge />
+
+      {/* Header */}
+      <div className="absolute top-5 left-10 right-10">
+        <div className="text-[9px] font-semibold tracking-[0.4em] uppercase mb-1 fade-up" style={{ color: "#1DE3A2" }}>
+          Слайд 07 — Результаты
+        </div>
+        <h2 className="font-black fade-up-d1" style={{ fontSize: "clamp(20px, 2.8vw, 32px)", color: "#fff" }}>
+          ~ 9 месяцев спустя
+        </h2>
+        <div className="mt-1 w-12 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
+      </div>
+
+      {/* Две колонки */}
+      <div className="absolute left-6 right-6 grid grid-cols-2 gap-4" style={{ top: 108, bottom: 16 }}>
+
+        {/* Hard Skills */}
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center gap-2 mb-1">
+            <div className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0"
+              style={{ background: "rgba(29,227,162,0.15)" }}>
+              <Icon name="Code2" size={12} style={{ color: "#1DE3A2" }} />
+            </div>
+            <span className="text-[10px] font-black tracking-[0.3em] uppercase" style={{ color: "#1DE3A2" }}>Hard Skills</span>
+          </div>
+          {hard.map((item, i) => (
+            <div key={i} className="rounded-xl px-3 py-2 border fade-up"
+              style={{ background: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.07)", animationDelay: `${0.06 * i}s` }}>
+              <div className="flex items-start gap-2">
+                <span className="text-[9px] leading-tight mt-0.5 shrink-0 line-through" style={{ color: "rgba(255,255,255,0.25)" }}>{item.before}</span>
+                <span style={{ color: "rgba(29,227,162,0.5)", fontSize: 9, marginTop: 1 }}>→</span>
+                <span className="text-[10px] font-semibold leading-tight" style={{ color: "rgba(255,255,255,0.82)" }}>{item.after}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Soft Skills */}
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center gap-2 mb-1">
+            <div className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0"
+              style={{ background: "rgba(0,200,150,0.15)" }}>
+              <Icon name="MessageCircle" size={12} style={{ color: "#00C896" }} />
+            </div>
+            <span className="text-[10px] font-black tracking-[0.3em] uppercase" style={{ color: "#00C896" }}>Soft Skills</span>
+          </div>
+          {soft.map((item, i) => (
+            <div key={i} className="rounded-xl px-3 py-2 border fade-up"
+              style={{ background: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.07)", animationDelay: `${0.06 * i + 0.1}s` }}>
+              <div className="flex items-start gap-2">
+                <span className="text-[9px] leading-tight mt-0.5 shrink-0 line-through" style={{ color: "rgba(255,255,255,0.25)" }}>{item.before}</span>
+                <span style={{ color: "rgba(0,200,150,0.5)", fontSize: 9, marginTop: 1 }}>→</span>
+                <span className="text-[10px] font-semibold leading-tight" style={{ color: "rgba(255,255,255,0.82)" }}>{item.after}</span>
+              </div>
+            </div>
+          ))}
+
+          {/* Итоговый бейдж */}
+          <div className="mt-auto rounded-2xl px-4 py-3 fade-up"
+            style={{ background: "rgba(29,227,162,0.08)", border: "1px solid rgba(29,227,162,0.25)", animationDelay: "0.5s" }}>
+            <div className="text-[10px] font-black" style={{ color: "#1DE3A2" }}>9 месяцев = реальный проектный опыт</div>
+            <div className="text-[9px] mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>
+              от стажёра без опыта → к самостоятельному специалисту
+            </div>
           </div>
         </div>
-      ))}
-    </div>
-    {ACCENT_LINE}
-  </Slide>
-);
+      </div>
+
+      {ACCENT_LINE}
+    </Slide>
+  );
+};
 
 // ─── Slide 8 (бывший 11): Thank you ──────────────────────────────────────────
 export const Slide8 = ({ dir, animKey, c, upd }: SlideProps) => (
