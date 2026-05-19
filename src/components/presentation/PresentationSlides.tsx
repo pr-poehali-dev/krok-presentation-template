@@ -512,43 +512,37 @@ export const Slide6 = ({ dir, animKey }: SlideProps) => {
     {
       icon: "Monitor",
       tag: "Инструменты",
-      title: "Альтернативные BI-платформы",
-      desc: "Расширение кругозора, понимание сильных сторон каждой системы",
+      title: "Освоение альтернативных BI-платформ для расширения инструментального кругозора и понимания сильных сторон каждой системы",
       color: "#1DE3A2",
     },
     {
       icon: "Database",
       tag: "Технологии",
-      title: "DWH и ETL",
-      desc: "Углубление в смежные области, развитие инженерных компетенций",
+      title: "Углубление в смежные области — развитие компетенций в области DWH и ETL",
       color: "#1DE3A2",
     },
     {
       icon: "Globe",
       tag: "Отрасли",
-      title: "Разные отрасли",
-      desc: "Накопление предметного опыта, выработка универсальных подходов",
+      title: "Работа в проектах различных отраслей для накопления разнообразного предметного опыта и выработки универсальных подходов к аналитике",
       color: "#00C896",
     },
     {
       icon: "Layers",
       tag: "Проекты",
-      title: "Все стадии проекта",
-      desc: "Участие на разных этапах: от аналитики до внедрения",
+      title: "Участие в различных стадиях проекта",
       color: "#00C896",
     },
     {
       icon: "Code2",
       tag: "Hard skill",
-      title: "JavaScript",
-      desc: "Углублённое изучение JS для кастомных виджетов и автоматизации",
+      title: "Углубленное изучение JavaScript",
       color: "#4AF0C0",
     },
     {
       icon: "MessageCircle",
       tag: "Soft skill",
-      title: "Коммуникация",
-      desc: "Развитие навыков работы с заказчиком, переговоры, презентации",
+      title: "Развитие коммуникативных навыков",
       color: "#4AF0C0",
     },
   ];
@@ -601,20 +595,8 @@ export const Slide6 = ({ dir, animKey }: SlideProps) => {
             </div>
 
             {/* Заголовок */}
-            <div className="font-black text-white leading-tight" style={{ fontSize: "clamp(11px, 1.1vw, 14px)" }}>
+            <div className="font-semibold leading-snug flex-1" style={{ fontSize: "clamp(10px, 1vw, 13px)", color: "rgba(255,255,255,0.85)" }}>
               {t.title}
-            </div>
-
-            {/* Описание — появляется при ховере */}
-            <div className="text-[10px] leading-snug"
-              style={{
-                color: "rgba(255,255,255,0.5)",
-                maxHeight: hovered === i ? 60 : 0,
-                overflow: "hidden",
-                transition: "max-height 0.25s ease, opacity 0.2s ease",
-                opacity: hovered === i ? 1 : 0,
-              }}>
-              {t.desc}
             </div>
 
             {/* Нижняя черта-прогресс */}
