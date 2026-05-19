@@ -228,11 +228,14 @@ export const SlideM = ({ dir, animKey }: SlideProps) => {
             {kpi.suffix && (
               <div className="text-[10px] font-semibold mb-0.5" style={{ color: "#1DE3A2", opacity: 0.7 }}>{kpi.suffix}</div>
             )}
-            <div className="font-black leading-none" style={{ fontSize: "clamp(22px, 2.8vw, 36px)", color: kpi.accent ? "#1DE3A2" : "#fff" }}>
-              {counts[i].toLocaleString("ru")}
-              {kpi.accent && kpi.note && (
-                <span className="ml-2 font-semibold" style={{ fontSize: "clamp(11px, 1.2vw, 15px)", color: "rgba(255,255,255,0.35)" }}>{kpi.note}</span>
-              )}
+            <div className="font-black leading-none" style={{ fontSize: "clamp(20px, 2.5vw, 32px)", color: kpi.accent ? "#1DE3A2" : "#fff" }}>
+              {kpi.accent ? (
+                <>
+                  <span style={{ color: "rgba(255,255,255,0.45)" }}>{kpi.from.toLocaleString("ru")}</span>
+                  <span className="mx-1.5" style={{ color: "rgba(29,227,162,0.5)", fontSize: "0.7em" }}>→</span>
+                  <span>{kpi.to.toLocaleString("ru")}</span>
+                </>
+              ) : counts[i].toLocaleString("ru")}
             </div>
             <div className="text-[10px] font-medium mt-1 leading-tight" style={{ color: "rgba(255,255,255,0.45)" }}>{kpi.label}</div>
           </div>
