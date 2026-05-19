@@ -400,9 +400,9 @@ export const Slide4 = ({ dir, animKey, c, upd }: SlideProps) => {
 export const Slide5 = ({ dir, animKey }: SlideProps) => {
   const screenshots = [
     { url: "https://cdn.poehali.dev/projects/ced705b4-8c8e-4826-8b52-7f4d72e16071/bucket/87c95f31-2e9b-4ae1-bac0-0307ad09236b.png", label: "План стажировки" },
-    { url: "https://cdn.poehali.dev/projects/ced705b4-8c8e-4826-8b52-7f4d72e16071/bucket/0a50cc5a-5502-4906-b96e-eb24faebefbd.png", label: "Курсы LMS" },
+    { url: "https://cdn.poehali.dev/projects/ced705b4-8c8e-4826-8b52-7f4d72e16071/bucket/0a50cc5a-5502-4906-b96e-eb24faebefbd.png", label: "Базовое обучение" },
     { url: "https://cdn.poehali.dev/projects/ced705b4-8c8e-4826-8b52-7f4d72e16071/bucket/cacb16db-0abc-4001-a46d-27ea2ee6bf89.png", label: "Протокол встречи" },
-    { url: "https://cdn.poehali.dev/projects/ced705b4-8c8e-4826-8b52-7f4d72e16071/bucket/e315c6cb-c609-410c-862f-80a8331de16c.png", label: "Обучение" },
+    { url: "https://cdn.poehali.dev/projects/ced705b4-8c8e-4826-8b52-7f4d72e16071/bucket/e315c6cb-c609-410c-862f-80a8331de16c.png", label: "Встречи с наставником" },
   ];
 
   return (
@@ -426,10 +426,9 @@ export const Slide5 = ({ dir, animKey }: SlideProps) => {
       {/* Центральная подпись со стрелками */}
       <div className="absolute fade-up-d1" style={{ top: 108, left: 24, right: 24, bottom: 16 }}>
 
-        {/* Лейбл */}
-        <div className="absolute flex items-center gap-2 z-10"
-          style={{ top: "38%", left: "50%", transform: "translate(-50%, -50%)" }}>
-          <div className="rounded-2xl px-4 py-2 text-center"
+        {/* Лейбл — строго по центру */}
+        <div className="absolute z-10" style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+          <div className="rounded-2xl px-5 py-2.5 text-center whitespace-nowrap"
             style={{ background: "rgba(29,227,162,0.12)", border: "1px solid rgba(29,227,162,0.35)", backdropFilter: "blur(8px)" }}>
             <div className="text-[11px] font-bold leading-snug" style={{ color: "#1DE3A2" }}>
               Процесс прохождения<br />стажёрской программы
