@@ -119,35 +119,35 @@ export const Slide3 = ({ dir, animKey, c, upd }: SlideProps) => {
         <div className="mt-1 w-10 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
       </div>
 
-      {/* Два столбца с строками — ниже зелёной черты */}
-      <div className="absolute left-6 right-6 grid grid-cols-2 gap-x-3 gap-y-1.5" style={{ top: 95, bottom: 162 }}>
+      {/* Два столбца с строками — ниже зелёной черты, стиль как на слайде 4 */}
+      <div className="absolute left-6 right-6 grid grid-cols-2 gap-x-3 gap-y-2" style={{ top: 95 }}>
         {leftItems.map((item, i) => (
-          <div key={`l${i}`} className="flex items-center gap-2.5 rounded-xl px-3 py-2 border fade-up"
+          <div key={`l${i}`} className="flex items-center gap-3 rounded-xl px-5 py-3 border fade-up"
             style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.06 * i}s` }}>
-            <div className="w-5 h-5 rounded-md flex items-center justify-center shrink-0"
+            <div className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0"
               style={{ background: "rgba(29,227,162,0.12)" }}>
-              <Icon name={item.icon} size={11} style={{ color: "#1DE3A2" }} />
+              <Icon name={item.icon} size={13} style={{ color: "#1DE3A2" }} />
             </div>
-            <span className="text-[11px] leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
+            <span className="text-xs leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
           </div>
         ))}
         {rightItems.map((item, i) => (
-          <div key={`r${i}`} className="flex items-center gap-2.5 rounded-xl px-3 py-2 border fade-up"
+          <div key={`r${i}`} className="flex items-center gap-3 rounded-xl px-5 py-3 border fade-up"
             style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", gridRow: i + 1, gridColumn: 2, animationDelay: `${0.06 * i + 0.03}s` }}>
-            <div className="w-5 h-5 rounded-md flex items-center justify-center shrink-0"
+            <div className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0"
               style={{ background: "rgba(29,227,162,0.12)" }}>
-              <Icon name={item.icon} size={11} style={{ color: "#1DE3A2" }} />
+              <Icon name={item.icon} size={13} style={{ color: "#1DE3A2" }} />
             </div>
-            <span className="text-[11px] leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
+            <span className="text-xs leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
           </div>
         ))}
       </div>
 
-      {/* Фотографии снизу — без обрезания */}
-      <div className="absolute left-6 right-6 flex gap-3 fade-up" style={{ bottom: 12, height: 150 }}>
+      {/* Фотографии снизу — без рамки, с отступом от строк */}
+      <div className="absolute left-6 right-6 flex gap-3 fade-up" style={{ bottom: 10, height: 172 }}>
         {photos.map((src, i) => (
-          <div key={i} className="flex-1 rounded-2xl overflow-hidden border flex items-center justify-center"
-            style={{ borderColor: "rgba(29,227,162,0.25)", background: "rgba(0,0,0,0.3)", animationDelay: `${0.1 + 0.08 * i}s` }}>
+          <div key={i} className="flex-1 rounded-2xl overflow-hidden flex items-center justify-center"
+            style={{ background: "rgba(0,0,0,0.25)", animationDelay: `${0.1 + 0.08 * i}s`, marginTop: 12 }}>
             <img src={src} alt="" className="w-full h-full object-contain" />
           </div>
         ))}
