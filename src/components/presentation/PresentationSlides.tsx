@@ -84,18 +84,23 @@ export const Slide2 = ({ dir, animKey, c, upd }: SlideProps) => (
 
 // ─── Slide 3: Path to KROK + Getting the offer (объединение 3 и 4) ────────────
 export const Slide3 = ({ dir, animKey, c, upd }: SlideProps) => {
-  const items = [
+  const leftItems = [
     { icon: "GraduationCap", text: "Математическая школа — хотела быть востоковедом?" },
     { icon: "BookOpen",      text: "11 класс — смена области → Московский Политех" },
     { icon: "Database",      text: "«Большие и открытые данные» — BigData" },
     { icon: "School",        text: "Летняя школа КРОК — узнала через сообщество вуза" },
-    { icon: "FileCheck",     text: "3 этапа — тестирование, кейс, ассессмент" },
-    { icon: "Car",           text: "Собеседование с ресурс-менеджером прямо в машине" },
-    { icon: "Radio",         text: "Оффер в лесу — 300 м над землёй на Валдае" },
-    { icon: "Sparkles",      text: "Старт стажировки в группе отчётности" },
   ];
-  const left  = items.filter((_, i) => i % 2 === 0);
-  const right = items.filter((_, i) => i % 2 === 1);
+  const rightItems = [
+    { icon: "FileCheck",  text: "3 этапа — тестирование, кейс, ассессмент" },
+    { icon: "Car",        text: "Собеседование с ресурс-менеджером прямо в машине" },
+    { icon: "Radio",      text: "Оффер в лесу — 300 м над землёй на Валдае" },
+    { icon: "Sparkles",   text: "Старт стажировки в группе отчётности" },
+  ];
+  const photos = [
+    "https://cdn.poehali.dev/projects/ced705b4-8c8e-4826-8b52-7f4d72e16071/bucket/0087e286-05a8-4f94-8638-afb87a16fc65.jpg",
+    "https://cdn.poehali.dev/projects/ced705b4-8c8e-4826-8b52-7f4d72e16071/bucket/6feb4469-4aac-486e-9407-80ee469c0c13.jpg",
+    "https://cdn.poehali.dev/projects/ced705b4-8c8e-4826-8b52-7f4d72e16071/bucket/fbd1272e-2e30-4e85-a1f0-a9ec2632339c.jpg",
+  ];
   return (
     <Slide dir={dir} animKey={animKey}>
       <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 80% at 85% 50%, #0F2D22 0%, #0A1A14 55%, #060F0B 100%)" }} />
@@ -104,41 +109,50 @@ export const Slide3 = ({ dir, animKey, c, upd }: SlideProps) => {
       <LogoBadge />
 
       {/* Header */}
-      <div className="absolute top-6 left-10 right-10">
+      <div className="absolute top-5 left-10 right-10">
         <EditableText value={c.s3.label} onChange={(v) => upd({ ...c, s3: { ...c.s3, label: v } })}
           className="text-[9px] font-semibold tracking-[0.4em] uppercase mb-1 fade-up block"
           style={{ color: "#1DE3A2" }} />
         <EditableText value={c.s3.heading} onChange={(v) => upd({ ...c, s3: { ...c.s3, heading: v } })}
           as="h2" className="text-white font-black fade-up-d1 block"
           style={{ fontSize: "clamp(22px, 3vw, 36px)", color: "#fff" }} />
-        <div className="mt-1.5 w-10 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
+        <div className="mt-1 w-10 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
       </div>
 
-      {/* Два столбца — центрированы по вертикали */}
-      <div className="absolute left-6 right-6 flex items-center" style={{ top: 88, bottom: 20 }}>
-        <div className="w-full grid grid-cols-2 gap-x-3 gap-y-2">
-          {left.map((item, i) => (
-            <div key={`l${i}`} className="flex items-center gap-3 rounded-xl px-5 py-4 border fade-up"
-              style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.06 * i}s` }}>
-              <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-                style={{ background: "rgba(29,227,162,0.12)" }}>
-                <Icon name={item.icon} size={13} style={{ color: "#1DE3A2" }} />
-              </div>
-              <span className="text-sm leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
+      {/* Два столбца с строками — не перекрывают заголовок */}
+      <div className="absolute left-6 right-6 grid grid-cols-2 gap-x-3 gap-y-1.5" style={{ top: 82, bottom: 158 }}>
+        {leftItems.map((item, i) => (
+          <div key={`l${i}`} className="flex items-center gap-3 rounded-xl px-4 py-2.5 border fade-up"
+            style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.06 * i}s` }}>
+            <div className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0"
+              style={{ background: "rgba(29,227,162,0.12)" }}>
+              <Icon name={item.icon} size={12} style={{ color: "#1DE3A2" }} />
             </div>
-          ))}
-          {right.map((item, i) => (
-            <div key={`r${i}`} className="flex items-center gap-3 rounded-xl px-5 py-4 border fade-up"
-              style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", gridRow: i + 1, gridColumn: 2, animationDelay: `${0.06 * i + 0.03}s` }}>
-              <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-                style={{ background: "rgba(29,227,162,0.12)" }}>
-                <Icon name={item.icon} size={13} style={{ color: "#1DE3A2" }} />
-              </div>
-              <span className="text-sm leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
+            <span className="text-xs leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
+          </div>
+        ))}
+        {rightItems.map((item, i) => (
+          <div key={`r${i}`} className="flex items-center gap-3 rounded-xl px-4 py-2.5 border fade-up"
+            style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", gridRow: i + 1, gridColumn: 2, animationDelay: `${0.06 * i + 0.03}s` }}>
+            <div className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0"
+              style={{ background: "rgba(29,227,162,0.12)" }}>
+              <Icon name={item.icon} size={12} style={{ color: "#1DE3A2" }} />
             </div>
-          ))}
-        </div>
+            <span className="text-xs leading-tight" style={{ color: "rgba(255,255,255,0.72)" }}>{item.text}</span>
+          </div>
+        ))}
       </div>
+
+      {/* Фотографии снизу */}
+      <div className="absolute left-6 right-6 flex gap-3 fade-up" style={{ bottom: 12, height: 138 }}>
+        {photos.map((src, i) => (
+          <div key={i} className="flex-1 rounded-2xl overflow-hidden border"
+            style={{ borderColor: "rgba(29,227,162,0.25)", animationDelay: `${0.1 + 0.08 * i}s` }}>
+            <img src={src} alt="" className="w-full h-full object-cover" style={{ objectPosition: "center top" }} />
+          </div>
+        ))}
+      </div>
+
       {ACCENT_LINE}
     </Slide>
   );
@@ -218,8 +232,16 @@ export const Slide4 = ({ dir, animKey, c, upd }: SlideProps) => {
 
                 {/* per-bar tooltip */}
                 {isHovered && (() => {
-                  const task = c.s6.tasks[i];
                   const col = color as string;
+                  const tooltipData: { desc: string; unit?: string }[] = [
+                    { desc: "Анализ состава показателей отчетов, включающий сверку с макетами, выявление логики расчета и формализация формул", unit: "(отчёты)" },
+                    { desc: "Формализация требований к BI-отчёту, включающая макет, определение показателей, разрезов и фильтров, проектирование витрины (атрибутивный состав, правила формирования) и постановку на Visiology (перечень виджетов, их настройки и форматирование) для дальнейшей разработки" },
+                    { desc: "Разработка дашбордов, использование кастомных виджетов, работа с js, написание SQL-запросов" },
+                    { desc: "Проверка корректности разработки и работы отчётов, использование чек-листа по тестированию" },
+                    { desc: "определение типа заявки, устранение ошибок, коммуникация с заказчиком и консультация" },
+                    { desc: "тестирование каждого атрибута витрины на корректное наполнение, формирование excel-таблицы для фиксирования результатов проверки" },
+                  ];
+                  const td = tooltipData[i] ?? { desc: "" };
                   return (
                     <div
                       className="absolute z-50 rounded-xl px-3 py-2.5 pointer-events-none"
@@ -230,20 +252,15 @@ export const Slide4 = ({ dir, animKey, c, upd }: SlideProps) => {
                         bottom: "calc(100% + 6px)",
                         left: "50%",
                         transform: "translateX(-50%)",
-                        width: "180px",
+                        width: "200px",
                         whiteSpace: "normal",
                       }}
                     >
                       <div className="text-xs font-black mb-1" style={{ color: col }}>{label as string}</div>
-                      {task && (
-                        <>
-                          <div className="text-[11px] font-semibold text-white leading-tight">{task.title}</div>
-                          {task.desc && <div className="text-[10px] mt-1" style={{ color: "rgba(255,255,255,0.5)" }}>{task.desc}</div>}
-                        </>
-                      )}
+                      {td.desc && <div className="text-[10px] mt-0.5" style={{ color: "rgba(255,255,255,0.5)" }}>{td.desc}</div>}
                       <div className="mt-1.5 flex items-center gap-1">
                         <div className="w-2 h-2 rounded-sm" style={{ background: col }} />
-                        <span className="text-[10px] font-bold" style={{ color: col }}>Кол-во: {value as number}</span>
+                        <span className="text-[10px] font-bold" style={{ color: col }}>Кол-во: {value as number}{td.unit ? ` ${td.unit}` : ""}</span>
                       </div>
                     </div>
                   );
@@ -419,9 +436,9 @@ export const Slide8 = ({ dir, animKey, c, upd }: SlideProps) => (
 
 // ─── Slide registry ───────────────────────────────────────────────────────────
 export const SLIDE_COMPONENTS = [
-  Slide1, Slide2, Slide3, Slide4, Slide5, Slide6, Slide7, Slide8,
+  Slide1, Slide2, Slide3, Slide4, Slide5, Slide7, Slide6, Slide8,
 ];
 export const SLIDE_LABELS = [
   "Титул", "Оглавление", "Путь → КРОК",
-  "Мосэнерго", "Программа", "Развитие", "9 месяцев", "Q&A",
+  "Задачи", "Программа", "9 месяцев", "Развитие", "Q&A",
 ];
