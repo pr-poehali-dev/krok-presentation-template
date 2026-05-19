@@ -504,38 +504,135 @@ export const Slide5 = ({ dir, animKey }: SlideProps) => {
   );
 };
 
-// ─── Slide 6 (бывший 9): Development directions ───────────────────────────────
-export const Slide6 = ({ dir, animKey, c, upd }: SlideProps) => (
-  <Slide dir={dir} animKey={animKey}>
-    <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 60% 90% at 10% 50%, #0F2D22 0%, #0A1A14 55%, #060F0B 100%)" }} />
-    <GlowOrb size={300} x="8%" y="50%" color="#1DE3A2" blur={100} />
-    <LogoBadge />
-    <div className="absolute top-7 left-10 right-10">
-      <EditableText value={c.s9.label} onChange={(v) => upd({ ...c, s9: { ...c.s9, label: v } })}
-        className="text-[9px] font-semibold tracking-[0.4em] uppercase mb-1 fade-up block"
-        style={{ color: "#1DE3A2" }} />
-      <EditableText value={c.s9.heading} onChange={(v) => upd({ ...c, s9: { ...c.s9, heading: v } })}
-        as="h2" className="text-white font-black fade-up-d1 block"
-        style={{ fontSize: "clamp(20px, 2.8vw, 32px)", color: "#fff" }} />
-      <div className="mt-1.5 w-12 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
-    </div>
-    <div className="absolute left-10 right-10 top-[108px] bottom-8 grid grid-cols-2 gap-2.5">
-      {c.s9.items.map((item, i) => (
-        <div key={i} className="rounded-2xl px-5 py-3.5 border flex items-center gap-3 fade-up"
-          style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.07 * i}s` }}>
-          <div className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0"
-            style={{ background: "rgba(29,227,162,0.12)" }}>
-            <Icon name={item.icon} size={14} style={{ color: "#1DE3A2" }} />
-          </div>
-          <EditableText value={item.text}
-            onChange={(v) => { const items = [...c.s9.items]; items[i] = { ...items[i], text: v }; upd({ ...c, s9: { ...c.s9, items } }); }}
-            className="text-sm block flex-1" style={{ color: "rgba(255,255,255,0.7)" }} />
+// ─── Slide 6: Траектории развития ─────────────────────────────────────────────
+export const Slide6 = ({ dir, animKey }: SlideProps) => {
+  const [hovered, setHovered] = useState<number | null>(null);
+
+  const tracks = [
+    {
+      icon: "Monitor",
+      tag: "Инструменты",
+      title: "Альтернативные BI-платформы",
+      desc: "Расширение кругозора, понимание сильных сторон каждой системы",
+      color: "#1DE3A2",
+    },
+    {
+      icon: "Database",
+      tag: "Технологии",
+      title: "DWH и ETL",
+      desc: "Углубление в смежные области, развитие инженерных компетенций",
+      color: "#1DE3A2",
+    },
+    {
+      icon: "Globe",
+      tag: "Отрасли",
+      title: "Разные отрасли",
+      desc: "Накопление предметного опыта, выработка универсальных подходов",
+      color: "#00C896",
+    },
+    {
+      icon: "Layers",
+      tag: "Проекты",
+      title: "Все стадии проекта",
+      desc: "Участие на разных этапах: от аналитики до внедрения",
+      color: "#00C896",
+    },
+    {
+      icon: "Code2",
+      tag: "Hard skill",
+      title: "JavaScript",
+      desc: "Углублённое изучение JS для кастомных виджетов и автоматизации",
+      color: "#4AF0C0",
+    },
+    {
+      icon: "MessageCircle",
+      tag: "Soft skill",
+      title: "Коммуникация",
+      desc: "Развитие навыков работы с заказчиком, переговоры, презентации",
+      color: "#4AF0C0",
+    },
+  ];
+
+  return (
+    <Slide dir={dir} animKey={animKey}>
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 90% at 15% 50%, #0D2B1E 0%, #0A1A14 55%, #060F0B 100%)" }} />
+      <GlowOrb size={350} x="12%" y="50%" color="#1DE3A2" blur={120} />
+      <GlowOrb size={200} x="90%" y="80%" color="#00C896" blur={90} />
+      <LogoBadge />
+
+      {/* Header */}
+      <div className="absolute top-5 left-10 right-10">
+        <div className="text-[9px] font-semibold tracking-[0.4em] uppercase mb-1 fade-up" style={{ color: "#1DE3A2" }}>
+          Слайд 08 — Куда расти
         </div>
-      ))}
-    </div>
-    {ACCENT_LINE}
-  </Slide>
-);
+        <h2 className="font-black fade-up-d1" style={{ fontSize: "clamp(20px, 2.8vw, 32px)", color: "#fff" }}>
+          Траектории развития
+        </h2>
+        <div className="mt-1 w-12 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
+      </div>
+
+      {/* Сетка карточек */}
+      <div className="absolute left-6 right-6 grid grid-cols-3 gap-3" style={{ top: 108, bottom: 16 }}>
+        {tracks.map((t, i) => (
+          <div
+            key={i}
+            className="rounded-2xl p-4 border flex flex-col gap-2 cursor-default fade-up"
+            style={{
+              background: hovered === i ? `${t.color}12` : "rgba(255,255,255,0.03)",
+              borderColor: hovered === i ? `${t.color}55` : "rgba(255,255,255,0.07)",
+              borderTopColor: t.color,
+              borderTopWidth: hovered === i ? 2 : 1,
+              transition: "all 0.2s ease",
+              animationDelay: `${0.07 * i}s`,
+            }}
+            onMouseEnter={() => setHovered(i)}
+            onMouseLeave={() => setHovered(null)}
+          >
+            {/* Иконка + тег */}
+            <div className="flex items-center justify-between">
+              <div className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0"
+                style={{ background: `${t.color}18`, transition: "background 0.2s" }}>
+                <Icon name={t.icon} size={15} style={{ color: t.color }} />
+              </div>
+              <span className="text-[8px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full"
+                style={{ background: `${t.color}15`, color: t.color }}>
+                {t.tag}
+              </span>
+            </div>
+
+            {/* Заголовок */}
+            <div className="font-black text-white leading-tight" style={{ fontSize: "clamp(11px, 1.1vw, 14px)" }}>
+              {t.title}
+            </div>
+
+            {/* Описание — появляется при ховере */}
+            <div className="text-[10px] leading-snug"
+              style={{
+                color: "rgba(255,255,255,0.5)",
+                maxHeight: hovered === i ? 60 : 0,
+                overflow: "hidden",
+                transition: "max-height 0.25s ease, opacity 0.2s ease",
+                opacity: hovered === i ? 1 : 0,
+              }}>
+              {t.desc}
+            </div>
+
+            {/* Нижняя черта-прогресс */}
+            <div className="mt-auto h-[2px] rounded-full" style={{ background: "rgba(255,255,255,0.06)" }}>
+              <div className="h-full rounded-full" style={{
+                width: hovered === i ? "100%" : "30%",
+                background: t.color,
+                transition: "width 0.4s ease",
+              }} />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {ACCENT_LINE}
+    </Slide>
+  );
+};
 
 // ─── Slide 7: 9 месяцев — было/стало ─────────────────────────────────────────
 export const Slide7 = ({ dir, animKey }: SlideProps) => {
