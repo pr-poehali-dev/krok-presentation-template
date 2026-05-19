@@ -555,7 +555,7 @@ export const Slide7 = ({ dir, animKey }: SlideProps) => {
 
   const stats = [
     { value: "~9", label: "месяцев на проекте" },
-    { value: "130+", label: "задач выполнено" },
+    { value: "200+", label: "задач выполнено" },
     { value: "×2", label: "рост самостоятельности" },
   ];
 
@@ -590,12 +590,12 @@ export const Slide7 = ({ dir, animKey }: SlideProps) => {
             <span className="text-[10px] font-black tracking-[0.3em] uppercase" style={{ color: "#1DE3A2" }}>Hard Skills</span>
           </div>
           {hard.map((item, i) => (
-            <div key={i} className="rounded-xl px-3 py-2 border fade-up"
+            <div key={i} className="rounded-xl px-3 py-2.5 border fade-up"
               style={{ background: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.07)", animationDelay: `${0.06 * i}s` }}>
               <div className="flex items-start gap-2">
-                <span className="text-[9px] leading-tight mt-0.5 shrink-0 line-through" style={{ color: "rgba(255,255,255,0.25)" }}>{item.before}</span>
-                <span style={{ color: "rgba(29,227,162,0.5)", fontSize: 9, marginTop: 1 }}>→</span>
-                <span className="text-[10px] font-semibold leading-tight" style={{ color: "rgba(255,255,255,0.82)" }}>{item.after}</span>
+                <span className="text-[10px] leading-tight mt-0.5 shrink-0 line-through" style={{ color: "rgba(255,255,255,0.25)" }}>{item.before}</span>
+                <span style={{ color: "rgba(29,227,162,0.5)", fontSize: 10, marginTop: 1 }}>→</span>
+                <span className="text-[11px] font-semibold leading-tight" style={{ color: "rgba(255,255,255,0.82)" }}>{item.after}</span>
               </div>
             </div>
           ))}
@@ -611,12 +611,12 @@ export const Slide7 = ({ dir, animKey }: SlideProps) => {
             <span className="text-[10px] font-black tracking-[0.3em] uppercase" style={{ color: "#00C896" }}>Soft Skills</span>
           </div>
           {soft.map((item, i) => (
-            <div key={i} className="rounded-xl px-3 py-2 border fade-up"
+            <div key={i} className="rounded-xl px-3 py-2.5 border fade-up"
               style={{ background: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.07)", animationDelay: `${0.06 * i + 0.1}s` }}>
               <div className="flex items-start gap-2">
-                <span className="text-[9px] leading-tight mt-0.5 shrink-0 line-through" style={{ color: "rgba(255,255,255,0.25)" }}>{item.before}</span>
-                <span style={{ color: "rgba(0,200,150,0.5)", fontSize: 9, marginTop: 1 }}>→</span>
-                <span className="text-[10px] font-semibold leading-tight" style={{ color: "rgba(255,255,255,0.82)" }}>{item.after}</span>
+                <span className="text-[10px] leading-tight mt-0.5 shrink-0 line-through" style={{ color: "rgba(255,255,255,0.25)" }}>{item.before}</span>
+                <span style={{ color: "rgba(0,200,150,0.5)", fontSize: 10, marginTop: 1 }}>→</span>
+                <span className="text-[11px] font-semibold leading-tight" style={{ color: "rgba(255,255,255,0.82)" }}>{item.after}</span>
               </div>
             </div>
           ))}
@@ -634,7 +634,6 @@ export const Slide7 = ({ dir, animKey }: SlideProps) => {
         ))}
         <div className="flex-[2] rounded-2xl flex flex-col justify-center px-5"
           style={{ background: "rgba(29,227,162,0.06)", border: "1px solid rgba(29,227,162,0.2)" }}>
-          <div className="text-[11px] font-black" style={{ color: "#1DE3A2" }}>от стажёра → к специалисту</div>
           <div className="text-[9px] mt-0.5" style={{ color: "rgba(255,255,255,0.35)" }}>9 месяцев реального проектного опыта в КРОК</div>
         </div>
       </div>
