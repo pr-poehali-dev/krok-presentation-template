@@ -1,6 +1,6 @@
 // ─── Slide1–Slide9 components ────────────────────────────────────────────────
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Icon from "@/components/ui/icon";
 import type { SlideProps } from "./slideTypes";
 import {
@@ -160,47 +160,49 @@ export const Slide3 = ({ dir, animKey, c, upd }: SlideProps) => {
 
 // ─── Slide 3.5: Проект Мосэнерго (KPI + роль) ────────────────────────────────
 export const SlideM = ({ dir, animKey }: SlideProps) => {
-  const [counts, setCounts] = useState<number[]>([568, 1000, 0, 0, 0, 0]);
-  const [animated, setAnimated] = useState(false);
-
   const kpis = [
-    { label: "Отчёты",        from: 568,  to: 332,  suffix: "",   accent: true,  note: "→ 332" },
-    { label: "Формы",         from: 1000, to: 100,  suffix: "",   accent: true,  note: "→ 100" },
-    { label: "Показателей",   from: 0,    to: 7500, suffix: "~",  accent: false, note: "" },
-    { label: "Систем интеграции", from: 0, to: 10,  suffix: "",   accent: false, note: "" },
-    { label: "ТЭЦ",           from: 0,    to: 13,   suffix: "",   accent: false, note: "" },
-    { label: "Сотрудников",   from: 0,    to: 8000, suffix: "~",  accent: false, note: "" },
+    { label: "Отчёты",            from: 568,  to: 332,  suffix: "",  accent: true,  note: "→ 332" },
+    { label: "Формы",             from: 1000, to: 100,  suffix: "",  accent: true,  note: "→ 100" },
+    { label: "Показателей",       from: 0,    to: 7500, suffix: "~", accent: false, note: "" },
+    { label: "Систем интеграции", from: 0,    to: 10,   suffix: "",  accent: false, note: "" },
+    { label: "ТЭЦ",               from: 0,    to: 13,   suffix: "",  accent: false, note: "" },
+    { label: "Сотрудников",       from: 0,    to: 8000, suffix: "~", accent: false, note: "" },
   ];
 
-  const triggerAnim = () => {
+  const [counts, setCounts] = useState<number[]>(kpis.map(k => k.from));
+  const [animated, setAnimated] = useState(false);
+
+  useEffect(() => {
     if (animated) return;
-    setAnimated(true);
-    kpis.forEach((kpi, idx) => {
-      const duration = 1200;
-      const steps = 40;
-      const step = (kpi.to - kpi.from) / steps;
-      let current = kpi.from;
-      let s = 0;
-      const timer = setInterval(() => {
-        s++;
-        current = Math.round(kpi.from + step * s);
-        if (s >= steps) { current = kpi.to; clearInterval(timer); }
-        setCounts(prev => { const next = [...prev]; next[idx] = current; return next; });
-      }, duration / steps + idx * 8);
-    });
-  };
+    const timeout = setTimeout(() => {
+      setAnimated(true);
+      kpis.forEach((kpi, idx) => {
+        const duration = 1400;
+        const steps = 45;
+        const step = (kpi.to - kpi.from) / steps;
+        let s = 0;
+        const timer = setInterval(() => {
+          s++;
+          const current = s >= steps ? kpi.to : Math.round(kpi.from + step * s);
+          if (s >= steps) clearInterval(timer);
+          setCounts(prev => { const next = [...prev]; next[idx] = current; return next; });
+        }, duration / steps + idx * 10);
+      });
+    }, 400);
+    return () => clearTimeout(timeout);
+  }, [animKey]);
 
   const roles = [
-    { icon: "Users",      text: "Роль стажёра в группе отчётности" },
-    { icon: "Zap",        text: "Погружение в Мосэнерго — «чёрная дыра»?" },
-    { icon: "Clock",      text: "Первый и единственный проект (~\u00a09\u00a0месяцев)" },
+    { icon: "Users", text: "Роль стажёра в группе отчётности" },
+    { icon: "Zap",   text: "Погружение в Мосэнерго — «чёрная дыра»?" },
+    { icon: "Clock", text: "Первый и единственный проект (~\u00a09\u00a0месяцев)" },
   ];
 
   return (
     <Slide dir={dir} animKey={animKey}>
       <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 70% at 20% 50%, #0D2B1E 0%, #0A1A14 55%, #060F0B 100%)" }} />
       <GlowOrb size={400} x="15%" y="50%" color="#1DE3A2" blur={130} />
-      <GlowOrb size={200} x="85%" y="20%" color="#00C896" blur={90} />
+      <GlowOrb size={200} x="85%" y="75%" color="#00C896" blur={100} />
       <LogoBadge />
 
       {/* Header */}
@@ -214,24 +216,8 @@ export const SlideM = ({ dir, animKey }: SlideProps) => {
         <div className="mt-1 w-10 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
       </div>
 
-      {/* Логотип Мосэнерго */}
-      <div className="absolute top-5 right-32 fade-up-d1 flex items-center gap-2">
-        <div className="rounded-xl px-3 py-1.5 flex items-center gap-2"
-          style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>
-          <div className="w-5 h-5 rounded flex items-center justify-center" style={{ background: "#003087" }}>
-            <span className="text-white font-black" style={{ fontSize: 9 }}>М</span>
-          </div>
-          <span className="text-[11px] font-bold tracking-wide text-white opacity-80">Мосэнерго</span>
-        </div>
-      </div>
-
       {/* KPI сетка */}
-      <div
-        className="absolute left-10 grid grid-cols-3 gap-3 cursor-pointer"
-        style={{ top: 108, width: "55%", bottom: 20 }}
-        onClick={triggerAnim}
-        onMouseEnter={triggerAnim}
-      >
+      <div className="absolute left-10 grid grid-cols-3 gap-3" style={{ top: 108, width: "56%", bottom: 20 }}>
         {kpis.map((kpi, i) => (
           <div key={i} className="rounded-2xl flex flex-col justify-center px-4 py-4 fade-up"
             style={{
@@ -249,30 +235,39 @@ export const SlideM = ({ dir, animKey }: SlideProps) => {
               )}
             </div>
             <div className="text-[10px] font-medium mt-1 leading-tight" style={{ color: "rgba(255,255,255,0.45)" }}>{kpi.label}</div>
-            {!animated && i === 0 && (
-              <div className="text-[9px] mt-2 opacity-40" style={{ color: "#1DE3A2" }}>▶ наведи для анимации</div>
-            )}
           </div>
         ))}
       </div>
 
       {/* Разделитель */}
-      <div className="absolute" style={{ left: "calc(55% + 40px + 16px)", top: 108, bottom: 20, width: 1, background: "rgba(29,227,162,0.15)" }} />
+      <div className="absolute" style={{ left: "calc(56% + 40px + 12px)", top: 108, bottom: 20, width: 1, background: "rgba(29,227,162,0.15)" }} />
 
-      {/* Роль и тезисы */}
-      <div className="absolute right-8 flex flex-col justify-center gap-3"
-        style={{ top: 108, bottom: 20, left: "calc(55% + 40px + 32px)" }}>
-        <div className="text-[9px] font-semibold tracking-[0.35em] uppercase mb-1" style={{ color: "#1DE3A2", opacity: 0.7 }}>Моя роль</div>
-        {roles.map((r, i) => (
-          <div key={i} className="flex items-start gap-3 rounded-xl px-4 py-3 border fade-up"
-            style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.1 + 0.08 * i}s` }}>
-            <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
-              style={{ background: "rgba(29,227,162,0.12)" }}>
-              <Icon name={r.icon} size={13} style={{ color: "#1DE3A2" }} />
+      {/* Правая колонка: логотип + тезисы */}
+      <div className="absolute right-8 flex flex-col justify-between"
+        style={{ top: 108, bottom: 20, left: "calc(56% + 40px + 28px)" }}>
+
+        {/* Логотип Мосэнерго */}
+        <div className="flex items-center justify-center fade-up" style={{ flex: 1 }}>
+          <img
+            src="https://cdn.poehali.dev/projects/ced705b4-8c8e-4826-8b52-7f4d72e16071/bucket/2f0ed8db-e230-451f-9364-ac2a19693a59.png"
+            alt="Мосэнерго"
+            style={{ maxWidth: "80%", maxHeight: 90, objectFit: "contain", mixBlendMode: "screen", opacity: 0.9 }}
+          />
+        </div>
+
+        {/* Тезисы */}
+        <div className="flex flex-col gap-2.5" style={{ flex: 1.4 }}>
+          {roles.map((r, i) => (
+            <div key={i} className="flex items-start gap-3 rounded-xl px-4 py-3 border fade-up"
+              style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.1 + 0.08 * i}s` }}>
+              <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
+                style={{ background: "rgba(29,227,162,0.12)" }}>
+                <Icon name={r.icon} size={13} style={{ color: "#1DE3A2" }} />
+              </div>
+              <span className="text-xs leading-snug" style={{ color: "rgba(255,255,255,0.72)" }}>{r.text}</span>
             </div>
-            <span className="text-xs leading-snug" style={{ color: "rgba(255,255,255,0.72)" }}>{r.text}</span>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {ACCENT_LINE}
