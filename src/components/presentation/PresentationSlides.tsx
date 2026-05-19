@@ -177,8 +177,8 @@ export const SlideM = ({ dir, animKey }: SlideProps) => {
     const timeout = setTimeout(() => {
       setAnimated(true);
       kpis.forEach((kpi, idx) => {
-        const duration = 1400;
-        const steps = 45;
+        const duration = 800;
+        const steps = 35;
         const step = (kpi.to - kpi.from) / steps;
         let s = 0;
         const timer = setInterval(() => {
@@ -186,9 +186,9 @@ export const SlideM = ({ dir, animKey }: SlideProps) => {
           const current = s >= steps ? kpi.to : Math.round(kpi.from + step * s);
           if (s >= steps) clearInterval(timer);
           setCounts(prev => { const next = [...prev]; next[idx] = current; return next; });
-        }, duration / steps + idx * 10);
+        }, duration / steps + idx * 5);
       });
-    }, 400);
+    }, 250);
     return () => clearTimeout(timeout);
   }, [animKey]);
 
@@ -249,9 +249,9 @@ export const SlideM = ({ dir, animKey }: SlideProps) => {
         {/* Логотип Мосэнерго */}
         <div className="flex items-center justify-center fade-up" style={{ flex: 1 }}>
           <img
-            src="https://cdn.poehali.dev/projects/ced705b4-8c8e-4826-8b52-7f4d72e16071/bucket/2f0ed8db-e230-451f-9364-ac2a19693a59.png"
+            src="https://cdn.poehali.dev/projects/ced705b4-8c8e-4826-8b52-7f4d72e16071/bucket/d6481481-88f7-41fb-bd2a-2246831dc1ee.png"
             alt="Мосэнерго"
-            style={{ maxWidth: "85%", maxHeight: 100, objectFit: "contain", mixBlendMode: "screen", filter: "brightness(1.1) contrast(1.2)" }}
+            style={{ maxWidth: "85%", maxHeight: 100, objectFit: "contain" }}
           />
         </div>
 
