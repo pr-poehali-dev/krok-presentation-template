@@ -143,15 +143,15 @@ export const Slide3 = ({ dir, animKey, c, upd }: SlideProps) => {
         ))}
       </div>
 
-      {/* Фотографии снизу — с закруглениями, смещены по высоте для динамики */}
-      <div className="absolute left-6 right-6 flex gap-2.5 fade-up" style={{ bottom: 10, height: 200 }}>
-        <div className="flex-1 rounded-2xl overflow-hidden fade-up" style={{ animationDelay: "0.1s", marginTop: 16 }}>
+      {/* Фотографии снизу */}
+      <div className="absolute left-4 right-4 flex gap-1 fade-up" style={{ bottom: 8, height: 222 }}>
+        <div className="flex-1 rounded-xl overflow-hidden fade-up" style={{ animationDelay: "0.1s", marginTop: 14 }}>
           <img src={photos[0]} alt="" className="w-full h-full object-contain" />
         </div>
-        <div className="flex-1 rounded-2xl overflow-hidden fade-up" style={{ animationDelay: "0.18s", marginTop: 0 }}>
+        <div className="flex-1 rounded-xl overflow-hidden fade-up" style={{ animationDelay: "0.18s", marginTop: 0 }}>
           <img src={photos[1]} alt="" className="w-full h-full object-contain" />
         </div>
-        <div className="flex-1 rounded-2xl overflow-hidden fade-up" style={{ animationDelay: "0.26s", marginTop: 24 }}>
+        <div className="flex-1 rounded-xl overflow-hidden fade-up" style={{ animationDelay: "0.26s", marginTop: 22 }}>
           <img src={photos[2]} alt="" className="w-full h-full object-contain" />
         </div>
       </div>
