@@ -169,7 +169,7 @@ export const SlideM = ({ dir, animKey }: SlideProps) => {
     { label: "Сотрудников",       from: 0,    to: 8000, suffix: "~", accent: false, note: "" },
   ];
 
-  const [counts, setCounts] = useState<number[]>(kpis.map(k => k.from));
+  const [counts, setCounts] = useState<number[]>(kpis.map(k => k.accent ? k.from : k.from));
   const [animated, setAnimated] = useState(false);
 
   useEffect(() => {
@@ -230,11 +230,11 @@ export const SlideM = ({ dir, animKey }: SlideProps) => {
             )}
             <div className="font-black leading-none" style={{ fontSize: "clamp(20px, 2.5vw, 32px)", color: kpi.accent ? "#1DE3A2" : "#fff" }}>
               {kpi.accent ? (
-                <>
+                <div className="flex items-baseline gap-1 flex-wrap">
                   <span style={{ color: "rgba(255,255,255,0.45)" }}>{kpi.from.toLocaleString("ru")}</span>
-                  <span className="mx-1.5" style={{ color: "rgba(29,227,162,0.5)", fontSize: "0.7em" }}>→</span>
-                  <span>{kpi.to.toLocaleString("ru")}</span>
-                </>
+                  <span style={{ color: "rgba(29,227,162,0.5)", fontSize: "0.65em" }}>→</span>
+                  <span style={{ color: "#1DE3A2" }}>{counts[i].toLocaleString("ru")}</span>
+                </div>
               ) : counts[i].toLocaleString("ru")}
             </div>
             <div className="text-[10px] font-medium mt-1 leading-tight" style={{ color: "rgba(255,255,255,0.45)" }}>{kpi.label}</div>
