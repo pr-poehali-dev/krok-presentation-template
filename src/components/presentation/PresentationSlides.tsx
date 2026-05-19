@@ -158,6 +158,128 @@ export const Slide3 = ({ dir, animKey, c, upd }: SlideProps) => {
   );
 };
 
+// ─── Slide 3.5: Проект Мосэнерго (KPI + роль) ────────────────────────────────
+export const SlideM = ({ dir, animKey }: SlideProps) => {
+  const [counts, setCounts] = useState<number[]>([568, 1000, 0, 0, 0, 0]);
+  const [animated, setAnimated] = useState(false);
+
+  const kpis = [
+    { label: "Отчёты",        from: 568,  to: 332,  suffix: "",   accent: true,  note: "→ 332" },
+    { label: "Формы",         from: 1000, to: 100,  suffix: "",   accent: true,  note: "→ 100" },
+    { label: "Показателей",   from: 0,    to: 7500, suffix: "~",  accent: false, note: "" },
+    { label: "Систем интеграции", from: 0, to: 10,  suffix: "",   accent: false, note: "" },
+    { label: "ТЭЦ",           from: 0,    to: 13,   suffix: "",   accent: false, note: "" },
+    { label: "Сотрудников",   from: 0,    to: 8000, suffix: "~",  accent: false, note: "" },
+  ];
+
+  const triggerAnim = () => {
+    if (animated) return;
+    setAnimated(true);
+    kpis.forEach((kpi, idx) => {
+      const duration = 1200;
+      const steps = 40;
+      const step = (kpi.to - kpi.from) / steps;
+      let current = kpi.from;
+      let s = 0;
+      const timer = setInterval(() => {
+        s++;
+        current = Math.round(kpi.from + step * s);
+        if (s >= steps) { current = kpi.to; clearInterval(timer); }
+        setCounts(prev => { const next = [...prev]; next[idx] = current; return next; });
+      }, duration / steps + idx * 8);
+    });
+  };
+
+  const roles = [
+    { icon: "Users",      text: "Роль стажёра в группе отчётности" },
+    { icon: "Zap",        text: "Погружение в Мосэнерго — «чёрная дыра»?" },
+    { icon: "Clock",      text: "Первый и единственный проект (~\u00a09\u00a0месяцев)" },
+  ];
+
+  return (
+    <Slide dir={dir} animKey={animKey}>
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 70% at 20% 50%, #0D2B1E 0%, #0A1A14 55%, #060F0B 100%)" }} />
+      <GlowOrb size={400} x="15%" y="50%" color="#1DE3A2" blur={130} />
+      <GlowOrb size={200} x="85%" y="20%" color="#00C896" blur={90} />
+      <LogoBadge />
+
+      {/* Header */}
+      <div className="absolute top-5 left-10 right-10">
+        <div className="text-[9px] font-semibold tracking-[0.4em] uppercase mb-1 fade-up" style={{ color: "#1DE3A2" }}>
+          Слайд 04 — Проектный опыт
+        </div>
+        <h2 className="font-black fade-up-d1" style={{ fontSize: "clamp(20px, 2.8vw, 34px)", color: "#fff" }}>
+          Проект Мосэнерго
+        </h2>
+        <div className="mt-1 w-10 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
+      </div>
+
+      {/* Логотип Мосэнерго */}
+      <div className="absolute top-5 right-32 fade-up-d1 flex items-center gap-2">
+        <div className="rounded-xl px-3 py-1.5 flex items-center gap-2"
+          style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>
+          <div className="w-5 h-5 rounded flex items-center justify-center" style={{ background: "#003087" }}>
+            <span className="text-white font-black" style={{ fontSize: 9 }}>М</span>
+          </div>
+          <span className="text-[11px] font-bold tracking-wide text-white opacity-80">Мосэнерго</span>
+        </div>
+      </div>
+
+      {/* KPI сетка */}
+      <div
+        className="absolute left-10 grid grid-cols-3 gap-3 cursor-pointer"
+        style={{ top: 108, width: "55%", bottom: 20 }}
+        onClick={triggerAnim}
+        onMouseEnter={triggerAnim}
+      >
+        {kpis.map((kpi, i) => (
+          <div key={i} className="rounded-2xl flex flex-col justify-center px-4 py-4 fade-up"
+            style={{
+              background: kpi.accent ? "rgba(29,227,162,0.08)" : "rgba(255,255,255,0.04)",
+              border: `1px solid ${kpi.accent ? "rgba(29,227,162,0.3)" : "rgba(255,255,255,0.08)"}`,
+              animationDelay: `${0.07 * i}s`,
+            }}>
+            {kpi.suffix && (
+              <div className="text-[10px] font-semibold mb-0.5" style={{ color: "#1DE3A2", opacity: 0.7 }}>{kpi.suffix}</div>
+            )}
+            <div className="font-black leading-none" style={{ fontSize: "clamp(22px, 2.8vw, 36px)", color: kpi.accent ? "#1DE3A2" : "#fff" }}>
+              {counts[i].toLocaleString("ru")}
+              {kpi.accent && kpi.note && (
+                <span className="ml-2 font-semibold" style={{ fontSize: "clamp(11px, 1.2vw, 15px)", color: "rgba(255,255,255,0.35)" }}>{kpi.note}</span>
+              )}
+            </div>
+            <div className="text-[10px] font-medium mt-1 leading-tight" style={{ color: "rgba(255,255,255,0.45)" }}>{kpi.label}</div>
+            {!animated && i === 0 && (
+              <div className="text-[9px] mt-2 opacity-40" style={{ color: "#1DE3A2" }}>▶ наведи для анимации</div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Разделитель */}
+      <div className="absolute" style={{ left: "calc(55% + 40px + 16px)", top: 108, bottom: 20, width: 1, background: "rgba(29,227,162,0.15)" }} />
+
+      {/* Роль и тезисы */}
+      <div className="absolute right-8 flex flex-col justify-center gap-3"
+        style={{ top: 108, bottom: 20, left: "calc(55% + 40px + 32px)" }}>
+        <div className="text-[9px] font-semibold tracking-[0.35em] uppercase mb-1" style={{ color: "#1DE3A2", opacity: 0.7 }}>Моя роль</div>
+        {roles.map((r, i) => (
+          <div key={i} className="flex items-start gap-3 rounded-xl px-4 py-3 border fade-up"
+            style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)", animationDelay: `${0.1 + 0.08 * i}s` }}>
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
+              style={{ background: "rgba(29,227,162,0.12)" }}>
+              <Icon name={r.icon} size={13} style={{ color: "#1DE3A2" }} />
+            </div>
+            <span className="text-xs leading-snug" style={{ color: "rgba(255,255,255,0.72)" }}>{r.text}</span>
+          </div>
+        ))}
+      </div>
+
+      {ACCENT_LINE}
+    </Slide>
+  );
+};
+
 // ─── Slide 4: Мосэнерго + задачи + диаграмма (объединение 5, 6, 7) ────────────
 export const Slide4 = ({ dir, animKey, c, upd }: SlideProps) => {
   const [tooltip, setTooltip] = useState<{ idx: number; x: number; y: number } | null>(null);
@@ -436,9 +558,9 @@ export const Slide8 = ({ dir, animKey, c, upd }: SlideProps) => (
 
 // ─── Slide registry ───────────────────────────────────────────────────────────
 export const SLIDE_COMPONENTS = [
-  Slide1, Slide2, Slide3, Slide4, Slide5, Slide7, Slide6, Slide8,
+  Slide1, Slide2, Slide3, SlideM, Slide4, Slide5, Slide7, Slide6, Slide8,
 ];
 export const SLIDE_LABELS = [
   "Титул", "Оглавление", "Путь → КРОК",
-  "Задачи", "Программа", "9 месяцев", "Развитие", "Q&A",
+  "Мосэнерго", "Задачи", "Программа", "9 месяцев", "Развитие", "Q&A",
 ];
