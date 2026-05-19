@@ -524,7 +524,7 @@ export const Slide6 = ({ dir, animKey }: SlideProps) => {
     {
       icon: "Globe",
       tag: "Отрасли",
-      title: "Работа в проектах различных отраслей для накопления разнообразного предметного опыта и выработки универсальных подходов к аналитике",
+      title: "Работа в проектах различных отраслей для накопления разнообразного предметного опыта",
       color: "#00C896",
     },
     {
@@ -607,6 +607,87 @@ export const Slide6 = ({ dir, animKey }: SlideProps) => {
                 transition: "width 0.4s ease",
               }} />
             </div>
+          </div>
+        ))}
+      </div>
+
+      {ACCENT_LINE}
+    </Slide>
+  );
+};
+
+// ─── Slide 6.5: Инициатива ────────────────────────────────────────────────────
+export const SlideI = ({ dir, animKey }: SlideProps) => {
+  const steps = [
+    { icon: "Search",       title: "Проблема",     desc: "Нет единого источника знаний по разработке BI-отчётов в Visiology — каждый стажёр разбирается с нуля" },
+    { icon: "Lightbulb",    title: "Идея",         desc: "Создать универсальную базу знаний: от структуры витрины до настройки виджетов и JS-кастомизации" },
+    { icon: "BookOpen",     title: "Содержание",   desc: "Постановки, SQL-запросы, работа с S2T, тестирование дашбордов, разбор заявок ОПЭ" },
+    { icon: "Users",        title: "Для кого",     desc: "Новые стажёры и аналитики, входящие в проект — готовая точка входа вместо долгого онбординга" },
+  ];
+
+  return (
+    <Slide dir={dir} animKey={animKey}>
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 70% at 50% 0%, #0D2B1E 0%, #0A1A14 55%, #060F0B 100%)" }} />
+      <GlowOrb size={500} x="50%" y="0%" color="#1DE3A2" blur={140} />
+      <GlowOrb size={200} x="90%" y="90%" color="#00C896" blur={90} />
+      <LogoBadge />
+
+      {/* Header */}
+      <div className="absolute top-5 left-10 right-10">
+        <div className="text-[9px] font-semibold tracking-[0.4em] uppercase mb-1 fade-up" style={{ color: "#1DE3A2" }}>
+          Слайд 09 — Инициатива
+        </div>
+        <h2 className="font-black fade-up-d1" style={{ fontSize: "clamp(20px, 2.8vw, 32px)", color: "#fff" }}>
+          Инициатива
+        </h2>
+        <div className="mt-1 w-12 h-[2px] fade-up-d2" style={{ background: "#1DE3A2" }} />
+      </div>
+
+      {/* Центральный баннер */}
+      <div className="absolute left-10 right-10 fade-up" style={{ top: 108 }}>
+        <div className="rounded-2xl px-6 py-4 flex items-center gap-4"
+          style={{ background: "rgba(29,227,162,0.08)", border: "1px solid rgba(29,227,162,0.3)", borderLeftWidth: 4, borderLeftColor: "#1DE3A2" }}>
+          <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+            style={{ background: "rgba(29,227,162,0.15)" }}>
+            <Icon name="Database" size={18} style={{ color: "#1DE3A2" }} />
+          </div>
+          <div>
+            <div className="text-[10px] font-semibold tracking-widest uppercase mb-0.5" style={{ color: "#1DE3A2" }}>Проект</div>
+            <div className="font-black text-white" style={{ fontSize: "clamp(13px, 1.4vw, 17px)" }}>
+              Универсальная база знаний по разработке BI-отчётов в Visiology
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Карточки-шаги */}
+      <div className="absolute left-10 right-10 grid grid-cols-4 gap-3" style={{ top: 200, bottom: 16 }}>
+        {steps.map((s, i) => (
+          <div key={i} className="rounded-2xl p-4 border flex flex-col gap-3 fade-up"
+            style={{
+              background: "rgba(255,255,255,0.03)",
+              borderColor: "rgba(255,255,255,0.07)",
+              borderTopColor: "#1DE3A2",
+              borderTopWidth: 2,
+              animationDelay: `${0.1 + 0.1 * i}s`,
+            }}>
+            {/* Номер + иконка */}
+            <div className="flex items-center justify-between">
+              <div className="w-8 h-8 rounded-xl flex items-center justify-center"
+                style={{ background: "rgba(29,227,162,0.12)" }}>
+                <Icon name={s.icon} size={14} style={{ color: "#1DE3A2" }} />
+              </div>
+              <span className="font-black" style={{ fontSize: 28, color: "rgba(29,227,162,0.08)", lineHeight: 1 }}>0{i + 1}</span>
+            </div>
+
+            {/* Заголовок */}
+            <div className="font-black text-white" style={{ fontSize: "clamp(12px, 1.2vw, 15px)" }}>{s.title}</div>
+
+            {/* Описание */}
+            <div className="text-[10px] leading-snug flex-1" style={{ color: "rgba(255,255,255,0.5)" }}>{s.desc}</div>
+
+            {/* Нижняя черта */}
+            <div className="h-[1px] w-full rounded-full" style={{ background: "linear-gradient(90deg, #1DE3A2, transparent)" }} />
           </div>
         ))}
       </div>
@@ -752,9 +833,9 @@ export const Slide8 = ({ dir, animKey, c, upd }: SlideProps) => (
 
 // ─── Slide registry ───────────────────────────────────────────────────────────
 export const SLIDE_COMPONENTS = [
-  Slide1, Slide2, Slide3, SlideM, Slide4, Slide5, Slide7, Slide6, Slide8,
+  Slide1, Slide2, Slide3, SlideM, Slide4, Slide5, Slide7, Slide6, SlideI, Slide8,
 ];
 export const SLIDE_LABELS = [
   "Титул", "Оглавление", "Путь → КРОК",
-  "Мосэнерго", "Задачи", "Программа", "9 месяцев", "Развитие", "Q&A",
+  "Мосэнерго", "Задачи", "Программа", "9 месяцев", "Развитие", "Инициатива", "Q&A",
 ];
