@@ -578,7 +578,7 @@ export const Slide7 = ({ dir, animKey }: SlideProps) => {
       </div>
 
       {/* Две колонки скиллов */}
-      <div className="absolute left-6 right-6 grid grid-cols-2 gap-4" style={{ top: 108, bottom: 106 }}>
+      <div className="absolute left-6 right-6 grid grid-cols-2 gap-4" style={{ top: 108, bottom: 103 }}>
 
         {/* Hard Skills */}
         <div className="flex flex-col gap-2">
@@ -623,8 +623,8 @@ export const Slide7 = ({ dir, animKey }: SlideProps) => {
         </div>
       </div>
 
-      {/* Нижний баннер — статистика на всю ширину */}
-      <div className="absolute left-6 right-6 flex gap-3 fade-up" style={{ bottom: 14, height: 80, animationDelay: "0.4s" }}>
+      {/* Нижний баннер — по центру между строками и границей */}
+      <div className="absolute left-6 right-6 flex gap-3 fade-up" style={{ bottom: 19, height: 68, animationDelay: "0.4s" }}>
         {stats.map((s, i) => (
           <div key={i} className="flex-1 rounded-2xl flex flex-col items-center justify-center"
             style={{ background: i === 1 ? "rgba(29,227,162,0.1)" : "rgba(255,255,255,0.04)", border: `1px solid ${i === 1 ? "rgba(29,227,162,0.3)" : "rgba(255,255,255,0.07)"}` }}>
@@ -634,7 +634,7 @@ export const Slide7 = ({ dir, animKey }: SlideProps) => {
         ))}
         <div className="flex-[2] rounded-2xl flex flex-col items-center justify-center px-5"
           style={{ background: "rgba(29,227,162,0.06)", border: "1px solid rgba(29,227,162,0.2)" }}>
-          <div className="font-black leading-none text-center" style={{ fontSize: "clamp(14px, 1.6vw, 20px)", color: "#fff" }}>
+          <div className="font-bold leading-snug text-center" style={{ fontSize: "clamp(12px, 1.3vw, 16px)", color: "#1DE3A2" }}>
             9 месяцев реального<br />проектного опыта в КРОК
           </div>
         </div>
