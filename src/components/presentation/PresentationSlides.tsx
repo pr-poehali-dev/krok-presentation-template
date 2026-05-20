@@ -229,16 +229,16 @@ export const SlideM = ({ dir, animKey }: SlideProps) => {
             {kpi.suffix && (
               <div className="text-[10px] font-semibold mb-0.5" style={{ color: "#1DE3A2", opacity: 0.7 }}>{kpi.suffix}</div>
             )}
-            <div className="font-black leading-none" style={{ fontSize: "clamp(20px, 2.5vw, 32px)", color: kpi.accent ? "#1DE3A2" : "#fff" }}>
+            <div className="font-black leading-none" style={{ fontSize: "clamp(18px, 2.2vw, 28px)", color: "#1DE3A2" }}>
               {kpi.accent ? (
                 <div className="flex items-baseline gap-1 flex-wrap">
-                  <span style={{ color: "rgba(255,255,255,0.45)" }}>{kpi.from.toLocaleString("ru")}</span>
-                  <span style={{ color: "rgba(29,227,162,0.5)", fontSize: "0.65em" }}>→</span>
+                  <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "0.75em" }}>{kpi.from.toLocaleString("ru")}</span>
+                  <span style={{ color: "rgba(29,227,162,0.5)", fontSize: "0.6em" }}>→</span>
                   <span style={{ color: "#1DE3A2" }}>{counts[i].toLocaleString("ru")}</span>
                 </div>
               ) : (kpi as typeof kpis[number] & { display?: string }).display ?? counts[i].toLocaleString("ru")}
             </div>
-            <div className="text-[10px] font-medium mt-1 leading-tight" style={{ color: "rgba(255,255,255,0.45)" }}>{kpi.label}</div>
+            <div className="text-[12px] font-semibold mt-1.5 leading-tight" style={{ color: "rgba(255,255,255,0.6)" }}>{kpi.label}</div>
           </div>
         ))}
       </div>
@@ -320,8 +320,40 @@ export const Slide4 = ({ dir, animKey, c, upd }: SlideProps) => {
         <div className="text-[9px] font-semibold tracking-widest uppercase mb-2" style={{ color: "rgba(255,255,255,0.3)" }}>
           {c.s7.heading}
         </div>
-        {/* Область баров: вся оставшаяся высота минус заголовок (18px) и подписи (20px) */}
-        <div className="relative flex gap-2" style={{ height: "calc(100% - 38px)" }}>
+        {/* Область баров: вся оставшаяся высота минус заголовок (18px) и подписи (32px) */}
+        <div className="relative flex gap-2" style={{ height: "calc(100% - 50px)" }}>
+          {/* Линия роста поверх столбцов */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 10 }} preserveAspectRatio="none">
+            <path
+              d={c.s7.bars.map(([, value], i) => {
+                const pct = Math.round(((value as number) / max) * 100);
+                const barW = 100 / c.s7.bars.length;
+                const cx = (barW * i + barW / 2).toFixed(2);
+                const cy = (100 - pct).toFixed(2);
+                return `${i === 0 ? "M" : "L"} ${cx}% ${cy}%`;
+              }).join(" ")}
+              fill="none"
+              stroke="rgba(29,227,162,0.22)"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              vectorEffect="non-scaling-stroke"
+            />
+            {c.s7.bars.map(([, value], i) => {
+              const pct = Math.round(((value as number) / max) * 100);
+              const barW = 100 / c.s7.bars.length;
+              return (
+                <circle
+                  key={i}
+                  cx={`${(barW * i + barW / 2).toFixed(2)}%`}
+                  cy={`${(100 - pct).toFixed(2)}%`}
+                  r="3"
+                  fill="rgba(29,227,162,0.4)"
+                  vectorEffect="non-scaling-stroke"
+                />
+              );
+            })}
+          </svg>
           {c.s7.bars.map(([label, value, color], i) => {
             const pct = Math.round(((value as number) / max) * 100);
             const isHovered = tooltip?.idx === i;
@@ -345,10 +377,10 @@ export const Slide4 = ({ dir, animKey, c, upd }: SlideProps) => {
                   <div className="absolute inset-0 rounded-t-xl"
                     style={{ background: `linear-gradient(to top, ${color}dd, ${color}44)` }} />
                 </div>
-                {/* axis label под баром */}
-                <div className="text-[9px] text-center font-medium leading-tight mt-1"
-                  style={{ color: "rgba(255,255,255,0.45)" }}>
-                  {(label as string).length > 9 ? (label as string).slice(0, 9) + "…" : label as string}
+                {/* axis label под баром — полный текст с переносом */}
+                <div className="text-[8px] text-center font-medium leading-tight mt-1"
+                  style={{ color: "rgba(255,255,255,0.45)", wordBreak: "break-word" }}>
+                  {label as string}
                 </div>
 
                 {/* per-bar tooltip */}
@@ -525,25 +557,25 @@ export const Slide6 = ({ dir, animKey }: SlideProps) => {
     {
       icon: "Globe",
       tag: "Отрасли",
-      title: "Работа в проектах различных отраслей для накопления разнообразного предметного опыта",
+      title: "Расширение проектного опыта в других отраслях (например, продажи и логистика)",
       color: "#00C896",
     },
     {
       icon: "Layers",
       tag: "Проекты",
-      title: "Участие в различных стадиях проекта",
+      title: "Участие во всех этапах реализации проекта, от сбора требований до сдачи системы",
       color: "#00C896",
     },
     {
       icon: "Code2",
       tag: "Hard skill",
-      title: "Углубленное изучение JavaScript",
+      title: "Углубленное изучение JavaScript и развитие библиотеки виджетов Visiology",
       color: "#4AF0C0",
     },
     {
       icon: "MessageCircle",
       tag: "Soft skill",
-      title: "Развитие коммуникативных навыков",
+      title: "Развитие навыков проведения обследования Заказчика и формирование предложений на реализацию решений",
       color: "#4AF0C0",
     },
   ];
@@ -692,10 +724,10 @@ export const Slide7 = ({ dir, animKey }: SlideProps) => {
     { before: "Приходила с «что делать?»",   after: "Прихожу с гипотезой и конкретным вопросом" },
     { before: "Не умела защищать решения",   after: "Аргументирую выбор и отстаиваю свою точку зрения" },
     { before: "Боялась ошибиться",           after: "Делаю, получаю обратную связь, расту" },
+    { before: "Работала самостоятельно",     after: "Опыт работы в команде" },
   ];
 
   const stats = [
-    { value: "~9", label: "месяцев на проекте" },
     { value: "200+", label: "задач выполнено" },
     { value: "×2", label: "рост самостоятельности" },
   ];
@@ -719,7 +751,7 @@ export const Slide7 = ({ dir, animKey }: SlideProps) => {
       </div>
 
       {/* Две колонки скиллов */}
-      <div className="absolute left-6 right-6 grid grid-cols-2 gap-4" style={{ top: 108, bottom: 103 }}>
+      <div className="absolute left-6 right-6 grid grid-cols-2 gap-4" style={{ top: 108, bottom: 85 }}>
 
         {/* Hard Skills */}
         <div className="flex flex-col gap-2">
@@ -764,20 +796,31 @@ export const Slide7 = ({ dir, animKey }: SlideProps) => {
         </div>
       </div>
 
-      {/* Нижний баннер — по центру между строками и границей */}
-      <div className="absolute left-6 right-6 flex gap-3 fade-up" style={{ bottom: 19, height: 68, animationDelay: "0.4s" }}>
-        {stats.map((s, i) => (
-          <div key={i} className="flex-1 rounded-2xl flex flex-col items-center justify-center"
-            style={{ background: i === 1 ? "rgba(29,227,162,0.1)" : "rgba(255,255,255,0.04)", border: `1px solid ${i === 1 ? "rgba(29,227,162,0.3)" : "rgba(255,255,255,0.07)"}` }}>
-            <div className="font-black leading-none" style={{ fontSize: "clamp(18px, 2.2vw, 26px)", color: i === 1 ? "#1DE3A2" : "#fff" }}>{s.value}</div>
-            <div className="text-[9px] mt-0.5 font-medium" style={{ color: "rgba(255,255,255,0.4)" }}>{s.label}</div>
-          </div>
-        ))}
-        <div className="flex-[2] rounded-2xl flex flex-col items-center justify-center px-5"
-          style={{ background: "rgba(29,227,162,0.06)", border: "1px solid rgba(29,227,162,0.2)" }}>
-          <div className="font-bold leading-snug text-center" style={{ fontSize: "clamp(12px, 1.3vw, 16px)", color: "#1DE3A2" }}>
-            9 месяцев реального<br />проектного опыта в КРОК
-          </div>
+      {/* Нижний баннер с KPI */}
+      <div className="absolute left-6 right-6 flex gap-2 fade-up" style={{ bottom: 16, height: 62, animationDelay: "0.4s" }}>
+        {/* KPI 1: 9 месяцев */}
+        <div className="flex-[2] rounded-2xl flex flex-col items-center justify-center px-3"
+          style={{ background: "rgba(29,227,162,0.1)", border: "1px solid rgba(29,227,162,0.3)" }}>
+          <div className="font-black leading-none text-center" style={{ fontSize: "clamp(13px, 1.4vw, 17px)", color: "#1DE3A2" }}>9 месяцев</div>
+          <div className="text-[8px] mt-0.5 font-medium text-center leading-tight" style={{ color: "rgba(255,255,255,0.5)" }}>реального проектного опыта в КРОК</div>
+        </div>
+        {/* KPI 2: 200+ */}
+        <div className="flex-1 rounded-2xl flex flex-col items-center justify-center"
+          style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}>
+          <div className="font-black leading-none" style={{ fontSize: "clamp(20px, 2.4vw, 30px)", color: "#1DE3A2" }}>200+</div>
+          <div className="text-[8px] mt-0.5 font-medium" style={{ color: "rgba(255,255,255,0.4)" }}>задач выполнено</div>
+        </div>
+        {/* KPI 3: коммуникация */}
+        <div className="flex-[2] rounded-2xl flex flex-col items-center justify-center px-3"
+          style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}>
+          <div className="font-black leading-none text-center" style={{ fontSize: "clamp(13px, 1.4vw, 17px)", color: "#fff" }}>Коммуникация</div>
+          <div className="text-[8px] mt-0.5 font-medium text-center leading-tight" style={{ color: "rgba(255,255,255,0.4)" }}>в проекте с 20+ коллегами</div>
+        </div>
+        {/* KPI 4: ×2 */}
+        <div className="flex-1 rounded-2xl flex flex-col items-center justify-center"
+          style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}>
+          <div className="font-black leading-none" style={{ fontSize: "clamp(20px, 2.4vw, 30px)", color: "#fff" }}>×2</div>
+          <div className="text-[8px] mt-0.5 font-medium" style={{ color: "rgba(255,255,255,0.4)" }}>рост самостоятельности</div>
         </div>
       </div>
 
