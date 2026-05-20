@@ -661,15 +661,16 @@ export const SlideI = ({ dir, animKey }: SlideProps) => {
       </div>
 
       {/* Картинка */}
-      <div className="absolute left-10 right-10 fade-up-d1" style={{ top: 200, bottom: 16 }}>
-        <div className="relative w-full h-full rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(29,227,162,0.15)" }}>
-          <img
-            src="https://cdn.poehali.dev/projects/ced705b4-8c8e-4826-8b52-7f4d72e16071/files/2d552ab9-56ca-47c1-9e62-66981dafc00c.jpg"
-            alt="База знаний"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(6,15,11,0.5) 0%, transparent 50%)" }} />
-        </div>
+      <div className="absolute left-10 right-10 fade-up-d1 flex items-center justify-center" style={{ top: 200, bottom: 16 }}>
+        <img
+          src="https://cdn.poehali.dev/projects/ced705b4-8c8e-4826-8b52-7f4d72e16071/bucket/92b8469c-6cea-4a50-860b-94b6a935a84f.png"
+          alt="База знаний"
+          style={{
+            width: "clamp(180px, 38%, 300px)",
+            height: "auto",
+            filter: "brightness(0) saturate(100%) invert(78%) sepia(60%) saturate(400%) hue-rotate(108deg) brightness(110%)",
+          }}
+        />
       </div>
 
       {ACCENT_LINE}
