@@ -653,43 +653,23 @@ export const SlideI = ({ dir, animKey }: SlideProps) => {
           </div>
           <div>
             <div className="text-[10px] font-semibold tracking-widest uppercase mb-0.5" style={{ color: "#1DE3A2" }}>Проект</div>
-            <div className="font-black text-white" style={{ fontSize: "clamp(13px, 1.4vw, 17px)" }}>
+            <div className="font-semibold text-white" style={{ fontSize: "clamp(12px, 1.3vw, 15px)", letterSpacing: "0.01em" }}>
               Универсальная база знаний по разработке BI-отчётов в Visiology
             </div>
           </div>
         </div>
       </div>
 
-      {/* Карточки-шаги */}
-      <div className="absolute left-10 right-10 grid grid-cols-4 gap-3" style={{ top: 200, bottom: 16 }}>
-        {steps.map((s, i) => (
-          <div key={i} className="rounded-2xl p-4 border flex flex-col gap-3 fade-up"
-            style={{
-              background: "rgba(255,255,255,0.03)",
-              borderColor: "rgba(255,255,255,0.07)",
-              borderTopColor: "#1DE3A2",
-              borderTopWidth: 2,
-              animationDelay: `${0.1 + 0.1 * i}s`,
-            }}>
-            {/* Номер + иконка */}
-            <div className="flex items-center justify-between">
-              <div className="w-8 h-8 rounded-xl flex items-center justify-center"
-                style={{ background: "rgba(29,227,162,0.12)" }}>
-                <Icon name={s.icon} size={14} style={{ color: "#1DE3A2" }} />
-              </div>
-              <span className="font-black" style={{ fontSize: 28, color: "rgba(29,227,162,0.08)", lineHeight: 1 }}>0{i + 1}</span>
-            </div>
-
-            {/* Заголовок */}
-            <div className="font-black text-white" style={{ fontSize: "clamp(12px, 1.2vw, 15px)" }}>{s.title}</div>
-
-            {/* Описание */}
-            <div className="text-[10px] leading-snug flex-1" style={{ color: "rgba(255,255,255,0.5)" }}>{s.desc}</div>
-
-            {/* Нижняя черта */}
-            <div className="h-[1px] w-full rounded-full" style={{ background: "linear-gradient(90deg, #1DE3A2, transparent)" }} />
-          </div>
-        ))}
+      {/* Картинка */}
+      <div className="absolute left-10 right-10 fade-up-d1" style={{ top: 200, bottom: 16 }}>
+        <div className="relative w-full h-full rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(29,227,162,0.15)" }}>
+          <img
+            src="https://cdn.poehali.dev/projects/ced705b4-8c8e-4826-8b52-7f4d72e16071/files/2d552ab9-56ca-47c1-9e62-66981dafc00c.jpg"
+            alt="База знаний"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(6,15,11,0.5) 0%, transparent 50%)" }} />
+        </div>
       </div>
 
       {ACCENT_LINE}
