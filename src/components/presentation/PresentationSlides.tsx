@@ -161,12 +161,12 @@ export const Slide3 = ({ dir, animKey, c, upd }: SlideProps) => {
 // ─── Slide 3.5: Проект Мосэнерго (KPI + роль) ────────────────────────────────
 export const SlideM = ({ dir, animKey }: SlideProps) => {
   const kpis = [
-    { label: "Отчёты",            from: 568,  to: 332,  suffix: "",  accent: true,  note: "→ 332" },
-    { label: "Формы",             from: 1000, to: 100,  suffix: "",  accent: true,  note: "→ 100" },
-    { label: "Показателей",       from: 0,    to: 7500, suffix: "~", accent: false, note: "" },
+    { label: "Отчёты",            from: 600,  to: 300,  suffix: "~", accent: true,  note: "→ 300+" },
+    { label: "Формы",             from: 1000, to: 100,  suffix: "~", accent: true,  note: "→ 100" },
+    { label: "Показателей",       from: 2000, to: 7500, suffix: "~", accent: true,  note: "→ ~7500" },
     { label: "Систем интеграции", from: 0,    to: 10,   suffix: "",  accent: false, note: "" },
     { label: "ТЭЦ",               from: 0,    to: 13,   suffix: "",  accent: false, note: "" },
-    { label: "Сотрудников",       from: 0,    to: 8000, suffix: "~", accent: false, note: "" },
+    { label: "Сотрудников",       from: 0,    to: 8000, suffix: "",  accent: false, note: "", display: "около 8000" },
   ];
 
   const [counts, setCounts] = useState<number[]>(kpis.map(k => k.accent ? k.from : k.from));
@@ -193,9 +193,10 @@ export const SlideM = ({ dir, animKey }: SlideProps) => {
   }, [animKey]);
 
   const roles = [
-    { icon: "Users", text: "Роль стажёра в группе отчётности" },
-    { icon: "Zap",   text: "Погружение в Мосэнерго — «чёрная дыра»?" },
-    { icon: "Clock", text: "Первый и единственный проект (~\u00a09\u00a0месяцев)" },
+    { icon: "Users",    text: "Роль стажёра в группе отчётности" },
+    { icon: "Zap",      text: "Погружение в Мосэнерго — «чёрная дыра»?" },
+    { icon: "Clock",    text: "Первый и единственный проект (~\u00a09\u00a0месяцев)" },
+    { icon: "Calendar", text: "Месяц прихода на проект — Август, 2025" },
   ];
 
   return (
@@ -235,7 +236,7 @@ export const SlideM = ({ dir, animKey }: SlideProps) => {
                   <span style={{ color: "rgba(29,227,162,0.5)", fontSize: "0.65em" }}>→</span>
                   <span style={{ color: "#1DE3A2" }}>{counts[i].toLocaleString("ru")}</span>
                 </div>
-              ) : counts[i].toLocaleString("ru")}
+              ) : (kpi as typeof kpis[number] & { display?: string }).display ?? counts[i].toLocaleString("ru")}
             </div>
             <div className="text-[10px] font-medium mt-1 leading-tight" style={{ color: "rgba(255,255,255,0.45)" }}>{kpi.label}</div>
           </div>
