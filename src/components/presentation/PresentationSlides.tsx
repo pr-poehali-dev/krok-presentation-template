@@ -649,7 +649,7 @@ export const SlideI = ({ dir, animKey }: SlideProps) => {
           style={{ background: "rgba(29,227,162,0.08)", border: "1px solid rgba(29,227,162,0.3)", borderLeftWidth: 4, borderLeftColor: "#1DE3A2" }}>
           <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
             style={{ background: "rgba(29,227,162,0.15)" }}>
-            <Icon name="BookOpen" size={18} style={{ color: "rgba(29,227,162,0.6)" }} />
+            <Icon name="BookOpen" size={18} color="rgba(29,227,162,0.6)" />
           </div>
           <div className="flex-1 flex items-center justify-center">
             <div className="font-semibold text-white" style={{ fontSize: "clamp(12px, 1.3vw, 15px)", letterSpacing: "0.01em" }}>
