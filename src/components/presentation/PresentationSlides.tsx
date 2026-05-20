@@ -236,7 +236,9 @@ export const SlideM = ({ dir, animKey }: SlideProps) => {
                   <span style={{ color: "rgba(29,227,162,0.5)", fontSize: "0.6em" }}>→</span>
                   <span style={{ color: "#1DE3A2" }}>{counts[i].toLocaleString("ru")}</span>
                 </div>
-              ) : (kpi as typeof kpis[number] & { display?: string }).display ?? counts[i].toLocaleString("ru")}
+              ) : (kpi as typeof kpis[number] & { display?: string }).display
+                  ? <span className="flex items-baseline gap-1"><span style={{ fontSize: "0.5em", fontWeight: 400, color: "rgba(255,255,255,0.35)" }}>около</span><span>8000</span></span>
+                  : counts[i].toLocaleString("ru")}
             </div>
             <div className="text-[12px] font-semibold mt-1.5 leading-tight" style={{ color: "rgba(255,255,255,0.6)" }}>{kpi.label}</div>
           </div>
@@ -322,37 +324,14 @@ export const Slide4 = ({ dir, animKey, c, upd }: SlideProps) => {
         </div>
         {/* Область баров: вся оставшаяся высота минус заголовок (18px) и подписи (32px) */}
         <div className="relative flex gap-2" style={{ height: "calc(100% - 50px)" }}>
-          {/* Линия роста поверх столбцов */}
+          {/* Простая возрастающая линия */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 10 }} preserveAspectRatio="none">
-            <path
-              d={c.s7.bars.map(([, value], i) => {
-                const pct = Math.round(((value as number) / max) * 100);
-                const barW = 100 / c.s7.bars.length;
-                const cx = (barW * i + barW / 2).toFixed(2);
-                const cy = (100 - pct).toFixed(2);
-                return `${i === 0 ? "M" : "L"} ${cx}% ${cy}%`;
-              }).join(" ")}
-              fill="none"
-              stroke="rgba(29,227,162,0.22)"
+            <line x1="0%" y1="98%" x2="100%" y2="4%"
+              stroke="rgba(29,227,162,0.18)"
               strokeWidth="2"
               strokeLinecap="round"
-              strokeLinejoin="round"
               vectorEffect="non-scaling-stroke"
             />
-            {c.s7.bars.map(([, value], i) => {
-              const pct = Math.round(((value as number) / max) * 100);
-              const barW = 100 / c.s7.bars.length;
-              return (
-                <circle
-                  key={i}
-                  cx={`${(barW * i + barW / 2).toFixed(2)}%`}
-                  cy={`${(100 - pct).toFixed(2)}%`}
-                  r="3"
-                  fill="rgba(29,227,162,0.4)"
-                  vectorEffect="non-scaling-stroke"
-                />
-              );
-            })}
           </svg>
           {c.s7.bars.map(([label, value, color], i) => {
             const pct = Math.round(((value as number) / max) * 100);
@@ -751,7 +730,7 @@ export const Slide7 = ({ dir, animKey }: SlideProps) => {
       </div>
 
       {/* Две колонки скиллов */}
-      <div className="absolute left-6 right-6 grid grid-cols-2 gap-4" style={{ top: 108, bottom: 85 }}>
+      <div className="absolute left-6 right-6 grid grid-cols-2 gap-4" style={{ top: 108, bottom: 96 }}>
 
         {/* Hard Skills */}
         <div className="flex flex-col gap-2">
@@ -797,7 +776,7 @@ export const Slide7 = ({ dir, animKey }: SlideProps) => {
       </div>
 
       {/* Нижний баннер с KPI */}
-      <div className="absolute left-6 right-6 flex gap-2 fade-up" style={{ bottom: 16, height: 62, animationDelay: "0.4s" }}>
+      <div className="absolute left-6 right-6 flex gap-2 fade-up" style={{ bottom: 14, height: 74, animationDelay: "0.4s" }}>
         {/* KPI 1: 9 месяцев */}
         <div className="flex-[2] rounded-2xl flex flex-col items-center justify-center px-3"
           style={{ background: "rgba(29,227,162,0.1)", border: "1px solid rgba(29,227,162,0.3)" }}>
