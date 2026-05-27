@@ -163,7 +163,7 @@ export const SlideM = ({ dir, animKey }: SlideProps) => {
   const kpis = [
     { label: "Отчёты",            from: 600,  to: 300,  suffix: "~", accent: true,  note: "→ 300+" },
     { label: "Формы",             from: 1000, to: 100,  suffix: "~", accent: true,  note: "→ 100" },
-    { label: "Показателей",       from: 2000, to: 7500, suffix: "~", accent: true,  note: "→ ~7500" },
+    { label: "Показателей",       from: 2000, to: 7500, suffix: "~", accent: true,  note: "→ ~7500", breakLine: true },
     { label: "Систем интеграции", from: 0,    to: 10,   suffix: "",  accent: false, note: "" },
     { label: "ТЭЦ",               from: 0,    to: 13,   suffix: "",  accent: false, note: "" },
     { label: "Сотрудников",       from: 0,    to: 8000, suffix: "",  accent: false, note: "", display: "около 8000" },
@@ -229,15 +229,25 @@ export const SlideM = ({ dir, animKey }: SlideProps) => {
             {kpi.suffix && (
               <div className="text-[10px] font-semibold mb-0.5" style={{ color: "#1DE3A2", opacity: 0.7 }}>{kpi.suffix}</div>
             )}
-            <div className="font-black leading-none" style={{ fontSize: "clamp(18px, 2.2vw, 28px)", color: "#1DE3A2" }}>
+            <div className="font-black leading-tight" style={{ fontSize: "clamp(18px, 2.2vw, 28px)", color: "#1DE3A2" }}>
               {kpi.accent ? (
-                <div className="flex items-baseline gap-1 flex-wrap">
-                  <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "0.75em" }}>{kpi.from.toLocaleString("ru")}</span>
-                  <span style={{ color: "rgba(29,227,162,0.5)", fontSize: "0.6em" }}>→</span>
-                  <span style={{ color: "#1DE3A2" }}>{counts[i].toLocaleString("ru")}</span>
-                </div>
+                (kpi as typeof kpis[number] & { breakLine?: boolean }).breakLine ? (
+                  <div className="flex flex-col gap-0.5">
+                    <div className="flex items-baseline gap-1">
+                      <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "0.7em" }}>{kpi.from.toLocaleString("ru")}</span>
+                      <span style={{ color: "rgba(29,227,162,0.5)", fontSize: "0.55em" }}>→</span>
+                    </div>
+                    <span style={{ color: "#1DE3A2" }}>{counts[i].toLocaleString("ru")}</span>
+                  </div>
+                ) : (
+                  <div className="flex items-baseline gap-1 flex-wrap">
+                    <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "0.75em" }}>{kpi.from.toLocaleString("ru")}</span>
+                    <span style={{ color: "rgba(29,227,162,0.5)", fontSize: "0.6em" }}>→</span>
+                    <span style={{ color: "#1DE3A2" }}>{counts[i].toLocaleString("ru")}</span>
+                  </div>
+                )
               ) : (kpi as typeof kpis[number] & { display?: string }).display
-                  ? <span className="flex items-baseline gap-1"><span style={{ fontSize: "0.5em", fontWeight: 400, color: "rgba(255,255,255,0.35)" }}>около</span><span>8000</span></span>
+                  ? <span className="flex items-baseline gap-1"><span style={{ fontSize: "0.38em", fontWeight: 400, color: "rgba(255,255,255,0.35)" }}>около</span><span>8000</span></span>
                   : counts[i].toLocaleString("ru")}
             </div>
             <div className="text-[12px] font-semibold mt-1.5 leading-tight" style={{ color: "rgba(255,255,255,0.6)" }}>{kpi.label}</div>
@@ -324,11 +334,13 @@ export const Slide4 = ({ dir, animKey, c, upd }: SlideProps) => {
         </div>
         {/* Область баров: вся оставшаяся высота минус заголовок (18px) и подписи (32px) */}
         <div className="relative flex gap-2" style={{ height: "calc(100% - 50px)" }}>
-          {/* Простая возрастающая линия */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 10 }} preserveAspectRatio="none">
-            <line x1="0%" y1="98%" x2="100%" y2="4%"
-              stroke="rgba(29,227,162,0.18)"
-              strokeWidth="2"
+          {/* Плавная волнообразная линия роста */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 10 }} preserveAspectRatio="none" viewBox="0 0 100 100">
+            <path
+              d="M 0 92 C 12 88, 20 82, 28 76 S 42 64, 52 56 S 68 42, 78 30 S 92 12, 100 6"
+              fill="none"
+              stroke="rgba(255,255,255,0.22)"
+              strokeWidth="3"
               strokeLinecap="round"
               vectorEffect="non-scaling-stroke"
             />
@@ -359,7 +371,7 @@ export const Slide4 = ({ dir, animKey, c, upd }: SlideProps) => {
                 {/* axis label под баром — полный текст с переносом */}
                 <div className="text-[8px] text-center font-medium leading-tight mt-1"
                   style={{ color: "rgba(255,255,255,0.45)", wordBreak: "break-word" }}>
-                  {label as string}
+                  {(label as string).replace(" и их корректировка", "")}
                 </div>
 
                 {/* per-bar tooltip */}
@@ -730,7 +742,7 @@ export const Slide7 = ({ dir, animKey }: SlideProps) => {
       </div>
 
       {/* Две колонки скиллов */}
-      <div className="absolute left-6 right-6 grid grid-cols-2 gap-4" style={{ top: 108, bottom: 96 }}>
+      <div className="absolute left-6 right-6 grid grid-cols-2 gap-4" style={{ top: 108, bottom: 140 }}>
 
         {/* Hard Skills */}
         <div className="flex flex-col gap-2">
@@ -775,31 +787,31 @@ export const Slide7 = ({ dir, animKey }: SlideProps) => {
         </div>
       </div>
 
-      {/* Нижний баннер с KPI */}
-      <div className="absolute left-6 right-6 flex gap-2 fade-up" style={{ bottom: 14, height: 74, animationDelay: "0.4s" }}>
+      {/* Нижний баннер с KPI — крупный, по центру нижней зоны */}
+      <div className="absolute left-6 right-6 flex gap-3 fade-up" style={{ bottom: 18, height: 104, animationDelay: "0.4s" }}>
         {/* KPI 1: 9 месяцев */}
         <div className="flex-[2] rounded-2xl flex flex-col items-center justify-center px-3"
-          style={{ background: "rgba(29,227,162,0.1)", border: "1px solid rgba(29,227,162,0.3)" }}>
-          <div className="font-black leading-none text-center" style={{ fontSize: "clamp(13px, 1.4vw, 17px)", color: "#1DE3A2" }}>9 месяцев</div>
-          <div className="text-[8px] mt-0.5 font-medium text-center leading-tight" style={{ color: "rgba(255,255,255,0.5)" }}>реального проектного опыта в КРОК</div>
+          style={{ background: "rgba(29,227,162,0.12)", border: "1px solid rgba(29,227,162,0.35)" }}>
+          <div className="font-black leading-tight text-center" style={{ fontSize: "clamp(17px, 1.9vw, 23px)", color: "#1DE3A2" }}>9 месяцев</div>
+          <div className="text-[10px] mt-1 font-medium text-center leading-tight" style={{ color: "rgba(255,255,255,0.6)" }}>реального проектного опыта в КРОК</div>
         </div>
         {/* KPI 2: 200+ */}
         <div className="flex-1 rounded-2xl flex flex-col items-center justify-center"
-          style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}>
-          <div className="font-black leading-none" style={{ fontSize: "clamp(20px, 2.4vw, 30px)", color: "#1DE3A2" }}>200+</div>
-          <div className="text-[8px] mt-0.5 font-medium" style={{ color: "rgba(255,255,255,0.4)" }}>задач выполнено</div>
+          style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.09)" }}>
+          <div className="font-black leading-none" style={{ fontSize: "clamp(28px, 3.2vw, 40px)", color: "#1DE3A2" }}>200+</div>
+          <div className="text-[10px] mt-1 font-medium" style={{ color: "rgba(255,255,255,0.5)" }}>задач выполнено</div>
         </div>
         {/* KPI 3: коммуникация */}
         <div className="flex-[2] rounded-2xl flex flex-col items-center justify-center px-3"
-          style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}>
-          <div className="font-black leading-none text-center" style={{ fontSize: "clamp(13px, 1.4vw, 17px)", color: "#fff" }}>Коммуникация</div>
-          <div className="text-[8px] mt-0.5 font-medium text-center leading-tight" style={{ color: "rgba(255,255,255,0.4)" }}>в проекте с 20+ коллегами</div>
+          style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.09)" }}>
+          <div className="font-black leading-tight text-center" style={{ fontSize: "clamp(17px, 1.9vw, 23px)", color: "#fff" }}>Коммуникация</div>
+          <div className="text-[10px] mt-1 font-medium text-center leading-tight" style={{ color: "rgba(255,255,255,0.5)" }}>в проекте с 20+ коллегами</div>
         </div>
         {/* KPI 4: ×2 */}
         <div className="flex-1 rounded-2xl flex flex-col items-center justify-center"
-          style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}>
-          <div className="font-black leading-none" style={{ fontSize: "clamp(20px, 2.4vw, 30px)", color: "#fff" }}>×2</div>
-          <div className="text-[8px] mt-0.5 font-medium" style={{ color: "rgba(255,255,255,0.4)" }}>рост самостоятельности</div>
+          style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.09)" }}>
+          <div className="font-black leading-none" style={{ fontSize: "clamp(28px, 3.2vw, 40px)", color: "#fff" }}>×2</div>
+          <div className="text-[10px] mt-1 font-medium" style={{ color: "rgba(255,255,255,0.5)" }}>рост самостоятельности</div>
         </div>
       </div>
 

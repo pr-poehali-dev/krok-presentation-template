@@ -215,33 +215,54 @@ export const DataPacketOverlay = ({
   triggerKey: number;
   dir: SlideDir;
 }) => {
-  const [active, setActive] = useState(false);
-  const [trail, setTrail]   = useState<TrailPoint[]>([]);
-  const [ripple, setRipple] = useState<{ x: number; y: number } | null>(null);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [state, setState] = useState<{
+    runKey: number;
+    dir: SlideDir;
+    trail: TrailPoint[];
+    ripple: { x: number; y: number } | null;
+    active: boolean;
+  }>({ runKey: 0, dir: "right", trail: [], ripple: null, active: false });
+
+  const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   useEffect(() => {
     if (triggerKey === 0) return;
-    if (timerRef.current) clearTimeout(timerRef.current);
-    setActive(false); setTrail([]); setRipple(null);
-    requestAnimationFrame(() => {
-      setActive(true);
-      setTrail(buildTrail(dir));
-      const arrival = sampleBezier(0.98, dir);
-      timerRef.current = setTimeout(() => setRipple({ x: arrival.x, y: arrival.y }), 1650);
-      timerRef.current = setTimeout(() => { setActive(false); setTrail([]); setRipple(null); }, 2300);
-    });
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [triggerKey]);
 
-  if (!active && trail.length === 0 && !ripple) return null;
+    // Очищаем все таймеры предыдущего запуска
+    timersRef.current.forEach(clearTimeout);
+    timersRef.current = [];
+
+    // Запускаем новый цикл с уникальным runKey для рестарта CSS-анимаций
+    setState({
+      runKey: triggerKey,
+      dir,
+      trail: buildTrail(dir),
+      ripple: null,
+      active: true,
+    });
+
+    const arrival = sampleBezier(0.98, dir);
+    const t1 = setTimeout(() => {
+      setState((s) => (s.runKey === triggerKey ? { ...s, ripple: { x: arrival.x, y: arrival.y } } : s));
+    }, 1650);
+    const t2 = setTimeout(() => {
+      setState((s) => (s.runKey === triggerKey ? { ...s, active: false, trail: [], ripple: null } : s));
+    }, 2300);
+    timersRef.current = [t1, t2];
+
+    return () => {
+      timersRef.current.forEach(clearTimeout);
+      timersRef.current = [];
+    };
+  }, [triggerKey, dir]);
+
+  if (!state.active && state.trail.length === 0 && !state.ripple) return null;
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 60 }}>
-      {trail.map((dot) => (
+      {state.trail.map((dot) => (
         <div
-          key={dot.id}
+          key={`${state.runKey}-${dot.id}`}
           className="trail-dot"
           style={{
             left: dot.x - dot.size / 2,
@@ -255,8 +276,8 @@ export const DataPacketOverlay = ({
           }}
         />
       ))}
-      {active && (
-        <div className={dir === "right" ? "data-packet-right" : "data-packet-left"}>
+      {state.active && (
+        <div key={`pkt-${state.runKey}`} className={state.dir === "right" ? "data-packet-right" : "data-packet-left"}>
           <svg viewBox="0 0 20 20" width="20" height="20">
             <polygon points="10,1 19,10 10,19 1,10" fill="#0D1F1A" stroke="#1DE3A2" strokeWidth="1.5" />
             <polygon points="10,5 15,10 10,15 5,10" fill="#1DE3A2" opacity="0.9" />
@@ -264,10 +285,10 @@ export const DataPacketOverlay = ({
           </svg>
         </div>
       )}
-      {ripple && (
+      {state.ripple && (
         <>
-          <div className="arrival-ripple" style={{ left: ripple.x - 10, top: ripple.y - 10, width: 20, height: 20, border: "1.5px solid #1DE3A2" }} />
-          <div className="arrival-ripple" style={{ left: ripple.x - 10, top: ripple.y - 10, width: 20, height: 20, border: "1px solid #1DE3A2", animationDelay: "0.12s", opacity: 0.5 }} />
+          <div key={`r1-${state.runKey}`} className="arrival-ripple" style={{ left: state.ripple.x - 10, top: state.ripple.y - 10, width: 20, height: 20, border: "1.5px solid #1DE3A2" }} />
+          <div key={`r2-${state.runKey}`} className="arrival-ripple" style={{ left: state.ripple.x - 10, top: state.ripple.y - 10, width: 20, height: 20, border: "1px solid #1DE3A2", animationDelay: "0.12s", opacity: 0.5 }} />
         </>
       )}
     </div>
